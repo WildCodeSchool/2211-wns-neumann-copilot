@@ -1,7 +1,7 @@
 import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
 import { InputType, ObjectType, Field } from "type-graphql";
 import { IsEmail, MinLength } from "class-validator";
-
+import { argon2id, hash } from "argon2";
 @ObjectType()
 @Entity()
 class User {
@@ -26,6 +26,13 @@ export class UserInput {
   @Field()
   @MinLength(8)
   password: string;
+}
+const hashageOptions = {
+  type: argon2id,
+  memoryCost: 2 ** 16,
+};
+export async function encodePassword(entry: string): Promise<string> {
+  return await hash(entry, hashageOptions);
 }
 
 export default User;
