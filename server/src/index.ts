@@ -11,6 +11,7 @@ async function start(): Promise<void> {
   const schema = await buildSchema({
     resolvers: [join(__dirname, "/resolvers/*.ts")],
   });
+  console.log(schema);
 
   const server = new ApolloServer({
     schema,
