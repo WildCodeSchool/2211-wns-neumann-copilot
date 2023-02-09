@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@apollo/client': ^3.7.7
+  '@apollo/client': 3.7.3
   '@graphql-codegen/cli': 2.6.1
   '@graphql-codegen/typescript': 2.4.3
   '@graphql-codegen/typescript-operations': 2.3.0
@@ -26,7 +26,7 @@ specifiers:
   web-vitals: ^2.1.4
 
 dependencies:
-  '@apollo/client': 3.7.7_gdcq4dv6opitr3wbfwyjmanyra
+  '@apollo/client': 3.7.3_gdcq4dv6opitr3wbfwyjmanyra
   '@graphql-codegen/cli': 2.6.1_dcxmw5hnfdsgq2yltib3xfuyxe
   '@graphql-codegen/typescript': 2.4.3_graphql@16.6.0
   '@graphql-codegen/typescript-operations': 2.3.0_graphql@16.6.0
@@ -78,8 +78,8 @@ packages:
       leven: 3.1.0
     dev: false
 
-  /@apollo/client/3.7.7_gdcq4dv6opitr3wbfwyjmanyra:
-    resolution: {integrity: sha512-Rp/pCWuJSjLN7Xl5Qi2NoeURmZYEU/TIUz0n/LOwEo1tGdU2W7/fGVZ8+5um58JeVYq4UoTGBKFxSVeG4s411A==}
+  /@apollo/client/3.7.3_gdcq4dv6opitr3wbfwyjmanyra:
+    resolution: {integrity: sha512-nzZ6d6a4flLpm3pZOGpuAUxLlp9heob7QcCkyIqZlCLvciUibgufRfYTwfkWCc4NaGHGSZyodzvfr79H6oUwGQ==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5
