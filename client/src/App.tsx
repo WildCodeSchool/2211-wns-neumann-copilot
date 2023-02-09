@@ -1,25 +1,20 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
 import "./App.css";
-
+import { useGetUsersQuery } from "./gql/generated/schema";
 
 function App() {
-function Create1User() {
-  const Create_Users = gql`
-    mutation Mutation($data: UserInput!) {
-      createUser(data: $data) {
-        email
-        id
-      }
-    }
-  `;
-  const { data } = useQuery(Create_Users);
-}
+  const { data } = useGetUsersQuery();
+  const users = data?.getUsers || [];
+  console.log(users);
   return (
     <div className="App">
       <header className="App-header"></header>
+      <p>
+        {users.map((user) => {
+          return user.id;
+        })}
+      </p>
     </div>
   );
 }
-
 export default App;

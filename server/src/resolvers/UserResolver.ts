@@ -8,8 +8,12 @@ export default class UserResolver {
   async createUser(@Arg("data") { email, password }: UserInput): Promise<User> {
     const hashedPassword = await encodePassword(password);
     console.log(hashedPassword);
-
     return await datasource.getRepository(User).save({ email, hashedPassword });
+  }
+
+  @Query(() => [User])
+  async getUsers(): Promise<User[]> {
+    return await datasource.getRepository(User).find();
   }
 
   @Query(() => String)
