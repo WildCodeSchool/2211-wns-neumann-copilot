@@ -1,7 +1,7 @@
 import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
 import { InputType, ObjectType, Field } from "type-graphql";
 import { IsEmail, MinLength } from "class-validator";
-import { argon2id, hash } from "argon2";
+import { argon2id, hash, verify } from "argon2";
 @ObjectType()
 @Entity()
 class User {
@@ -34,5 +34,7 @@ const hashageOptions = {
 export async function encodePassword(entry: string): Promise<string> {
   return await hash(entry, hashageOptions);
 }
+
+export async function verifyPassword(   plain: string,   hashed: string ): Promise<boolean> {   return await verify(hashed, plain, hashageOptions); }
 
 export default User;
