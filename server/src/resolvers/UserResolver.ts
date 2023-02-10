@@ -20,7 +20,7 @@ export default class UserResolver {
   }
 
   @Mutation(() => String) 
-  async login(@Arg("data") { email, password }: UserInput): Promise<string> {
+  async login(@Arg("data") { email, password }: UserInput, @Ctx() { res }: contextType): Promise<string> {
     const user = await datasource.getRepository(User).findOneBy({email});
 
     if (user === null || !(await verifyPassword(password, user.hashedPassword))) {
@@ -28,6 +28,9 @@ export default class UserResolver {
     }
 
     const token = jwt.sign({userId: user.id}, env.JWT_PRIVATE_KEY);
+
+    // reponce via cookie (nom, valeur, options) / secure empeche au navigateur d'interpreter un cookie si on est pas en https
+    res.cookie('token', token, {httpOnly: true, secure: env.NODE_ENV === "production"});
 
     return token;
   }

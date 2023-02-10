@@ -8,7 +8,6 @@ import type express from "express";
 import jwt from 'jsonwebtoken';
 import { env } from "./env";
 import User from "./entity/User";
-import datasource from "./db";
 
 export interface JWTPayload {
   userId: number;
@@ -41,7 +40,7 @@ async function start(): Promise<void> {
           context.jwt = decoded;
         }
         // recuperation des infos de l'utilisateur courrant
-        const currentUser = await datasource.getRepository(User).findOneBy({id: decoded.userId})
+        const currentUser = await db.getRepository(User).findOneBy({id: decoded.userId})
         if (currentUser !== null) {
           // on met les infos de l'utilisateur dans le contexte
           context.currentUser = currentUser;
@@ -58,8 +57,14 @@ async function start(): Promise<void> {
     csrfPrevention: true,
     cache: "bounded",
     plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
+    cors: {
+      origin: env.CORS_ALLOWED_ORIGINS.split(","),
+      credentials: true,
+    },
   });
+  console.log(env.CORS_ALLOWED_ORIGINS);
+  
 
   await server.listen().then(({ url }: { url: string }) => {
     console.log(`🚀  Server ready at ${url}`);
