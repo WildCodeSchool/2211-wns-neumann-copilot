@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useGetUsersQuery } from "./gql/generated/schema";
 
 function App() {
+  const { data } = useGetUsersQuery();
+  const users = data?.getUsers || [];
+  console.log(users);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"></header>
+      <p>
+        {users.map((user) => {
+          return user.id;
+        })}
+      </p>
     </div>
   );
 }
-
 export default App;
