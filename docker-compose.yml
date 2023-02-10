@@ -12,3 +12,24 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  # server:
+  #   restart: always
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   environment:
+  #     DB_HOST: db
+  #   build: ./server
+  #   ports:
+  #     - 4000:4000
+  #     - 4001:4001
+  #   volumes:
+  #     - ./server/src:/app/src
+  # client:
+  #   restart: always
+  #   build: ./client
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./client/src:/app/src
