@@ -9,7 +9,7 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY package*.json .
-COPY pnpm-lock.yaml .
+COPY pnpm* .
 COPY .npmrc .
 RUN pnpm i
 
@@ -18,6 +18,4 @@ COPY tsconfig.json .
 COPY .eslintrc.js .
 COPY .env .
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
-
-# CMD pnpm start
+CMD pnpm run start
