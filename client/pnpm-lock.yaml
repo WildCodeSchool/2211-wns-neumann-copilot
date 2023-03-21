@@ -32,7 +32,7 @@ dependencies:
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 13.5.0_@testing-library+dom@9.0.1
   '@types/jest': 27.5.2
-  '@types/node': 16.18.18
+  '@types/node': 16.18.16
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@types/use-persisted-state': 0.3.1
@@ -46,7 +46,7 @@ dependencies:
   web-vitals: 2.1.4
 
 devDependencies:
-  '@graphql-codegen/cli': 2.6.1_xxth5lndfq6ofwbsfffefdaj7u
+  '@graphql-codegen/cli': 2.6.1_tiasu4ivnp5sxqzswxxa2yl3z4
   '@graphql-codegen/typescript': 2.4.3_graphql@16.6.0
   '@graphql-codegen/typescript-operations': 2.3.0_graphql@16.6.0
   '@graphql-codegen/typescript-react-apollo': 3.2.5_sy4knu3obj4ys7pjcqbyfxmqle
@@ -2000,7 +2000,7 @@ packages:
       '@graphql-tools/utils': 9.2.1_graphql@16.6.0
       globby: 11.1.0
       graphql: 16.6.0
-      tslib: 2.4.1
+      tslib: 2.5.0
       unixify: 1.0.0
     dev: true
 
@@ -2040,7 +2040,7 @@ packages:
       '@graphql-tools/utils': 9.2.1_graphql@16.6.0
       globby: 11.1.0
       graphql: 16.6.0
-      tslib: 2.4.1
+      tslib: 2.5.0
       unixify: 1.0.0
     dev: true
 
@@ -2107,7 +2107,7 @@ packages:
       json-stable-stringify: 1.0.2
       lodash: 4.17.21
       scuid: 1.1.0
-      tslib: 2.4.1
+      tslib: 2.5.0
       yaml-ast-parser: 0.0.43
     transitivePeerDependencies:
       - '@types/node'
@@ -2877,6 +2877,20 @@ packages:
   /@testing-library/dom/8.20.0:
     resolution: {integrity: sha512-d9ULIT+a4EXLX3UU8FBjauG9NnsZHkHztXoIcTsOKoOw030fyjheN9svkTULjJxtYag9DZz5Jz5qkWZDPxTFwA==}
     engines: {node: '>=12'}
+    dependencies:
+      '@babel/code-frame': 7.18.6
+      '@babel/runtime': 7.21.0
+      '@types/aria-query': 5.0.1
+      aria-query: 5.1.3
+      chalk: 4.1.2
+      dom-accessibility-api: 0.5.16
+      lz-string: 1.5.0
+      pretty-format: 27.5.1
+    dev: false
+
+  /@testing-library/dom/9.0.1:
+    resolution: {integrity: sha512-fTOVsMY9QLFCCXRHG3Ese6cMH5qIWwSbgxZsgeF5TNsy81HKaZ4kgehnSF8FsR3OF+numlIV2YcU79MzbnhSig==}
+    engines: {node: '>=14'}
     dependencies:
       '@babel/code-frame': 7.18.6
       '@babel/runtime': 7.21.0
