@@ -3,6 +3,7 @@ import "./App.css";
 import { useGetUsersQuery } from "./gql/generated/schema";
 import { Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
+import Profil from "./screens/Profil";
 
 function App() {
   const { data } = useGetUsersQuery();
@@ -11,7 +12,6 @@ function App() {
   return (
     <>
       <div className="App">
-        <header className="App-header"></header>
         <p>
           {users.map((user) => {
             return user.id;
@@ -19,6 +19,7 @@ function App() {
         </p>
         <Routes>
           <Route path="/Login" element={<Login />} />
+          <Route path="/Profil" element={<Profil />} />
         </Routes>
       </div>
     </>
