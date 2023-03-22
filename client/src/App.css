@@ -32,7 +32,97 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Tout les boutons de l'application */
+
+button {
+  font-size: 20px;
+  color: #FFF;
+  background-color: #518071;
+  border: none;
+  border-radius: 20px;
+  padding: 15px 40px;
+}
+
+button:hover {
+  color: #f9f9f9;
+  background-color: #3e5e54;
+  cursor: pointer;
+}
+
+/* header */
+
+.header {
+  background-color: #518071;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.header img {
+  cursor: pointer;
+}
+
+.header .menu {
+  height: 40px;
+  color: #FFF;
+}
+
+.header .logo {
+  width: 100px;
+}
+
+.header .profil-img {
+  border-radius: 50px;
+  height: 60px;
+}
+
+/* Acceuil / HomePage */
+
+.app {
+  padding: 50px 10px;
+}
+
+.app h1 {
+  margin: 0 0 20px 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.app h2, p {
+  font-size: 15px;
+  text-align: left;
+}
+
+.app h2 {
+  margin: 40px 0 0 0;
+  font-weight: bold;
+}
+
+.app p {
+  margin: 0 0 40px 0;
+}
+
+.app img {
+  width: 100%;
+}
+
+/* footer */
+
+.footer {
+  background-color: #518071;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.footer p {
+  color: #FFF;
+  margin: 0;
 }
