@@ -12,7 +12,7 @@ export default function Connexion() {
         <h1>Connexion</h1>
 
         <div className="container_form">
-            <div className="form">
+            <form className="form">
                 <div className="input_connexion">
                     <input type="email" name="email" placeholder="Votre adresse email"/>
                 </div>
@@ -22,9 +22,9 @@ export default function Connexion() {
                 <div>
                     <button className="button button_connexion">Connexion</button>
                 </div>
-            </div>
+            </form>
             <div className="redirection_sign_up">
-            <p>Pas encore de compte ?</p>&nbsp;<Link to="/Inscription">Inscription</Link>
+                <p>Pas encore de compte ?</p>&nbsp;<Link to="/Inscription">Inscription</Link>
             </div>
         </div>
     </div>

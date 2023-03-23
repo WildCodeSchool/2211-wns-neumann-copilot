@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import "../css/Inscription.css"
 
 export default function Loginn() {
-    
-  
     return (
     <div className="main">
         <h1>Inscription</h1>
 
         <div className="container_form">
-            <div className="form">
+            <form className="form">
                 <div className="input_inscription">
                     <input type="email" name="email" placeholder="Votre adresse email"/>
                 </div>
@@ -21,7 +19,7 @@ export default function Loginn() {
                 <div>
                     <button className="button button_inscription">Connexion</button>
                 </div>
-            </div>
+            </form>
             <div className="redirection_sign_in">
             <p>Déjà un compte ?</p>&nbsp;<Link to="/Connexion">Connexion</Link>
             </div>
