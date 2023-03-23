@@ -1,5 +1,6 @@
 // import { useState } from "react"
 // import { useLoginMutation } from "../gql/generated/schema"
+import { Link } from "react-router-dom";
 import "../css/Inscription.css"
 
 export default function Loginn() {
@@ -22,7 +23,7 @@ export default function Loginn() {
                 </div>
             </div>
             <div className="redirection_sign_in">
-            <p>Déjà un compte ?</p>&nbsp;<a>Connexion</a>
+            <p>Déjà un compte ?</p>&nbsp;<Link to="/Connexion">Connexion</Link>
             </div>
         </div>
     </div>
