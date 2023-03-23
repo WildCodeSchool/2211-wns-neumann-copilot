@@ -2,6 +2,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    z-index: 0;
 }
 
 .container_form {
@@ -43,12 +44,12 @@
 
 .redirection_sign_in p{
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.875rem;
     color: #686868;
 }
 
 .redirection_sign_in a{
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: bold;
     color: #518071;
 }
