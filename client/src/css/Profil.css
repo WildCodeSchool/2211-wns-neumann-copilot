@@ -2,6 +2,9 @@
     width: 100%;
     height: auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container_avatar{
@@ -12,35 +15,45 @@
     margin-top: 120px;
 }
 
-.avatar img{
+.container_avatar img{
     border-radius: 50%;
     width: 150px;
     height: 150px;
 }
 
 .container_information{
-    width: 80%;
-    height: 350px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 50px;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+    height: auto;
+    margin-top: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
 }
+
 .input{
-    position: relative;
-    width: 50%;
+    flex-basis: 75%;
+}
+
+.input input {
+    width: 90%;
+    height: 40px;
+    border: 1px solid #686868;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
 }
 
 .input_description {
-    position: relative;
     width: 100%;
+    margin-top: 30px;
 }
 
 .input_description textarea{
-    width: 80%;
+    width: 70%;
     height: 100px;
     border: 1px solid #686868;
     border-radius: 10px;
@@ -48,58 +61,32 @@
     outline: none;
 }
 
-.placeholder_description{
-    position: absolute;
-    top: -12px;
-    left: 8px;
-    padding: 0px 5px;
-    color: #686868;
-    pointer-events:none;
-    background: #FBFBFB;
-}
-
-.input input {
-    width: 255px;
-    height: 40px;
-    border: 1px solid #686868;
-    border-radius: 10px;
-    padding: 10px;
-    outline: none;
-}
-
-.placeholder{
-    position: absolute;
-    top: -12px;
-    left: 8px;
-    padding: 0px 5px;
-    color: #686868;
-    pointer-events:none;
-    background: #FBFBFB;
-}
 
 
 .button_deconnexion{
     width: 100%;
     height: 10px;
-    position: relative;
     top: 100px;
     text-align: center;
+    margin-top: 30px;
 }
 
-.button_deconnexion input{
-    width: 150px;
-    height: 40px;
-    background-color:#518071 ;
-    border: none;
-    border-radius: 5px;
-    color: #FBFBFB;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
+@media screen and (min-width: 576px){
+    .input{
+        flex-basis: 45%;
+    }
+
+    .input input {
+        width: 55%;
+    }
 }
 
-.button_deconnexion input:hover{
-    border:1px solid #518071;
-    background-color: #FBFBFB;
-    color: #518071;
+@media screen and (min-width: 992px){
+    .input{
+        flex-basis: 45%;
+    }
+
+    .input input {
+        width: 50%;
+    }
 }

@@ -9,34 +9,27 @@ export default function Profil() {
     return (
     <div className="main">
         <div className="container_avatar">
-            <div className="avatar">
-                <img src={blank_profile} alt="Profil-image" />
-            </div>
+            <img src={blank_profile} alt="Profil-image" />
         </div>
         <div className="container_information">
         <div className="input">
-                <label htmlFor="firstname" className="placeholder">Prénom</label>
-                <input name="firstname" type="text"/>
+                <input name="firstname" type="text" placeholder="Prénom"/>
             </div>
             <div className="input">
-                <label htmlFor="name" className="placeholder">Nom</label>
-                <input name="name" type="text"/>
+                <input name="name" type="text" placeholder="Nom"/>
             </div>
             <div className="input">
-                <label htmlFor="email" className="placeholder">Email</label>
-                <input type="email" name="email"/>
+                <input type="email" name="email" placeholder="Email"/>
             </div>
             <div className="input">
-                <label htmlFor="age" className="placeholder">Age</label>
-                <input name="age" type="number"/>
+                <input name="age" type="text" placeholder="Age"/>
             </div>
             <div className="input_description">
-                <label htmlFor="description" className="placeholder_description">Description</label>
-                <textarea name="descrition" ></textarea>
+                <textarea name="descrition" placeholder="Description"></textarea>
             </div>
         </div>
         <div className="button_deconnexion">
-            <input type="button" name="deconnexion" value="Deconnexion"/>
+            <button className="button">Deconnexion</button>
         </div>
     </div>
 )}
