@@ -32,7 +32,103 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Tout les boutons de l'application */
+
+.button {
+  /* font-size: 20px; */
+  font-size: 1.5rem;
+  color: #FFF;
+  background-color: #518071;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem 3rem;
+}
+
+.button:hover {
+  color: #f9f9f9;
+  background-color: #3e5e54;
+  cursor: pointer;
+}
+
+/* HomePage */
+
+.app {
+  padding: 3.75rem 0.75rem;
+}
+
+.app h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.app h2,
+p {
+  font-size: 1rem;
+  text-align: left;
+}
+
+.app h2 {
+  margin: 3rem 0 0 0;
+  font-weight: bold;
+}
+
+.app p {
+  margin: 0 0 3rem 0;
+}
+
+.app img {
+  width: 100%;
+}
+
+/* responsive ecran de tablette */
+
+@media screen and (min-width: 576px) {
+
+  /* Acceuil / HomePage */
+
+  .app {
+    padding: 3.75rem;
+  }
+
+  .app h2,
+  p {
+    text-align: center;
+  }
+
+  .app h2 {
+    margin: 6rem 0 0 0;
+  }
+
+  .app p {
+    margin: 0 0 6rem 0;
+  }
+
+  .app img {
+    width: 75%;
+  }
+}
+
+/* responsive ecran de PC */
+
+@media screen and (min-width: 992px) {
+  .app h1 {
+    font-size: 3rem;
+  }
+
+  .app h2,
+  p {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .app img {
+    width: 50%;
   }
 }
