@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
+import Connexion from "./screens/Connexion";
+import Inscription from "./screens/Inscription";
 import Profil from "./screens/Profil";
 import "./App.css";
 import { useGetUsersQuery } from "./gql/generated/schema";
@@ -26,17 +28,17 @@ function App() {
         <button className="button">Trajet</button>
       </div>
       {window.innerWidth < 992 ? <Footer></Footer> : ''}
-
-      {/* <header className="App-header"></header>
-        <p>
+        {/* <p>
           {users.map((user) => {
             return user.id;
           })}
-        </p>
+        </p> */}
         <Routes>
           <Route path="/Login" element={<Login />} />
+          <Route path="/Connexion" element={<Connexion />} />
+          <Route path="/Inscription" element={<Inscription />} />
           <Route path="/Profil" element={<Profil />} />
-        </Routes> */}
+        </Routes>
     </div>
   );
 }
