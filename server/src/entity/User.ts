@@ -2,6 +2,12 @@ import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
 import { InputType, ObjectType, Field } from "type-graphql";
 import { IsEmail, MinLength } from "class-validator";
 import { argon2id, hash, verify } from "argon2";
+
+export enum UserRole {
+  ADMIN = "admin",
+  PASSENGER = "passenger",
+  DRIVER = "driver",
+}
 @ObjectType()
 @Entity()
 class User {
@@ -35,6 +41,10 @@ class User {
   @Field({ nullable: true })
   @Column({ nullable: true, length: 50, type: "varchar" })
   lastName?: string;
+
+  @Field()
+  @Column({ default: UserRole.PASSENGER, enum: UserRole })
+  role: string;
 }
 
 @InputType()

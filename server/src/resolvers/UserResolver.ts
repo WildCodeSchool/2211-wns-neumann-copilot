@@ -12,6 +12,7 @@ import User, {
   UserInput,
   encodePassword,
   verifyPassword,
+  UserRole,
 } from "../entity/User";
 import jwt from "jsonwebtoken";
 import { ApolloError } from "apollo-server-errors";
@@ -76,7 +77,7 @@ export default class UserResolver {
     return currentUser;
   }
 
-  @Authorized()
+  @Authorized<UserRole>([UserRole.PASSENGER])
   @Mutation(() => User)
   async updateUser(
     @Arg("id", () => Int) id: number,

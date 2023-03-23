@@ -26,7 +26,9 @@ async function start(): Promise<void> {
 
   const schema = await buildSchema({
     resolvers: [join(__dirname, "/resolvers/*.ts")],
-    authChecker: async ({ context }: { context: ContextType }) => {
+    authChecker: async ({ context }: { context: ContextType }, roles = []) => {
+      console.log({ roles });
+
       const {
         req: { headers },
       } = context;
@@ -48,11 +50,13 @@ async function start(): Promise<void> {
         const currentUser = await db
           .getRepository(User)
           .findOneBy({ id: decoded.userId });
-        if (currentUser !== null) {
-          // on met les infos de l'utilisateur dans le contexte
-          context.currentUser = currentUser;
-        }
-        return true;
+        if (currentUser === null) return false;
+
+        console.log({ roles, currentUser });
+
+        // on met les infos de l'utilisateur dans le contexte
+        context.currentUser = currentUser;
+        return roles.length === 0 || roles.includes(currentUser.role);
       }
       return false;
     },
