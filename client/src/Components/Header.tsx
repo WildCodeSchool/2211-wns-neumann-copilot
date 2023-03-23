@@ -1,3 +1,4 @@
+import "./css/Header.css";
 import LogoCopilote from "../img/LogoCopilote.svg";
 import BarreMenu from "../img/BarreMenu.png";
 import StandardProfil from "../img/StandardProfil.svg";

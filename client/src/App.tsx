@@ -13,15 +13,19 @@ function App() {
   console.log(users);
   return (
     <div className="App">
-      <Header></Header>
+      {/* window.innerWidth recupere la taille de la fenêtre */}
+      {window.innerWidth < 992 ? <Header></Header> : ''}
       <div className="app">
         <h1>Bienvenue chères Copilote !</h1>
         <img src={ImageDeCovoiturage} alt="véhicule avec quatre personnes à l'intérieur" />
-        <h2>Recherchez, cliquez et covoiturez !</h2>
-        <p>Trouver un trajet devient encore plus simple ! Facile d'utilisation et dotée de technologies avancées, notre appli vous permet de trouver un trajet à proximité en un rien de temps.</p>
-        <button>Trajet</button>
+        <div>
+          <h2>Recherchez, cliquez et covoiturez !</h2>
+          <p>Trouver un trajet devient encore plus simple ! Facile d'utilisation et dotée de technologies avancées, notre appli vous permet de trouver un trajet à proximité en un rien de temps.</p>
+        </div>
+        <button className="button">Trajet</button>
       </div>
-      <Footer></Footer>
+      {window.innerWidth < 992 ? <Footer></Footer> : ''}
+
       {/* <header className="App-header"></header>
         <p>
           {users.map((user) => {
