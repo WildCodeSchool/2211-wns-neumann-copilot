@@ -1,8 +1,8 @@
 // import { useState } from "react"
 // import { useLoginMutation } from "../gql/generated/schema"
-import "../css/Loginn.css"
+import "../css/Connexion.css"
 
-export default function Loginn() {
+export default function Connexion() {
     
   
     return (
