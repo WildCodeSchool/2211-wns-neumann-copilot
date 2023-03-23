@@ -15,6 +15,26 @@ class User {
 
   @Column()
   hashedPassword: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true, length: 500, type: "varchar" })
+  profilePicture?: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true, length: 500, type: "varchar" })
+  profileDescription?: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true, length: 50, type: "varchar" })
+  pseudo?: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true, length: 50, type: "varchar" })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true, length: 50, type: "varchar" })
+  lastName?: string;
 }
 
 @InputType()
@@ -26,6 +46,21 @@ export class UserInput {
   @Field()
   @MinLength(8)
   password: string;
+
+  @Field({ nullable: true })
+  profilePicture?: string;
+
+  @Field({ nullable: true })
+  profileDescription?: string;
+
+  @Field({ nullable: true })
+  pseudo?: string;
+
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
 }
 const hashageOptions = {
   type: argon2id,
@@ -35,6 +70,11 @@ export async function encodePassword(entry: string): Promise<string> {
   return await hash(entry, hashageOptions);
 }
 
-export async function verifyPassword(   plain: string,   hashed: string ): Promise<boolean> {   return await verify(hashed, plain, hashageOptions); }
+export async function verifyPassword(
+  plain: string,
+  hashed: string
+): Promise<boolean> {
+  return await verify(hashed, plain, hashageOptions);
+}
 
 export default User;

@@ -8,12 +8,12 @@ function Header() {
     return (
         <div className="header">
             <img src={BarreMenu} alt="logo de Copilote" className="menu" />
-            {/* <Link to={"/App"}> */}
-            <img src={LogoCopilote} alt="logo de Copilote" className="logo" />
-            {/* </Link> */}
-            {/* <Link to={"/Login"}> */}
-            <img src={StandardProfil} alt="logo de Copilote" className="profil-img" />
-            {/* </Link> */}
+            <Link to={"/"}>
+                <img src={LogoCopilote} alt="logo de Copilote" className="logo" />
+            </Link>
+            <Link to={"/login"}>
+                <img src={StandardProfil} alt="logo de Copilote" className="profil-img" />
+            </Link>
         </div>
     );
 }
