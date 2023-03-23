@@ -5,8 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "@apollo/client";
 import client from "./services/apolloClient";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./screens/Login";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,14 +14,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
-        {/* <Routes>
-          <Route path="/"> */}
         <App />
-        {/* </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Routes> */}
       </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>
