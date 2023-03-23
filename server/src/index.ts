@@ -3,17 +3,17 @@ import db from "./db";
 import { ApolloServer } from "apollo-server";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import { buildSchema } from "type-graphql";
-import { join } from "path";
-import type express from "express";
+import express from "express";
 import jwt from "jsonwebtoken";
 import { env } from "./env";
 import User from "./entity/User";
+import { join } from "path";
 
 export interface JWTPayload {
   userId: number;
 }
 
-export interface contextType {
+export interface ContextType {
   req: express.Request;
   res: express.Response;
   jwt?: JWTPayload;
@@ -25,14 +25,16 @@ async function start(): Promise<void> {
 
   const schema = await buildSchema({
     resolvers: [join(__dirname, "/resolvers/*.ts")],
-    authChecker: async ({ context }: { context: contextType }) => {
+    authChecker: async ({ context }: { context: ContextType }) => {
       const {
         req: { headers },
       } = context;
-      // recupere le jwt
-      const tokenInAuthHeaders = headers.authorization?.split(" ")[1];
-      const token = tokenInAuthHeaders;
 
+      // recupere le jwt
+      const tokenInAuthHeaders = headers.authorization?.split(" ")[2];
+      console.log(tokenInAuthHeaders);
+
+      const token = tokenInAuthHeaders;
       // verification que le token n'est pas vide
       if (typeof token === "string") {
         // verifie si le token est valide et le decode (donc on sait s'il est valide ou non)
