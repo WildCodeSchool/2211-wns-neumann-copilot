@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
+import Profil from "./screens/Profil";
 import "./App.css";
 import { useGetUsersQuery } from "./gql/generated/schema";
 import Home from "./screens/Home";
 import Trajet from "./screens/Trajet";
-
 
 function App() {
   const { data } = useGetUsersQuery();
@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/trajet" element={<Trajet />} />
+        <Route path="/Profil" element={<Profil />} />
       </Routes>
       {/* <p>
           {users.map((user) => {
