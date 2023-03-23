@@ -7,6 +7,7 @@ query getProfile {
     pseudo
     firstName
     lastName
+    role
   }
 }
 mutation updateUser($data: UserInput!, $updateUserId: Int!) {
@@ -18,5 +19,6 @@ mutation updateUser($data: UserInput!, $updateUserId: Int!) {
     pseudo
     firstName
     lastName
+    role
   }
 }

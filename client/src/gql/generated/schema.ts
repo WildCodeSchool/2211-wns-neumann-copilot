@@ -54,6 +54,7 @@ export type User = {
   profileDescription?: Maybe<Scalars['String']>;
   profilePicture?: Maybe<Scalars['String']>;
   pseudo?: Maybe<Scalars['String']>;
+  role: Scalars['String'];
 };
 
 export type UserInput = {
@@ -81,7 +82,7 @@ export type GetUsersQuery = { __typename?: 'Query', getUsers: Array<{ __typename
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, pseudo?: string | null, firstName?: string | null, lastName?: string | null } };
+export type GetProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, pseudo?: string | null, firstName?: string | null, lastName?: string | null, role: string } };
 
 export type UpdateUserMutationVariables = Exact<{
   data: UserInput;
@@ -89,7 +90,7 @@ export type UpdateUserMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, pseudo?: string | null, firstName?: string | null, lastName?: string | null } };
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, pseudo?: string | null, firstName?: string | null, lastName?: string | null, role: string } };
 
 export type LoginMutationVariables = Exact<{
   data: UserInput;
@@ -183,6 +184,7 @@ export const GetProfileDocument = gql`
     pseudo
     firstName
     lastName
+    role
   }
 }
     `;
@@ -223,6 +225,7 @@ export const UpdateUserDocument = gql`
     pseudo
     firstName
     lastName
+    role
   }
 }
     `;
