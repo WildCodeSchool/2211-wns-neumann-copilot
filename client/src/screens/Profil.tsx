@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useLoginMutation } from "../gql/generated/schema"
+// import { useState } from "react"
+// import { useLoginMutation } from "../gql/generated/schema"
 import blank_profile from "../assets/avatar.png"
 import "../css/Profil.css"
 
