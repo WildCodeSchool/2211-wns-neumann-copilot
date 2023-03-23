@@ -1,4 +1,12 @@
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Authorized,
+  Int,
+  Ctx,
+  Mutation,
+  Query,
+  Resolver,
+} from "type-graphql";
 import datasource from "../db";
 import User, {
   UserInput,
@@ -49,10 +57,10 @@ export default class UserResolver {
     return token;
   }
 
-  @Mutation ( () => Boolean )
-  async logout (@Ctx() {res}:ContextType) :Promise<boolean>{
+  @Mutation(() => Boolean)
+  async logout(@Ctx() { res }: ContextType): Promise<boolean> {
     res.clearCookie("token");
-    return true
+    return true;
   }
 
   // // requete authentifié a partir d'appolostudio pour recupere le token
@@ -60,11 +68,46 @@ export default class UserResolver {
   // // la query n'est realiser que si on a les autorisation (on peu mettre des role dans les () pour donner des condition plus précise sur les autorisation)
   @Authorized()
   @Query(() => User)
-  async profile (@Ctx() { currentUser }: ContextType): Promise<User> {
+  async profile(@Ctx() { currentUser }: ContextType): Promise<User> {
     // si currentUser est null, on renvoi une exception
     if (typeof currentUser !== "object") {
       throw new ApolloError("Vous devez être connecté !!!");
     }
     return currentUser;
+  }
+
+  @Authorized()
+  @Mutation(() => User)
+  async updateUser(
+    @Arg("id", () => Int) id: number,
+    @Arg("data")
+    {
+      email,
+      password,
+      profileDescription,
+      profilePicture,
+      pseudo,
+      lastName,
+      firstName,
+    }: UserInput
+  ): Promise<User> {
+    password = await encodePassword(password);
+    if (typeof email === "string") {
+      const wilderToUpdate = await datasource
+        .getRepository(User)
+        .findOne({ where: { id } });
+      if (wilderToUpdate === null) throw new ApolloError("Account unavailable");
+    }
+    const toReturn = await datasource.getRepository(User).save({
+      id,
+      email,
+      password,
+      profileDescription,
+      profilePicture,
+      pseudo,
+      lastName,
+      firstName,
+    });
+    return toReturn;
   }
 }

@@ -46,6 +46,21 @@ export class UserInput {
   @Field()
   @MinLength(8)
   password: string;
+
+  @Field({ nullable: true })
+  profilePicture?: string;
+
+  @Field({ nullable: true })
+  profileDescription?: string;
+
+  @Field({ nullable: true })
+  pseudo?: string;
+
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
 }
 const hashageOptions = {
   type: argon2id,

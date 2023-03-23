@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import { env } from "./env";
 import User from "./entity/User";
 import { join } from "path";
+import cookie from "cookie";
 
 export interface JWTPayload {
   userId: number;
@@ -31,10 +32,10 @@ async function start(): Promise<void> {
       } = context;
 
       // recupere le jwt
-      const tokenInAuthHeaders = headers.authorization?.split(" ")[2];
-      console.log(tokenInAuthHeaders);
+      const tokenInAuthHeaders = headers.authorization?.split(" ")[1];
+      const tokenInCoockie = cookie.parse(headers.cookie ?? " ").token;
 
-      const token = tokenInAuthHeaders;
+      const token = tokenInAuthHeaders ?? tokenInCoockie;
       // verification que le token n'est pas vide
       if (typeof token === "string") {
         // verifie si le token est valide et le decode (donc on sait s'il est valide ou non)
