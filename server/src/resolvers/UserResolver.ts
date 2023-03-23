@@ -98,7 +98,7 @@ export default class UserResolver {
         .findOne({ where: { id } });
       if (wilderToUpdate === null) throw new ApolloError("Account unavailable");
     }
-    const toReturn = await datasource.getRepository(User).save({
+    return await datasource.getRepository(User).save({
       id,
       email,
       password,
@@ -108,6 +108,5 @@ export default class UserResolver {
       lastName,
       firstName,
     });
-    return toReturn;
   }
 }
