@@ -1,9 +1,19 @@
 .left-menu-pc {
     background-color: #518071;
     padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    /* attention : la valeur est liée au margin-left du .app de la "media query PC" dans "Home.css" */
+    width: 175px;
 }
 
-.left-menu-pc img {
+.left-menu-pc img,
+.option p {
     cursor: pointer;
 }
 
@@ -14,4 +24,31 @@
 .left-menu-pc .profil-img {
     border-radius: 50px;
     height: 100px;
+}
+
+.left-menu-pc p {
+    color: #FFF;
+    font-size: 1rem;
+}
+
+.left-menu-pc a {
+    text-decoration: none;
+}
+
+.left-menu-pc a:hover {
+    text-decoration: underline;
+    text-decoration-color: #FFF;
+}
+
+.option {
+    display: flex;
+}
+
+.option img {
+    margin: 5px;
+    width: 25px;
+}
+
+.option p {
+    margin-left: 5px;
 }

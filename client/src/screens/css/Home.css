@@ -77,6 +77,11 @@
   /* responsive ecran de PC */
   
   @media screen and (min-width: 992px) {
+    .app {
+        /* attention : la valeur est liée au width du left-menu-pc dans "LeftMenuPC.css" */
+        margin-left: 175px;
+    }
+
     .app h1 {
       font-size: 3rem;
     }

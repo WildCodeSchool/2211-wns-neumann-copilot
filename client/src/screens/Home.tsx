@@ -9,10 +9,9 @@ import { Link } from "react-router-dom";
 function Home() {
     return (
         <div>
-            {/* window.innerWidth recupere la taille de la fenêtre */}
-            {window.innerWidth < 992 ? <Header></Header> : ''}
             <div className="pc">
-                {window.innerWidth > 991 ? <LeftMenuPC></LeftMenuPC> : ''}
+            {/* window.innerWidth recupere la taille de la fenêtre */}
+            {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
                 <div className="app">
                     <h1>Bienvenue chères Copilote !</h1>
                     <img src={ImageDeCovoiturage} alt="véhicule avec quatre personnes à l'intérieur" />
