@@ -1,0 +1,17 @@
+.left-menu-pc {
+    background-color: #518071;
+    padding: 10px;
+}
+
+.left-menu-pc img {
+    cursor: pointer;
+}
+
+.left-menu-pc .logo {
+    width: 150px;
+}
+
+.left-menu-pc .profil-img {
+    border-radius: 50px;
+    height: 100px;
+}
