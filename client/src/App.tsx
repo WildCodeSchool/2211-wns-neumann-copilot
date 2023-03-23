@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
+import Profil from "./screens/Profil";
 import "./App.css";
 import { useGetUsersQuery } from "./gql/generated/schema";
 import Header from "./Components/Header";
@@ -34,6 +35,7 @@ function App() {
         </p>
         <Routes>
           <Route path="/Login" element={<Login />} />
+          <Route path="/Profil" element={<Profil />} />
         </Routes> */}
     </div>
   );
