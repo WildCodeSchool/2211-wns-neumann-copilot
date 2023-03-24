@@ -26,7 +26,7 @@ function LeftMenuPC() {
                             <p>Acceuil</p>
                         </div>
                     </Link>
-                    <Link to={"/trajet"}>
+                    <Link to={currentUser?.profile ? "/trajet" : "/login"}>
                         <div className="option">
                             <img src={IconVoiture} alt="icon de voiture" />
                             <p>Trajet</p>
