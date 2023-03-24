@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./css/Inscription.css"
+import "./css/register.css"
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import LeftMenuPC from "../Components/LeftMenuPC";
 import { useCreateUserMutation, useGetProfileQuery } from "../gql/generated/schema";
 import { useState } from "react";
 
-export default function Inscription() {
+export default function Register() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
