@@ -1,6 +1,4 @@
-// import { useState } from "react"
-// import { useLoginMutation } from "../gql/generated/schema"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/Inscription.css"
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
@@ -9,12 +7,11 @@ import { useCreateUserMutation, useGetProfileQuery } from "../gql/generated/sche
 import { useState } from "react";
 
 export default function Inscription() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
     const [create_user] = useCreateUserMutation();
-
     const { data: currentUser, client } = useGetProfileQuery({
         errorPolicy: "ignore",
     });
@@ -26,7 +23,6 @@ export default function Inscription() {
             {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
             <div className="main">
                 <h1>Inscription</h1>
-
                 <div className="container_form">
                     <form
                         className="form"
@@ -40,6 +36,7 @@ export default function Inscription() {
                                 setError("invalid credentials");
                             } finally {
                                 client.resetStore();
+                                navigate('/login');
                             }
                         }}
                     >
