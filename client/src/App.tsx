@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
-import Inscription from "./screens/Inscription";
+import Register from "./screens/Register";
 import Profil from "./screens/Profil";
 import "./App.css";
 import { useGetUsersQuery } from "./gql/generated/schema";
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/trajet" element={<Trajet />} />
-        <Route path="/Inscription" element={<Inscription />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/Profil" element={<Profil />} />
       </Routes>
       {/* <p>
