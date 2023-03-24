@@ -16,6 +16,8 @@ export default function Login() {
   const { data: currentUser, client } = useGetProfileQuery({
     errorPolicy: "ignore",
   });
+  const isAdmin = currentUser?.profile.role === "admin";
+  console.log(currentUser);
 
   return (
     <div>
@@ -70,6 +72,7 @@ export default function Login() {
           <button type="submit">Log in</button>
         </form>
       )}
+      <div> {isAdmin && <p>C'est le boss</p>}</div>
     </div>
   );
 }

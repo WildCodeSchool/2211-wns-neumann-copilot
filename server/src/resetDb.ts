@@ -9,6 +9,13 @@ async function reset(): Promise<void> {
       email: "userReset@hello.com",
       hashedPassword: await encodePassword("password123"),
       pseudo: "TOTO",
+      role: "admin",
+    },
+    {
+      email: "jackieA5@autoplus.vroom",
+      hashedPassword: await encodePassword("a5a5a5a5a5"),
+      pseudo: "Satanas",
+      role: "passenger",
     },
   ]);
   await datasource.destroy();
