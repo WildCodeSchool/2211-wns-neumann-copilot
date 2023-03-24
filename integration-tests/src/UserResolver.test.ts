@@ -49,7 +49,7 @@ describe("User resolver", () => {
     it("should return an array", async () => {
       await db
         .getRepository(User)
-        .insert([{ email: "jojo" }, { email: "jaja" }]);
+        .insert([{ email: "test@test.fr" }, { email: "test1@test.fr" }]);
 
       const res = await client.query({
         query: readUserQuery,
