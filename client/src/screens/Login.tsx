@@ -21,6 +21,8 @@ export default function Login() {
   const { data: currentUser, client } = useGetProfileQuery({
     errorPolicy: "ignore",
   });
+  const isAdmin = currentUser?.profile.role === "admin";
+  console.log(currentUser);
 
   return (
     <div>
@@ -86,6 +88,7 @@ export default function Login() {
         </div>
       )}
       {window.innerWidth < 992 ? <Footer></Footer> : ''}
+      <div> {isAdmin && <p>C'est le boss</p>}</div>
     </div>
   );
 }
