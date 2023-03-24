@@ -6,7 +6,7 @@ import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import LeftMenuPC from "../Components/LeftMenuPC";
 
-export default function Loginn() {
+export default function SignUp() {
     return (
         <div>
         {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
@@ -20,6 +20,9 @@ export default function Loginn() {
                     </div>
                     <div className="input_inscription">
                         <input type="password" name="password" placeholder="Votre mot de passe"/>
+                    </div>
+                    <div className="input_inscription">
+                        <input type="password" name="confirm_password" placeholder="Confirmer votre mot de passe"/>
                     </div>
                     <div className="redirection_sign_in">
                 <p>Déjà un compte ?</p>&nbsp;<Link to="/login">Connexion</Link>
