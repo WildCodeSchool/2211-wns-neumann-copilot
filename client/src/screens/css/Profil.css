@@ -1,0 +1,93 @@
+.main{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container_avatar{
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.container_avatar img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.container_information{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+    height: auto;
+    margin-top: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.input{
+    flex-basis: 75%;
+}
+
+.input input {
+    width: 90%;
+    height: 40px;
+    border: 1px solid #686868;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.input_description {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.input_description textarea{
+    width: 70%;
+    height: 100px;
+    border: 1px solid #686868;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+
+
+
+.button_deconnexion{
+    width: 100%;
+    height: 10px;
+    top: 100px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+@media screen and (min-width: 576px){
+    .input{
+        flex-basis: 45%;
+    }
+
+    .input input {
+        width: 55%;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .input{
+        flex-basis: 45%;
+    }
+
+    .input input {
+        width: 50%;
+    }
+}
