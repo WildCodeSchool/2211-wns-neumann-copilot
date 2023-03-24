@@ -1,4 +1,4 @@
-mutation Mutation($data: UserInput!) {
+mutation createUser($data: UserInput!) {
   createUser(data: $data) {
     id
     email

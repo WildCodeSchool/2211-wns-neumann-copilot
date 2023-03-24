@@ -79,7 +79,7 @@ export default function Login() {
               </div>
             {error && <p>{error}</p>}
           <div className="redirection_sign_up">
-                <p>Pas encore de compte ?</p>&nbsp;<Link to="/Inscription">Inscription</Link>
+                <p>Pas encore de compte ?</p>&nbsp;<Link to="/register">Inscription</Link>
           </div>
             <div>
               <button className="button button_connexion" type="submit">Connexion</button>
