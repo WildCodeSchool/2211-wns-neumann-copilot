@@ -1,7 +1,7 @@
 // import { useState } from "react"
 // import { useLoginMutation } from "../gql/generated/schema"
 import { Link } from "react-router-dom";
-import "../css/Inscription.css"
+import "./css/Inscription.css"
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import LeftMenuPC from "../Components/LeftMenuPC";

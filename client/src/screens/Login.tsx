@@ -5,7 +5,7 @@ import {
   useLogoutMutation,
 } from "../gql/generated/schema";
 import { Link } from "react-router-dom";
-import "../css/login.css"
+import "./css/login.css"
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import LeftMenuPC from "../Components/LeftMenuPC";
