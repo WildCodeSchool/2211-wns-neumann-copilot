@@ -3,9 +3,7 @@
 import blank_profile from "../assets/avatar.png"
 import "./css/Profil.css"
 
-export default function Profil() {
-    
-  
+export default function Profil() {  
     return (
     <div className="main">
         <div className="container_avatar">
