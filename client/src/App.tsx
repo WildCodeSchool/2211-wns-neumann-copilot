@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
-import Connexion from "./screens/Connexion";
 import Inscription from "./screens/Inscription";
 import Profil from "./screens/Profil";
 import "./App.css";
@@ -18,7 +17,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/trajet" element={<Trajet />} />
-        <Route path="/Connexion" element={<Connexion />} />
         <Route path="/Inscription" element={<Inscription />} />
         <Route path="/Profil" element={<Profil />} />
       </Routes>

@@ -2,6 +2,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    z-index: 0;
 }
 
 .container_form {
@@ -18,11 +19,11 @@
     flex-direction: column;
     justify-content: space-around;
 }
-.input_connexion{
+.input_inscription{
     flex-basis: 25%;
 }
 
-.input_connexion input{
+.input_inscription input{
     width: 90%;
     height: 40px;
     border: none;
@@ -33,7 +34,7 @@
     font-size: 1rem;
 }
 
-.redirection_sign_up{
+.redirection_sign_in{
     width: 100%;
     height: auto;
     display: flex;
@@ -41,26 +42,27 @@
     justify-content: center;
 }
 
-.redirection_sign_up p{
+.redirection_sign_in p{
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.875rem;
     color: #686868;
 }
 
-.redirection_sign_up a{
-    font-size: 1rem;
+.redirection_sign_in a{
+    font-size: 0.875rem;
     font-weight: bold;
     color: #518071;
 }
 
+
 @media screen and (min-width: 576px){
-    .input_connexion input{
+    .input_inscription input{
         width: 45%;
     }
 }
 
 @media screen and (min-width: 992px){
-    .input_connexion input{
+    .input_inscription input{
         width: 30%;
     }
 }
