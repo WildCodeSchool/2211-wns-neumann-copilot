@@ -4,13 +4,14 @@ import {
   useLoginMutation,
   useLogoutMutation,
 } from "../gql/generated/schema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/login.css"
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import LeftMenuPC from "../Components/LeftMenuPC";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,10 +29,10 @@ export default function Login() {
     <div>
       {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
       {currentUser?.profile ? (
-        <div>
+        <div className="logout">
           {" "}
           <p> connected as {currentUser.profile.email}</p>
-          <button 
+          <button
             className="button button_connexion"
             onClick={async () => {
               await logout();
@@ -56,6 +57,7 @@ export default function Login() {
                 setError("invalid credentials");
               } finally {
                 client.resetStore();
+                navigate('/Profil');
               }
             }}
           >
@@ -76,7 +78,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Votre mot de passe"
               />
-              </div>
+            </div>
             {error && <p>{error}</p>}
           <div className="redirection_sign_up">
                 <p>Pas encore de compte ?</p>&nbsp;<Link to="/signUp">Inscription</Link>
