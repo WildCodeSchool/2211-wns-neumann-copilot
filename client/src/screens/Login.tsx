@@ -28,7 +28,7 @@ export default function Login() {
     <div>
       {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
       {currentUser?.profile ? (
-        <div>
+        <div className="logout">
           {" "}
           <p> connected as {currentUser.profile.email}</p>
           <button 

@@ -7,7 +7,7 @@ import { useGetProfileQuery } from "../gql/generated/schema";
 
 function Header() {
     
-    const { data: currentUser, client } = useGetProfileQuery({
+    const { data: currentUser } = useGetProfileQuery({
         errorPolicy: "ignore",
     });
     console.log(currentUser);

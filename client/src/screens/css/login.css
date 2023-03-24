@@ -54,6 +54,10 @@
     color: #518071;
 }
 
+.logout {
+    text-align: center;
+}
+
 @media screen and (min-width: 576px){
     .input_connexion input{
         width: 45%;

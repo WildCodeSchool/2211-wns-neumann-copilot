@@ -4,8 +4,15 @@ import StandardProfil from "../img/StandardProfil.svg";
 import IconHome from "../img/IconHome.svg";
 import IconVoiture from "../img/IconVoiture.svg";
 import { Link } from "react-router-dom";
+import { useGetProfileQuery } from "../gql/generated/schema";
 
 function LeftMenuPC() {
+        
+    const { data: currentUser } = useGetProfileQuery({
+        errorPolicy: "ignore",
+    });
+    console.log(currentUser);
+
     return (
         <div className="left-menu-pc">
             <div>
@@ -28,7 +35,7 @@ function LeftMenuPC() {
                 </div>
             </div>
             <div>
-                <Link to={"/login"}>
+                <Link to={currentUser?.profile ? "/Profil" : "/login"}>
                     <img src={StandardProfil} alt="logo de Copilote" className="profil-img" />
                 </Link>
                 <p>Copyright 2023 by J-R, Rémy et Florian</p>
