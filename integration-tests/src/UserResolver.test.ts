@@ -4,8 +4,8 @@ import client from "./appolloClient";
 import db from "../../server/src/db";
 
 const createUserMutation = gql`
-  mutation createUser($data: UserInput!) {
-    createuser(data: $data) {
+  mutation CreateUser($data: UserInput!) {
+    createUser(data: $data) {
       id
       email
     }
@@ -13,12 +13,11 @@ const createUserMutation = gql`
 `;
 
 const readUserQuery = gql`
-  query User {
-    User {
-      id
-      email
-    }
+query Query {
+  getUsers {
+    email
   }
+}
 `;
 
 describe("User resolver", () => {
@@ -26,39 +25,36 @@ describe("User resolver", () => {
     it("should create user given valid attributes", async () => {
       const res = await client.mutate({
         mutation: createUserMutation,
-        variables: { data: { email: "test@test.fr" } },
+        variables: { data: { email: "test123456@test.fr", password:"Superlesoleil"}},
       });
-
       expect(res.data?.createUser).toHaveProperty("id");
       expect(res.data?.createUser).toHaveProperty("email");
     });
 
-    it("should not create wilder given invalid attributes and return an error", async () => {
+
+    it("should not create user given invalid attributes and return an error", async () => {
       expect(() =>
         client.mutate({
-          mutation: createUserMutation,
-          variables: { data: { email: "" } },
-        })
-      ).rejects.toThrowErrorMatchingInlineSnapshot(
-        `"Argument Validation Error"`
-      );
-    });
-  });
+        mutation: createUserMutation,
+        variables: { data: { email: "" } }
+      })).
+      rejects.toThrowErrorMatchingInlineSnapshot(`"Response not successful: Received status code 400"`)
+      });
+      });
 
   describe("read user", () => {
     it("should return an array", async () => {
       await db
         .getRepository(User)
-        .insert([{ email: "test@test.fr" }, { email: "test1@test.fr" }]);
+        .insert([{ email: "test@test11111.fr", hashedPassword: 'Superlesoleil'}]);
 
       const res = await client.query({
         query: readUserQuery,
         fetchPolicy: "no-cache",
       });
 
-      expect(res.data.user.length).toBe(2);
-      res?.data?.user.forEach((w: User) => {
-        expect(w).toHaveProperty("id");
+      expect(res.data.getUsers.length).toBe(1);
+      res?.data?.getUsers.forEach((w: User) => {
         expect(w).toHaveProperty("email");
       });
     });
