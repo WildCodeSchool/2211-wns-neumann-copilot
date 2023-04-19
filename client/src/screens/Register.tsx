@@ -25,7 +25,7 @@ export default function Register() {
                 <h1>Inscription</h1>
                 <div className="container_form">
                     <form
-                        className="form"
+                        className="form_register"
                         onSubmit={async (e) => {
                             e.preventDefault();
                             setError("");
@@ -58,6 +58,16 @@ export default function Register() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Votre mot de passe"
+                            />
+                        </div>
+                        <div className="input_inscription">
+                            <input
+                                type="text"
+                                id="password"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Confirmer votre mot de passe"
                             />
                         </div>
                         {error && <p>{error}</p>}
