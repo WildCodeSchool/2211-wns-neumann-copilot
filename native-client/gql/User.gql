@@ -1,0 +1,12 @@
+mutation createUser($data: UserInput!) {
+  createUser(data: $data) {
+    id
+    email
+  }
+}
+query GetUsers {
+  getUsers {
+    id
+    email
+  }
+}
