@@ -10,7 +10,6 @@ import Trajet from "./screens/Trajet";
 function App() {
   const { data } = useGetUsersQuery();
   const users = data?.getUsers || [];
-  console.log(users);
   return (
     <div className="App">
       <Routes>
@@ -20,11 +19,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profil" element={<Profil />} />
       </Routes>
-      {/* <p>
-          {users.map((user) => {
-            return user.id;
-          })}
-        </p> */}
     </div>
   );
 }

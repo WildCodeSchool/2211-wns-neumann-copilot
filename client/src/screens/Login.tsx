@@ -5,10 +5,11 @@ import {
   useLogoutMutation,
 } from "../gql/generated/schema";
 import { Link, useNavigate } from "react-router-dom";
-import "./css/login.css"
+import "./css/login.css";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import LeftMenuPC from "../Components/LeftMenuPC";
+import { log } from "console";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,7 +24,9 @@ export default function Login() {
     errorPolicy: "ignore",
   });
   const isAdmin = currentUser?.profile.role === "admin";
+  console.log("Hey");
   console.log(currentUser);
+  console.log("oh");
 
   return (
     <div>
@@ -45,10 +48,10 @@ export default function Login() {
       ) : (
         <div className="main">
           <h1>Connexion</h1>
-          <form className="form"
+          <form
+            className="form"
             onSubmit={async (e) => {
               e.preventDefault();
-              console.log({ email, password });
               setError("");
               try {
                 await login({ variables: { data: { email, password } } });
@@ -57,7 +60,7 @@ export default function Login() {
                 setError("invalid credentials");
               } finally {
                 client.resetStore();
-                navigate('/Profil');
+                // navigate("/Profil");
               }
             }}
           >
@@ -80,16 +83,23 @@ export default function Login() {
               />
             </div>
             {error && <p>{error}</p>}
-          <div className="redirection_sign_up">
-                <p>Pas encore de compte ?</p>&nbsp;<Link to="/register">Inscription</Link>
-          </div>
+            <div className="redirection_sign_up">
+              <p>Pas encore de compte ?</p>&nbsp;
+              <Link to="/Register">Inscription</Link>
+            </div>
             <div>
-              <button className="button button_connexion" type="submit">Connexion</button>
+              <button
+                className="button button_connexion"
+                type="submit"
+                name="Login"
+              >
+                Connexion
+              </button>
             </div>
           </form>
         </div>
       )}
-      {window.innerWidth < 992 ? <Footer></Footer> : ''}
+      {window.innerWidth < 992 ? <Footer></Footer> : ""}
       <div> {isAdmin && <p>C'est le boss</p>}</div>
     </div>
   );
