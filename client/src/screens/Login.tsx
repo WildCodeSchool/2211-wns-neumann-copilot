@@ -6,9 +6,6 @@ import {
 } from "../gql/generated/schema";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/login.css"
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
-import LeftMenuPC from "../Components/LeftMenuPC";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -24,10 +21,10 @@ export default function Login() {
   });
   const isAdmin = currentUser?.profile.role === "admin";
   console.log(currentUser);
+  console.log(client);
 
   return (
     <div>
-      {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
       {currentUser?.profile ? (
         <div className="logout">
           {" "}
@@ -89,7 +86,6 @@ export default function Login() {
           </form>
         </div>
       )}
-      {window.innerWidth < 992 ? <Footer></Footer> : ''}
       <div> {isAdmin && <p>C'est le boss</p>}</div>
     </div>
   );
