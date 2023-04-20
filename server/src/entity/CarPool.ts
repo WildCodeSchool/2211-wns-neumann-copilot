@@ -1,5 +1,5 @@
 import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
-import { InputType, ObjectType, Field, ID } from "type-graphql";
+import { InputType, ObjectType, Field } from "type-graphql";
 import { IsInt, MinLength } from "class-validator";
 
 @ObjectType()
@@ -27,7 +27,7 @@ export class CarPool {
 
   @Field({ nullable: true })
   @Column({ nullable: true })
-  passengerId?: number;
+  passengerId?: string;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
@@ -36,6 +36,9 @@ export class CarPool {
 
 @InputType()
 export class CarPoolerInput {
+  @Column()
+  id: number;
+
   @Field()
   @MinLength(1)
   departureCity: string;
