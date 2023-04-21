@@ -1,0 +1,24 @@
+query getProfile {
+  profile {
+    id
+    email
+    profilePicture
+    profileDescription
+    pseudo
+    firstName
+    lastName
+    role
+  }
+}
+mutation updateUser($data: UserInput!, $updateUserId: Int!) {
+  updateUser(data: $data, id: $updateUserId) {
+    id
+    email
+    profilePicture
+    profileDescription
+    pseudo
+    firstName
+    lastName
+    role
+  }
+}
