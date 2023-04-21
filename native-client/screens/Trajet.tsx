@@ -5,7 +5,7 @@ export default function Trajet() {
 
     const { data: getUsers, loading, error } = useGetUsersQuery();
     console.log(getUsers);
-    console.log(getUsers.getUsers[0].email);
+    console.log(getUsers?.getUsers[0].email);
 
     return (
         <View style={styles.container}>
@@ -20,7 +20,7 @@ export default function Trajet() {
                 </View>
             ))} */}
             <FlatList
-                data={getUsers.getUsers}
+                data={getUsers?.getUsers}
                 renderItem={({item}) => (
                     <View>
                         <Text>id : {item.id}</Text>
