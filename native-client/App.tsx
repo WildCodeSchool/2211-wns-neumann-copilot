@@ -8,16 +8,6 @@ export default function App() {
   return (
     <ApolloProvider client={apolloClient}>
       <View>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
-        <Text>test</Text>
         <Trajet />
         <StatusBar style="auto" />
       </View>
