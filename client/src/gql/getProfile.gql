@@ -4,7 +4,6 @@ query getProfile {
     email
     profilePicture
     profileDescription
-    pseudo
     firstName
     lastName
     role
@@ -16,7 +15,6 @@ mutation updateUser($data: UserInput!, $updateUserId: Int!) {
     email
     profilePicture
     profileDescription
-    pseudo
     firstName
     lastName
     role

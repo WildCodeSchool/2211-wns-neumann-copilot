@@ -87,7 +87,6 @@ export default class UserResolver {
       password,
       profileDescription,
       profilePicture,
-      pseudo,
       lastName,
       firstName,
     }: UserInput
@@ -105,7 +104,6 @@ export default class UserResolver {
       password,
       profileDescription,
       profilePicture,
-      pseudo,
       lastName,
       firstName,
     });
