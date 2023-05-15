@@ -1,4 +1,5 @@
 import datasource from "./db";
+import { CarPool } from "./entity/CarPool";
 import User, { encodePassword } from "./entity/User";
 
 async function reset(): Promise<void> {
@@ -16,6 +17,16 @@ async function reset(): Promise<void> {
       hashedPassword: await encodePassword("a5a5a5a5a5"),
       pseudo: "Satanas",
       role: "passenger",
+    },
+  ]);
+  await datasource.getRepository(CarPool).delete({});
+  await datasource.getRepository(CarPool).save([
+    {
+      departureCity: "Dunkerque",
+      arrivalCity: "Lille",
+      departureDate: "20 Avril 2023",
+      departureTime: "12h00",
+      driverId: 1,
     },
   ]);
   await datasource.destroy();

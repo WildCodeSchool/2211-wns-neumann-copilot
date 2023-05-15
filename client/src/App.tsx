@@ -14,7 +14,6 @@ import LeftMenuPC from "./Components/LeftMenuPC";
 function App() {
   const { data } = useGetUsersQuery();
   const users = data?.getUsers || [];
-  console.log(users);
   return (
     <div className="App">
       <Header />

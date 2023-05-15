@@ -20,6 +20,7 @@ export default function Login() {
     errorPolicy: "ignore",
   });
   const isAdmin = currentUser?.profile.role === "admin";
+  console.log("Hey");
   console.log(currentUser);
   console.log(client);
 
@@ -42,10 +43,10 @@ export default function Login() {
       ) : (
         <div className="main">
           <h1>Connexion</h1>
-          <form className="form"
+          <form
+            className="form"
             onSubmit={async (e) => {
               e.preventDefault();
-              console.log({ email, password });
               setError("");
               try {
                 await login({ variables: { data: { email, password } } });
@@ -54,7 +55,7 @@ export default function Login() {
                 setError("invalid credentials");
               } finally {
                 client.resetStore();
-                navigate('/Profil');
+                // navigate("/Profil");
               }
             }}
           >
@@ -77,11 +78,18 @@ export default function Login() {
               />
             </div>
             {error && <p>{error}</p>}
-          <div className="redirection_sign_up">
-                <p>Pas encore de compte ?</p>&nbsp;<Link to="/register">Inscription</Link>
-          </div>
+            <div className="redirection_sign_up">
+              <p>Pas encore de compte ?</p>&nbsp;
+              <Link to="/Register">Inscription</Link>
+            </div>
             <div>
-              <button className="button button_connexion" type="submit">Connexion</button>
+              <button
+                className="button button_connexion"
+                type="submit"
+                name="Login"
+              >
+                Connexion
+              </button>
             </div>
           </form>
         </div>
