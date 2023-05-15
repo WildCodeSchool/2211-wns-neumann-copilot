@@ -12,37 +12,37 @@ export default function Edit() {
     const [updateUser] = useUpdateUserMutation();
 
     const [editedUser, setEditedUser] = useState<UserInput>();
-    // const save = () =>
-    // updateUser({
-    //   variables: {
-    //     updateUserId: parseInt(id, 10),
-    //     data: {
-    //       lastName,
-    //       firstName,
-    //       profileDescription,
-    //       email,
-    //       profilePicture
-    //     },
-    //   },
-    //   onCompleted: () => {
-    //     toast.success("Wilder saved");
-    //     navigate(`/wilders/${id}`);
-    //   },
-    //   onError: (err) => {
-    //     console.error(err);
-    //     toast.error("error while saving wilder");
-    //   },
-    //   refetchQueries: [
-    //     { query: WilderDocument, variables: { wilderId: parseInt(id, 10) } },
-    //   ],
-    // });
+    const save = () =>
+    updateUser({
+      variables: {
+        updateUserId: parseInt(id, 10),
+        data: {
+          lastName,
+          firstName,
+          profileDescription,
+          email,
+          profilePicture
+        },
+      },
+      onCompleted: () => {
+        toast.success("User saved");
+        navigate(`/wilders/${id}`);
+      },
+      onError: (err) => {
+        console.error(err);
+        toast.error("error while saving wilder");
+      },
+      refetchQueries: [
+        { query: WilderDocument, variables: { wilderId: parseInt(id, 10) } },
+      ],
+    });
     console.log(currentUser);
     
     return (
         <>
-            {/* <div className="update_profil_main">
+            <div className="update_profil_main">
                     <div className="container_avatar">
-                        <img src={editedUser.profilePicture || blank_profile} alt={editedWilder.lastName}/>
+                        <img src={editedUser.profilePicture || blank_profile} alt={editedUser.profilePicture}/>
                     </div>
                     <div className="container_information">
                         <div className="input">
@@ -64,6 +64,6 @@ export default function Edit() {
                     <div className="button_edit">
                         <button className="button button_update_profil" onClick={save}><Link to="/profil">Modifier</Link></button>
                     </div>           
-            </div> */}
+            </div>
         </>
 )}

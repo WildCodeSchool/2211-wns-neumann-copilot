@@ -64,13 +64,34 @@ export class UserInput {
   profileDescription?: string;
 
   @Field({ nullable: true })
-  pseudo?: string;
+  age?: string;
 
   @Field({ nullable: true })
   firstName?: string;
 
   @Field({ nullable: true })
   lastName?: string;
+}
+
+export class updateUserInput {
+  @Field()
+  @IsEmail()
+  email: string;
+
+  @Field({ nullable: true })
+  profilePicture?: string;
+
+  @Field({ nullable: true })
+  profileDescription?: string;
+
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
+  
+  @Field({ nullable: true })
+  age?: string;
 }
 const hashageOptions = {
   type: argon2id,

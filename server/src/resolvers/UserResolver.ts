@@ -6,6 +6,7 @@ import {
   Mutation,
   Query,
   Resolver,
+  ObjectType,
 } from "type-graphql";
 import datasource from "../db";
 import User, {
@@ -13,6 +14,7 @@ import User, {
   encodePassword,
   verifyPassword,
   UserRole,
+  updateUserInput
 } from "../entity/User";
 import jwt from "jsonwebtoken";
 import { ApolloError } from "apollo-server-errors";
@@ -77,37 +79,35 @@ export default class UserResolver {
     return currentUser;
   }
 
-  @Authorized<UserRole>([UserRole.PASSENGER])
-  @Mutation(() => User)
-  async updateUser(
-    @Arg("id", () => Int) id: number,
-    @Arg("data")
-    {
-      email,
-      password,
-      profileDescription,
-      profilePicture,
-      pseudo,
-      lastName,
-      firstName,
-    }: UserInput
-  ): Promise<User> {
-    password = await encodePassword(password);
-    if (typeof email === "string") {
-      const wilderToUpdate = await datasource
-        .getRepository(User)
-        .findOne({ where: { id } });
-      if (wilderToUpdate === null) throw new ApolloError("Account unavailable");
-    }
-    return await datasource.getRepository(User).save({
-      id,
-      email,
-      password,
-      profileDescription,
-      profilePicture,
-      pseudo,
-      lastName,
-      firstName,
-    });
-  }
+  // @Authorized<UserRole>([UserRole.PASSENGER])
+  // @Mutation(() => User)
+  // async updateUser(
+  //   @Arg("id", () => Int) id: number,
+  //   @Arg("data", () => ObjectType)data: updateUserInput,
+
+  // ): Promise<User> {
+  //   const {
+  //     email,
+  //     profileDescription,
+  //     profilePicture,
+  //     lastName,
+  //     age,
+  //     firstName,
+  //   } = data
+  //   if (typeof email === "string") {
+  //     const userToUpdate = await datasource
+  //       .getRepository(User)
+  //       .findOne({ where: { id } });
+  //     if (userToUpdate === null) throw new ApolloError("Account unavailable");
+  //   }
+  //   return await datasource.getRepository(User).save({
+  //     id,
+  //     email,
+  //     profileDescription,
+  //     profilePicture,
+  //     age,
+  //     lastName,
+  //     firstName,
+  //   });
+  // }
 }

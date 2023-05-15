@@ -1,3 +1,11 @@
+
+.img-edit{
+    width: 60%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-top: 100px;
+}
 .update_profil_main{
     width: 100%;
     height: auto;

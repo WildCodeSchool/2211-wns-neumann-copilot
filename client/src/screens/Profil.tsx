@@ -4,12 +4,15 @@ import blank_profile from "../assets/avatar.png"
 import "./css/Profil.css"
 import { Link } from "react-router-dom";
 import { useGetProfileQuery } from "../gql/generated/schema";
+import { log } from "console";
 
 export default function Profil() {  
 
     const { data: currentUser } = useGetProfileQuery({
         errorPolicy: "ignore",
       });
+      console.log(currentUser);
+      
     return (
         <div>
         <div className="main_profil">
