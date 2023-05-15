@@ -5,42 +5,42 @@ import "./css/Edit.css"
 import React, { useState, FormEvent} from "react";
 export default function Edit() {
 
-    const { data: currentUser } = useGetProfileQuery({
-        errorPolicy: "ignore",
-      });
+    // const { data: currentUser } = useGetProfileQuery({
+    //     errorPolicy: "ignore",
+    //   });
 
-    const [updateUser] = useUpdateUserMutation();
+    // const [updateUser] = useUpdateUserMutation();
 
-    const [editedUser, setEditedUser] = useState<UserInput>();
-    const save = () =>
-    updateUser({
-      variables: {
-        updateUserId: parseInt(id, 10),
-        data: {
-          lastName,
-          firstName,
-          profileDescription,
-          email,
-          profilePicture
-        },
-      },
-      onCompleted: () => {
-        toast.success("User saved");
-        navigate(`/wilders/${id}`);
-      },
-      onError: (err) => {
-        console.error(err);
-        toast.error("error while saving wilder");
-      },
-      refetchQueries: [
-        { query: WilderDocument, variables: { wilderId: parseInt(id, 10) } },
-      ],
-    });
-    console.log(currentUser);
+    // const [editedUser, setEditedUser] = useState<UserInput>();
+    // const save = () =>
+    // updateUser({
+    //   variables: {
+    //     updateUserId: parseInt(id, 10),
+    //     data: {
+    //       lastName,
+    //       firstName,
+    //       profileDescription,
+    //       email,
+    //       profilePicture
+    //     },
+    //   },
+    //   onCompleted: () => {
+    //     toast.success("User saved");
+    //     navigate(`/wilders/${id}`);
+    //   },
+    //   onError: (err) => {
+    //     console.error(err);
+    //     toast.error("error while saving wilder");
+    //   },
+    //   refetchQueries: [
+    //     { query: WilderDocument, variables: { wilderId: parseInt(id, 10) } },
+    //   ],
+    // });
+    // console.log(currentUser);
     
     return (
         <>
-            <div className="update_profil_main">
+            {/* <div className="update_profil_main">
                     <div className="container_avatar">
                         <img src={editedUser.profilePicture || blank_profile} alt={editedUser.profilePicture}/>
                     </div>
@@ -64,6 +64,6 @@ export default function Edit() {
                     <div className="button_edit">
                         <button className="button button_update_profil" onClick={save}><Link to="/profil">Modifier</Link></button>
                     </div>           
-            </div>
+            </div> */}
         </>
 )}

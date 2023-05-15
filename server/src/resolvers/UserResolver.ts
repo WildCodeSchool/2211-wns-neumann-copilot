@@ -79,35 +79,35 @@ export default class UserResolver {
     return currentUser;
   }
 
-  // @Authorized<UserRole>([UserRole.PASSENGER])
-  // @Mutation(() => User)
-  // async updateUser(
-  //   @Arg("id", () => Int) id: number,
-  //   @Arg("data", () => ObjectType)data: updateUserInput,
+  @Authorized<UserRole>([UserRole.PASSENGER])
+  @Mutation(() => User)
+  async updateUser(
+    @Arg("id", () => Int) id: number,
+    @Arg("data", () => ObjectType)data: updateUserInput,
 
-  // ): Promise<User> {
-  //   const {
-  //     email,
-  //     profileDescription,
-  //     profilePicture,
-  //     lastName,
-  //     age,
-  //     firstName,
-  //   } = data
-  //   if (typeof email === "string") {
-  //     const userToUpdate = await datasource
-  //       .getRepository(User)
-  //       .findOne({ where: { id } });
-  //     if (userToUpdate === null) throw new ApolloError("Account unavailable");
-  //   }
-  //   return await datasource.getRepository(User).save({
-  //     id,
-  //     email,
-  //     profileDescription,
-  //     profilePicture,
-  //     age,
-  //     lastName,
-  //     firstName,
-  //   });
-  // }
+  ): Promise<User> {
+    const {
+      email,
+      profileDescription,
+      profilePicture,
+      lastName,
+      age,
+      firstName,
+    } = data
+    if (typeof email === "string") {
+      const userToUpdate = await datasource
+        .getRepository(User)
+        .findOne({ where: { id } });
+      if (userToUpdate === null) throw new ApolloError("Account unavailable");
+    }
+    return await datasource.getRepository(User).save({
+      id,
+      email,
+      profileDescription,
+      profilePicture,
+      age,
+      lastName,
+      firstName,
+    });
+  }
 }

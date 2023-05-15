@@ -32,10 +32,6 @@ class User {
 
   @Field({ nullable: true })
   @Column({ nullable: true, length: 50, type: "varchar" })
-  pseudo?: string;
-
-  @Field({ nullable: true })
-  @Column({ nullable: true, length: 50, type: "varchar" })
   firstName?: string;
 
   @Field({ nullable: true })
