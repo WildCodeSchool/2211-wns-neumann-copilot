@@ -6,8 +6,8 @@ import * as SecureStore from 'expo-secure-store';
 export default function Login() {
 
     const [credentials, setCredentials] = useState({
-        email: '',
-        password: ''
+        email: 'testdstgf@test.fr',
+        password: 'azertyuiop'
     });
     const { data: currentUser, client } = useGetProfileQuery({
         errorPolicy: "ignore",
@@ -23,7 +23,7 @@ export default function Login() {
             </View>
             {currentUser?.profile ?
                 <View>
-                    <Text>bienvenu {currentUser?.profile.email}</Text>
+                    <Text style={{ textAlign: 'center', margin: 30 }}>Vous êtes connecté en tant que : {currentUser?.profile.email}</Text>
                     <Pressable style={styles.button}
                         onPress={async () => {
                             await logout();
@@ -48,15 +48,18 @@ export default function Login() {
                     />
                     {error && <Text style={styles.error}>{error}</Text>}
                     <Pressable style={styles.button}
-                        onPress={() => {
-                            login({ variables: { data: credentials } })
-                                .then((res) => {
-                                    client.resetStore();
-                                    if (res.data?.login) {
-                                        SecureStore.setItemAsync('token', res.data?.login);
-                                    }
-                                })
-                                .catch(() => setError("Email ou mot de passe incorrect"));
+                        onPress={async () => {
+                            console.log(credentials);
+                            try {
+                                setError('');
+                                const res = await login({ variables: { data: credentials } });
+                                SecureStore.setItemAsync('token', res.data?.login as string);
+                                console.log({ res });
+                            } catch (err) {
+                                setError("Email ou mot de passe incorrect");
+                            } finally {
+                                client.resetStore();
+                            }
                         }}
                     >
                         <Text style={styles.textOnButton}>Se connecter</Text>
