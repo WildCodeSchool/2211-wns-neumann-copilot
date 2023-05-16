@@ -75,7 +75,7 @@ export type MutationUpdateCarpoolArgs = {
 
 
 export type MutationUpdateUserArgs = {
-  data: UserInput;
+  data: UserUpdateInput;
 };
 
 export type Query = {
@@ -107,6 +107,14 @@ export type UserInput = {
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
+  profileDescription?: InputMaybe<Scalars['String']>;
+  profilePicture?: InputMaybe<Scalars['String']>;
+};
+
+export type UserUpdateInput = {
+  email: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
   profileDescription?: InputMaybe<Scalars['String']>;
   profilePicture?: InputMaybe<Scalars['String']>;
 };
@@ -164,7 +172,7 @@ export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, firstName?: string | null, lastName?: string | null, role: string } };
 
 export type UpdateUserMutationVariables = Exact<{
-  data: UserInput;
+  data: UserUpdateInput;
 }>;
 
 
@@ -485,7 +493,7 @@ export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
 export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
 export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
 export const UpdateUserDocument = gql`
-    mutation updateUser($data: UserInput!) {
+    mutation UpdateUser($data: UserUpdateInput!) {
   updateUser(data: $data) {
     email
     profilePicture

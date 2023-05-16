@@ -21,7 +21,7 @@ export default function Profil() {
   const [firstName, setfirstName] = useState("");
   const [profileDescription, setprofileDescription] = useState("");
   const [profilePicture, setprofilePicture] = useState("");
-  const [password, setpassword] = useState("");
+  // const [password, setpassword] = useState("");
 
   return (
     <>
@@ -39,7 +39,6 @@ export default function Profil() {
                   lastName,
                   profileDescription,
                   profilePicture,
-                  password,
                 },
               },
             });
@@ -81,15 +80,19 @@ export default function Profil() {
               onChange={(e) => setlastName(e.target.value)}
             />
           </div>
+
+          {/* Email */}
           <div className="input">
             <input
               type="email"
               name="email"
-              placeholder={currentUser?.profile.email}
+              // defaultValue={currentUser?.profile.email}
               onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              value={email || currentUser?.profile.email}
             />
           </div>
+
+          {/* Age */}
           <div className="input">
             <input name="age" type="text" placeholder="Age" />
           </div>
