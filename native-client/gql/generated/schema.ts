@@ -15,12 +15,40 @@ export type Scalars = {
   Float: number;
 };
 
+export type CarPool = {
+  __typename?: 'CarPool';
+  arrivalCity: Scalars['String'];
+  departureCity: Scalars['String'];
+  departureDate?: Maybe<Scalars['String']>;
+  departureTime?: Maybe<Scalars['String']>;
+  driverId?: Maybe<Scalars['Float']>;
+  id: Scalars['Float'];
+  passengerId?: Maybe<Scalars['String']>;
+};
+
+export type CarPoolerInput = {
+  arrivalCity: Scalars['String'];
+  departureCity: Scalars['String'];
+  departureDate: Scalars['String'];
+  departureTime: Scalars['String'];
+  driverId: Scalars['Float'];
+  passengerId: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createCarPool: CarPool;
   createUser: User;
+  deleteCarPool: Scalars['Boolean'];
   login: Scalars['String'];
   logout: Scalars['Boolean'];
+  updateCarpool: CarPool;
   updateUser: User;
+};
+
+
+export type MutationCreateCarPoolArgs = {
+  data: CarPoolerInput;
 };
 
 
@@ -29,8 +57,20 @@ export type MutationCreateUserArgs = {
 };
 
 
+export type MutationDeleteCarPoolArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type MutationLoginArgs = {
   data: UserInput;
+};
+
+
+export type MutationUpdateCarpoolArgs = {
+  carPoolId: Scalars['Int'];
+  data: CarPoolerInput;
+  userId: Scalars['Int'];
 };
 
 
@@ -41,8 +81,15 @@ export type MutationUpdateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getCarPool: CarPool;
+  getCarPools: Array<CarPool>;
   getUsers: Array<User>;
   profile: User;
+};
+
+
+export type QueryGetCarPoolArgs = {
+  id: Scalars['Int'];
 };
 
 export type User = {
@@ -105,7 +152,7 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
 
 
-export const MutationDocument = gql`
+export const CreateUserDocument = gql`
     mutation createUser($data: UserInput!) {
   createUser(data: $data) {
     id
@@ -126,7 +173,7 @@ export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, C
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [CreateUserMutation, { data, loading, error }] = useCreateUserMutation({
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
  *   variables: {
  *      data: // value for 'data'
  *   },
@@ -134,7 +181,7 @@ export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, C
  */
 export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(MutationDocument, options);
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
       }
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;

@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { useGetUsersQuery } from "../gql/generated/schema";
+import { useGetProfileQuery, useGetUsersQuery } from "../gql/generated/schema";
 
 export default function Trajet() {
 
@@ -7,30 +7,37 @@ export default function Trajet() {
     console.log(getUsers);
     console.log(getUsers?.getUsers[0].email);
 
+    const { data: currentUser, client } = useGetProfileQuery({
+        errorPolicy: "ignore",
+    });
+
     return (
         <View style={styles.container}>
-            <View style={styles.title}>
-                <Text>Page des trajets</Text>
-            </View>
-            <Text>test d'affichage de listes d'utilisateurs :</Text>
-            {/* {getUsers.getUsers.map(user => (
+            {currentUser?.profile ?
                 <View>
-                    <Text>id : {user.id}</Text>
-                    <Text>email : {user.email}</Text>
-                </View>
-            ))} */}
-            <FlatList
-                data={getUsers?.getUsers}
-                renderItem={({item}) => (
-                    <View>
-                        <Text>id : {item.id}</Text>
-                        <Text>email : {item.email}</Text>
+                    <View style={styles.title}>
+                        <Text>Page des trajets</Text>
                     </View>
-                )}
-                keyExtractor={item => item.id.toString()}
-                ListEmptyComponent={<Text>aucun utilisateur</Text>}
-                ItemSeparatorComponent={() => <View style={styles.list} />}
-            />
+                    <Text>test d'affichage de listes d'utilisateurs :</Text>
+
+                    <FlatList
+                        data={getUsers?.getUsers}
+                        renderItem={({ item }) => (
+                            <View>
+                                <Text>id : {item.id}</Text>
+                                <Text>email : {item.email}</Text>
+                            </View>
+                        )}
+                        keyExtractor={item => item.id.toString()}
+                        ListEmptyComponent={<Text>aucun utilisateur</Text>}
+                        ItemSeparatorComponent={() => <View style={styles.list} />}
+                    />
+                </View>
+                :
+                <View style={styles.title}>
+                    <Text>Vous devez être connecté</Text>
+                </View>
+            }
         </View>
     );
 }
