@@ -9,9 +9,8 @@ query getProfile {
     role
   }
 }
-mutation updateUser($data: UserInput!, $updateUserId: Int!) {
-  updateUser(data: $data, id: $updateUserId) {
-    id
+mutation updateUser($data: UserInput!) {
+  updateUser(data: $data) {
     email
     profilePicture
     profileDescription

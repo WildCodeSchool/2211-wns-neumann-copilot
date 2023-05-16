@@ -6,9 +6,6 @@ import {
 } from "../gql/generated/schema";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/login.css";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
-import LeftMenuPC from "../Components/LeftMenuPC";
 import { log } from "console";
 
 export default function Login() {
@@ -30,8 +27,7 @@ export default function Login() {
 
   return (
     <div>
-      {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
-      {currentUser?.profile ? (
+      {/* {currentUser?.profile ? (
         <div className="logout">
           {" "}
           <p> connected as {currentUser.profile.email}</p>
@@ -45,7 +41,7 @@ export default function Login() {
             Logout
           </button>
         </div>
-      ) : (
+      ) : ( */}
         <div className="main">
           <h1>Connexion</h1>
           <form
@@ -60,7 +56,7 @@ export default function Login() {
                 setError("invalid credentials");
               } finally {
                 client.resetStore();
-                // navigate("/Profil");
+                navigate("/profil");
               }
             }}
           >
@@ -98,9 +94,7 @@ export default function Login() {
             </div>
           </form>
         </div>
-      )}
-      {window.innerWidth < 992 ? <Footer></Footer> : ""}
-      <div> {isAdmin && <p>C'est le boss</p>}</div>
+      {/* )} */}
     </div>
   );
 }

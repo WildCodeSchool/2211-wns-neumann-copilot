@@ -24,3 +24,9 @@
     border-radius: 50px;
     height: 60px;
 }
+
+@media screen and (min-width: 992px) {
+    .header {
+        display: none;
+    }
+}

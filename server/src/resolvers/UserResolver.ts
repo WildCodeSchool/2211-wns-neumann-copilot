@@ -10,6 +10,7 @@ import {
 import datasource from "../db";
 import User, {
   UserInput,
+  UserUpdateInput,
   encodePassword,
   verifyPassword,
   UserRole,
@@ -77,31 +78,33 @@ export default class UserResolver {
     return currentUser;
   }
 
-  @Authorized<UserRole>([UserRole.PASSENGER])
   @Mutation(() => User)
   async updateUser(
-    @Arg("id", () => Int) id: number,
+    @Ctx() { currentUser }: ContextType,
     @Arg("data")
     {
       email,
-      password,
+      // password,
       profileDescription,
       profilePicture,
       lastName,
       firstName,
-    }: UserInput
+    }: UserUpdateInput
   ): Promise<User> {
-    password = await encodePassword(password);
+    if (typeof currentUser !== "object") {
+      console.log("hop" + " " + currentUser);
+      throw new ApolloError("Vous devez être connecté !!!");
+    }
+    // password = await encodePassword(password);
     if (typeof email === "string") {
-      const wilderToUpdate = await datasource
+      const userToUpdate = await datasource
         .getRepository(User)
-        .findOne({ where: { id } });
-      if (wilderToUpdate === null) throw new ApolloError("Account unavailable");
+        .findOne({ where: { id: currentUser.id } });
+      if (userToUpdate === null) throw new ApolloError("Account unavailable");
     }
     return await datasource.getRepository(User).save({
-      id,
       email,
-      password,
+      // password,
       profileDescription,
       profilePicture,
       lastName,

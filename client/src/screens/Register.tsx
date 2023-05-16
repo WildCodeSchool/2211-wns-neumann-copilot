@@ -1,8 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./css/register.css"
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
-import LeftMenuPC from "../Components/LeftMenuPC";
 import { useCreateUserMutation, useGetProfileQuery } from "../gql/generated/schema";
 import { useState } from "react";
 
@@ -20,7 +17,6 @@ export default function Register() {
 
     return (
         <div>
-            {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
             <div className="main">
                 <h1>Inscription</h1>
                 <div className="container_form">
@@ -80,7 +76,6 @@ export default function Register() {
                     </form>
                 </div>
             </div>
-            {window.innerWidth < 992 ? <Footer></Footer> : ''}
             <div> {isAdmin && <p>C'est le boss</p>}</div>
         </div>
     )
