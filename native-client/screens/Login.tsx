@@ -6,8 +6,8 @@ import * as SecureStore from 'expo-secure-store';
 export default function Login() {
 
     const [credentials, setCredentials] = useState({
-        email: 'testdstgf@test.fr',
-        password: 'azertyuiop'
+        email: '',
+        password: ''
     });
     const { data: currentUser, client } = useGetProfileQuery({
         errorPolicy: "ignore",
