@@ -42,58 +42,58 @@ export default function Login() {
           </button>
         </div>
       ) : ( */}
-        <div className="main">
-          <h1>Connexion</h1>
-          <form
-            className="form"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              setError("");
-              try {
-                await login({ variables: { data: { email, password } } });
-              } catch (err) {
-                console.error(err);
-                setError("invalid credentials");
-              } finally {
-                client.resetStore();
-                navigate("/profil");
-              }
-            }}
-          >
-            <div className="input_connexion">
-              <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre adresse email"
-              />
-            </div>
-            <div className="input_connexion">
-              <input
-                type="text"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Votre mot de passe"
-              />
-            </div>
-            {error && <p>{error}</p>}
-            <div className="redirection_sign_up">
-              <p>Pas encore de compte ?</p>&nbsp;
-              <Link to="/Register">Inscription</Link>
-            </div>
-            <div>
-              <button
-                className="button button_connexion"
-                type="submit"
-                name="Login"
-              >
-                Connexion
-              </button>
-            </div>
-          </form>
-        </div>
+      <div className="main">
+        <h1>Connexion</h1>
+        <form
+          className="form"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setError("");
+            try {
+              await login({ variables: { data: { email, password } } });
+            } catch (err) {
+              console.error(err);
+              setError("invalid credentials");
+            } finally {
+              client.resetStore();
+              navigate("/profil");
+            }
+          }}
+        >
+          <div className="input_connexion">
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Votre adresse email"
+            />
+          </div>
+          <div className="input_connexion">
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Votre mot de passe"
+            />
+          </div>
+          {error && <p>{error}</p>}
+          <div className="redirection_sign_up">
+            <p>Pas encore de compte ?</p>&nbsp;
+            <Link to="/Register">Inscription</Link>
+          </div>
+          <div>
+            <button
+              className="button button_connexion"
+              type="submit"
+              name="Login"
+            >
+              Connexion
+            </button>
+          </div>
+        </form>
+      </div>
       {/* )} */}
     </div>
   );
