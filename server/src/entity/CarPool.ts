@@ -17,20 +17,20 @@ export class CarPool {
   @Column()
   arrivalCity: string;
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
-  departureDate: string;
+  @Field()
+  @Column()
+  departureDateTime: string;
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
-  departureTime: string;
+  @Field()
+  @Column()
+  passengerNumber: string;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
   passengerId?: string;
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
+  @Field()
+  @Column()
   driverId: number;
 }
 
@@ -49,11 +49,11 @@ export class CarPoolerInput {
 
   @Field()
   @MinLength(1)
-  departureDate: string;
+  departureDateTime: string;
 
   @Field()
   @MinLength(1)
-  departureTime: string;
+  passengerNumber: string;
 
   @Field()
   passengerId?: string;

@@ -1,10 +1,10 @@
-mutation Mutation($data: CarPoolerInput!) {
+mutation CreateCarPool($data: CarPoolerInput!) {
   createCarPool(data: $data) {
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }
@@ -14,8 +14,8 @@ query Query($getCarPoolId: Int!) {
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }
@@ -25,8 +25,8 @@ query GetCarPools {
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }
@@ -40,8 +40,8 @@ mutation UpdateCarpool(
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }

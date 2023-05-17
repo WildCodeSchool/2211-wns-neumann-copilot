@@ -24,9 +24,9 @@ async function reset(): Promise<void> {
     {
       departureCity: "Dunkerque",
       arrivalCity: "Lille",
-      departureDate: "20 Avril 2023",
-      departureTime: "12h00",
+      departureDateTime: "2023-05-19T16:30",
       driverId: 1,
+      passengerNumber: "1",
     },
   ]);
   await datasource.destroy();

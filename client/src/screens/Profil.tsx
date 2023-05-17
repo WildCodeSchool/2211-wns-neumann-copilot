@@ -13,8 +13,8 @@ export default function Profil() {
   const { data: currentUser, client } = useGetProfileQuery({
     errorPolicy: "ignore",
   });
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const [updateProfil] = useUpdateUserMutation();
   const [email, setEmail] = useState("");
   const [lastName, setlastName] = useState("");
