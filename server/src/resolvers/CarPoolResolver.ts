@@ -41,7 +41,8 @@ export class CarPoolResolver {
     @Arg("data") data: CarPoolerInput
   ): Promise<CarPool> {
     const id = carPoolId;
-    const { departureCity, arrivalCity, departureDate, departureTime } = data;
+    const { departureCity, arrivalCity, departureDateTime, passengerNumber } =
+      data;
     const carpoolToUpdate = await datasource
       .getRepository(CarPool)
       .findOne({ where: { id } });
@@ -52,8 +53,12 @@ export class CarPoolResolver {
         "Only the driver can update the carpool",
         "Unauthorised"
       );
-    return await datasource
-      .getRepository(CarPool)
-      .save({ id, departureCity, arrivalCity, departureDate, departureTime });
+    return await datasource.getRepository(CarPool).save({
+      id,
+      departureCity,
+      arrivalCity,
+      departureDateTime,
+      passengerNumber,
+    });
   }
 }

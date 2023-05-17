@@ -19,20 +19,20 @@ export type CarPool = {
   __typename?: 'CarPool';
   arrivalCity: Scalars['String'];
   departureCity: Scalars['String'];
-  departureDate?: Maybe<Scalars['String']>;
-  departureTime?: Maybe<Scalars['String']>;
-  driverId?: Maybe<Scalars['Float']>;
+  departureDateTime: Scalars['String'];
+  driverId: Scalars['Float'];
   id: Scalars['Float'];
   passengerId?: Maybe<Scalars['String']>;
+  passengerNumber: Scalars['String'];
 };
 
 export type CarPoolerInput = {
   arrivalCity: Scalars['String'];
   departureCity: Scalars['String'];
-  departureDate: Scalars['String'];
-  departureTime: Scalars['String'];
+  departureDateTime: Scalars['String'];
   driverId: Scalars['Float'];
   passengerId: Scalars['String'];
+  passengerNumber: Scalars['String'];
 };
 
 export type Mutation = {
@@ -129,24 +129,24 @@ export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUsersQuery = { __typename?: 'Query', getUsers: Array<{ __typename?: 'User', id: number, email: string }> };
 
-export type MutationMutationVariables = Exact<{
+export type CreateCarPoolMutationVariables = Exact<{
   data: CarPoolerInput;
 }>;
 
 
-export type MutationMutation = { __typename?: 'Mutation', createCarPool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null } };
+export type CreateCarPoolMutation = { __typename?: 'Mutation', createCarPool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDateTime: string, passengerNumber: string, passengerId?: string | null, driverId: number } };
 
 export type QueryQueryVariables = Exact<{
   getCarPoolId: Scalars['Int'];
 }>;
 
 
-export type QueryQuery = { __typename?: 'Query', getCarPool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null } };
+export type QueryQuery = { __typename?: 'Query', getCarPool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDateTime: string, passengerNumber: string, passengerId?: string | null, driverId: number } };
 
 export type GetCarPoolsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCarPoolsQuery = { __typename?: 'Query', getCarPools: Array<{ __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null }> };
+export type GetCarPoolsQuery = { __typename?: 'Query', getCarPools: Array<{ __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDateTime: string, passengerNumber: string, passengerId?: string | null, driverId: number }> };
 
 export type UpdateCarpoolMutationVariables = Exact<{
   data: CarPoolerInput;
@@ -155,7 +155,7 @@ export type UpdateCarpoolMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCarpoolMutation = { __typename?: 'Mutation', updateCarpool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null } };
+export type UpdateCarpoolMutation = { __typename?: 'Mutation', updateCarpool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDateTime: string, passengerNumber: string, passengerId?: string | null, driverId: number } };
 
 export type DeleteCarPoolMutationVariables = Exact<{
   deleteCarPoolId: Scalars['Int'];
@@ -258,53 +258,53 @@ export function useGetUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
 export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
 export type GetUsersQueryResult = Apollo.QueryResult<GetUsersQuery, GetUsersQueryVariables>;
-export const MutationDocument = gql`
-    mutation Mutation($data: CarPoolerInput!) {
+export const CreateCarPoolDocument = gql`
+    mutation CreateCarPool($data: CarPoolerInput!) {
   createCarPool(data: $data) {
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }
 }
     `;
-export type MutationMutationFn = Apollo.MutationFunction<MutationMutation, MutationMutationVariables>;
+export type CreateCarPoolMutationFn = Apollo.MutationFunction<CreateCarPoolMutation, CreateCarPoolMutationVariables>;
 
 /**
- * __useMutationMutation__
+ * __useCreateCarPoolMutation__
  *
- * To run a mutation, you first call `useMutationMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useMutationMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateCarPoolMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCarPoolMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [mutationMutation, { data, loading, error }] = useMutationMutation({
+ * const [createCarPoolMutation, { data, loading, error }] = useCreateCarPoolMutation({
  *   variables: {
  *      data: // value for 'data'
  *   },
  * });
  */
-export function useMutationMutation(baseOptions?: Apollo.MutationHookOptions<MutationMutation, MutationMutationVariables>) {
+export function useCreateCarPoolMutation(baseOptions?: Apollo.MutationHookOptions<CreateCarPoolMutation, CreateCarPoolMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<MutationMutation, MutationMutationVariables>(MutationDocument, options);
+        return Apollo.useMutation<CreateCarPoolMutation, CreateCarPoolMutationVariables>(CreateCarPoolDocument, options);
       }
-export type MutationMutationHookResult = ReturnType<typeof useMutationMutation>;
-export type MutationMutationResult = Apollo.MutationResult<MutationMutation>;
-export type MutationMutationOptions = Apollo.BaseMutationOptions<MutationMutation, MutationMutationVariables>;
+export type CreateCarPoolMutationHookResult = ReturnType<typeof useCreateCarPoolMutation>;
+export type CreateCarPoolMutationResult = Apollo.MutationResult<CreateCarPoolMutation>;
+export type CreateCarPoolMutationOptions = Apollo.BaseMutationOptions<CreateCarPoolMutation, CreateCarPoolMutationVariables>;
 export const QueryDocument = gql`
     query Query($getCarPoolId: Int!) {
   getCarPool(id: $getCarPoolId) {
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }
@@ -344,8 +344,8 @@ export const GetCarPoolsDocument = gql`
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }
@@ -384,8 +384,8 @@ export const UpdateCarpoolDocument = gql`
     id
     departureCity
     arrivalCity
-    departureDate
-    departureTime
+    departureDateTime
+    passengerNumber
     passengerId
     driverId
   }
