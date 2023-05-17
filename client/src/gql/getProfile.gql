@@ -7,15 +7,16 @@ query getProfile {
     firstName
     lastName
     role
+    age
   }
 }
 mutation UpdateUser($data: UserUpdateInput!) {
   updateUser(data: $data) {
+    age
     email
-    profilePicture
-    profileDescription
     firstName
+    profileDescription
     lastName
-    role
+    profilePicture
   }
 }

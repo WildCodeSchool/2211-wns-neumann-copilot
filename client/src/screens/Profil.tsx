@@ -6,7 +6,7 @@ import {
   useLogoutMutation,
   useUpdateUserMutation,
 } from "../gql/generated/schema";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Profil() {
   const [logout] = useLogoutMutation();
@@ -21,7 +21,18 @@ export default function Profil() {
   const [firstName, setfirstName] = useState("");
   const [profileDescription, setprofileDescription] = useState("");
   const [profilePicture, setprofilePicture] = useState("");
+  const [age, setage] = useState("");
   // const [password, setpassword] = useState("");
+
+  useEffect(() => {
+    if (currentUser) {
+      setEmail(currentUser.profile.email);
+      setfirstName(currentUser.profile.firstName || "");
+      setlastName(currentUser.profile.lastName || "");
+      setprofileDescription(currentUser.profile.profileDescription || "");
+      setage(currentUser.profile.age || "");
+    }
+  }, [currentUser]);
 
   return (
     <>
@@ -39,6 +50,7 @@ export default function Profil() {
                   lastName,
                   profileDescription,
                   profilePicture,
+                  age,
                 },
               },
             });
@@ -55,6 +67,7 @@ export default function Profil() {
           <img src={blank_profile} alt="Profil-image" />
         </div>
         <div className="container_information">
+          {/* First Name */}
           <div className="input">
             <input
               name="firstname"
@@ -68,6 +81,8 @@ export default function Profil() {
               value={firstName}
             />
           </div>
+
+          {/* Last Name */}
           <div className="input">
             <input
               name="lastname"
@@ -78,6 +93,7 @@ export default function Profil() {
                   : currentUser?.profile.lastName
               }
               onChange={(e) => setlastName(e.target.value)}
+              value={lastName}
             />
           </div>
 
@@ -86,25 +102,42 @@ export default function Profil() {
             <input
               type="email"
               name="email"
-              // defaultValue={currentUser?.profile.email}
+              placeholder={
+                currentUser?.profile.email === null
+                  ? "Email"
+                  : currentUser?.profile.email
+              }
               onChange={(e) => setEmail(e.target.value)}
-              value={email || currentUser?.profile.email}
+              value={email}
             />
           </div>
 
           {/* Age */}
           <div className="input">
-            <input name="age" type="text" placeholder="Age" />
+            <input
+              name="age"
+              type="text"
+              placeholder={
+                currentUser?.profile.age === null
+                  ? "Votre age"
+                  : currentUser?.profile.age
+              }
+              onChange={(e) => setage(e.target.value)}
+              value={age}
+            />
           </div>
+
+          {/* Description */}
           <div className="input_description">
             <textarea
-              name="descrition"
+              name="description"
               placeholder={
                 currentUser?.profile.profileDescription === null
                   ? "Votre description"
                   : currentUser?.profile.profileDescription
               }
               onChange={(e) => setprofileDescription(e.target.value)}
+              value={profileDescription}
             ></textarea>
           </div>
         </div>

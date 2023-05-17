@@ -93,6 +93,7 @@ export type QueryGetCarPoolArgs = {
 
 export type User = {
   __typename?: 'User';
+  age?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   id: Scalars['Float'];
@@ -104,14 +105,11 @@ export type User = {
 
 export type UserInput = {
   email: Scalars['String'];
-  firstName?: InputMaybe<Scalars['String']>;
-  lastName?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
-  profileDescription?: InputMaybe<Scalars['String']>;
-  profilePicture?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUpdateInput = {
+  age?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
@@ -169,14 +167,14 @@ export type DeleteCarPoolMutation = { __typename?: 'Mutation', deleteCarPool: bo
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, firstName?: string | null, lastName?: string | null, role: string } };
+export type GetProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, firstName?: string | null, lastName?: string | null, role: string, age?: string | null } };
 
 export type UpdateUserMutationVariables = Exact<{
   data: UserUpdateInput;
 }>;
 
 
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', email: string, profilePicture?: string | null, profileDescription?: string | null, firstName?: string | null, lastName?: string | null, role: string } };
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', age?: string | null, email: string, firstName?: string | null, profileDescription?: string | null, lastName?: string | null, profilePicture?: string | null } };
 
 export type LoginMutationVariables = Exact<{
   data: UserInput;
@@ -462,6 +460,7 @@ export const GetProfileDocument = gql`
     firstName
     lastName
     role
+    age
   }
 }
     `;
@@ -495,12 +494,12 @@ export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfi
 export const UpdateUserDocument = gql`
     mutation UpdateUser($data: UserUpdateInput!) {
   updateUser(data: $data) {
+    age
     email
-    profilePicture
-    profileDescription
     firstName
+    profileDescription
     lastName
-    role
+    profilePicture
   }
 }
     `;

@@ -41,6 +41,10 @@ class User {
   @Field()
   @Column({ default: UserRole.PASSENGER, enum: UserRole })
   role: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true, length: 3, type: "varchar" })
+  age?: string;
 }
 
 @InputType()
@@ -52,18 +56,6 @@ export class UserInput {
   @Field()
   @MinLength(8)
   password: string;
-
-  @Field({ nullable: true })
-  profilePicture?: string;
-
-  @Field({ nullable: true })
-  profileDescription?: string;
-
-  @Field({ nullable: true })
-  firstName?: string;
-
-  @Field({ nullable: true })
-  lastName?: string;
 }
 
 @InputType()
@@ -83,6 +75,9 @@ export class UserUpdateInput {
 
   @Field({ nullable: true })
   lastName?: string;
+
+  @Field({ nullable: true })
+  age?: string;
 }
 
 const hashageOptions = {

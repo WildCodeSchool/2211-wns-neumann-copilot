@@ -78,37 +78,38 @@ export default class UserResolver {
     return currentUser;
   }
 
+  @Authorized()
   @Mutation(() => User)
   async updateUser(
     @Ctx() { currentUser }: ContextType,
     @Arg("data")
     {
       email,
-      // password,
       profileDescription,
       profilePicture,
       lastName,
       firstName,
+      age,
     }: UserUpdateInput
   ): Promise<User> {
     if (typeof currentUser !== "object") {
-      console.log("hop" + " " + currentUser);
       throw new ApolloError("Vous devez être connecté !!!");
     }
     // password = await encodePassword(password);
-    if (typeof email === "string") {
-      const userToUpdate = await datasource
-        .getRepository(User)
-        .findOne({ where: { id: currentUser.id } });
-      if (userToUpdate === null) throw new ApolloError("Account unavailable");
-    }
+    const userToUpdate = await datasource
+      .getRepository(User)
+      .findOne({ where: { id: currentUser.id } });
+    if (userToUpdate === null) throw new ApolloError("Account unavailable");
+
     return await datasource.getRepository(User).save({
+      ...userToUpdate,
       email,
       // password,
       profileDescription,
       profilePicture,
       lastName,
       firstName,
+      age,
     });
   }
 }
