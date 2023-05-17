@@ -53,3 +53,9 @@
 .option p {
     margin-left: 5px;
 }
+
+@media screen and (max-width: 992px) {
+    .left-menu-pc {
+        display: none;
+    }
+}

@@ -32,10 +32,6 @@ class User {
 
   @Field({ nullable: true })
   @Column({ nullable: true, length: 50, type: "varchar" })
-  pseudo?: string;
-
-  @Field({ nullable: true })
-  @Column({ nullable: true, length: 50, type: "varchar" })
   firstName?: string;
 
   @Field({ nullable: true })
@@ -45,6 +41,10 @@ class User {
   @Field()
   @Column({ default: UserRole.PASSENGER, enum: UserRole })
   role: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true, length: 3, type: "varchar" })
+  age?: string;
 }
 
 @InputType()
@@ -56,6 +56,13 @@ export class UserInput {
   @Field()
   @MinLength(8)
   password: string;
+}
+
+@InputType()
+export class UserUpdateInput {
+  @Field()
+  @IsEmail()
+  email: string;
 
   @Field({ nullable: true })
   profilePicture?: string;
@@ -64,14 +71,15 @@ export class UserInput {
   profileDescription?: string;
 
   @Field({ nullable: true })
-  pseudo?: string;
-
-  @Field({ nullable: true })
   firstName?: string;
 
   @Field({ nullable: true })
   lastName?: string;
+
+  @Field({ nullable: true })
+  age?: string;
 }
+
 const hashageOptions = {
   type: argon2id,
   memoryCost: 2 ** 16,

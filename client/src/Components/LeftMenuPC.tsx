@@ -7,40 +7,42 @@ import { Link } from "react-router-dom";
 import { useGetProfileQuery } from "../gql/generated/schema";
 
 function LeftMenuPC() {
-        
-    const { data: currentUser } = useGetProfileQuery({
-        errorPolicy: "ignore",
-    });
-    console.log(currentUser);
+  const { data: currentUser } = useGetProfileQuery({
+    errorPolicy: "ignore",
+  });
 
-    return (
-        <div className="left-menu-pc">
-            <div>
-                <Link to={"/"}>
-                    <img src={LogoCopilote} alt="logo de Copilote" className="logo" />
-                </Link>
-                <div className="option-liste">
-                    <Link to={"/"}>
-                        <div className="option">
-                            <img src={IconHome} alt="icon en forme de maison" />
-                            <p>Acceuil</p>
-                        </div>
-                    </Link>
-                    <Link to={currentUser?.profile ? "/trajet" : "/login"}>
-                        <div className="option">
-                            <img src={IconVoiture} alt="icon de voiture" />
-                            <p>Trajet</p>
-                        </div>
-                    </Link>
-                </div>
+  return (
+    <div className="left-menu-pc">
+      <div>
+        <Link to={"/"}>
+          <img src={LogoCopilote} alt="logo de Copilote" className="logo" />
+        </Link>
+        <div className="option-liste">
+          <Link to={"/"}>
+            <div className="option">
+              <img src={IconHome} alt="icon en forme de maison" />
+              <p>Acceuil</p>
             </div>
-            <div>
-                <Link to={currentUser?.profile ? "/Profil" : "/login"}>
-                    <img src={StandardProfil} alt="logo de Copilote" className="profil-img" />
-                </Link>
-                <p>Copyright 2023 by J-R, Rémy et Florian</p>
+          </Link>
+          <Link to={currentUser?.profile ? "/trajet" : "/login"}>
+            <div className="option">
+              <img src={IconVoiture} alt="icon de voiture" />
+              <p>Trajet</p>
             </div>
+          </Link>
         </div>
-    );
+      </div>
+      <div>
+        <Link to={currentUser?.profile ? "/Profil" : "/login"}>
+          <img
+            src={StandardProfil}
+            alt="logo de Copilote"
+            className="profil-img"
+          />
+        </Link>
+        <p>Copyright 2023 by J-R, Rémy et Florian</p>
+      </div>
+    </div>
+  );
 }
 export default LeftMenuPC;
