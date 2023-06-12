@@ -78,7 +78,7 @@ input:checked + .slider:before {
   gap: 20px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
 }
 
 .toggle p {
@@ -90,11 +90,11 @@ input:checked + .slider:before {
     gap: 50px;
   }
 
-  .form_create_carpool .input {
+  .form_create_carpool .input_carpool {
     flex-basis: 40%;
   }
 
-  .form_create_carpool .input input {
+  .form_create_carpool .input_carpool input {
     width: 100%;
   }
 

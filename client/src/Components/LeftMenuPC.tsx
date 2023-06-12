@@ -1,10 +1,9 @@
 import "./css/LeftMenuPC.css";
 import LogoCopilote from "../img/LogoCopilote.svg";
 import StandardProfil from "../img/StandardProfil.svg";
-import IconHome from "../img/IconHome.svg";
-import IconVoiture from "../img/IconVoiture.svg";
 import { Link } from "react-router-dom";
 import { useGetProfileQuery } from "../gql/generated/schema";
+import { MdDirectionsCar, MdHome } from "react-icons/md";
 
 function LeftMenuPC() {
   const { data: currentUser } = useGetProfileQuery({
@@ -20,14 +19,14 @@ function LeftMenuPC() {
         <div className="option-liste">
           <Link to={"/"}>
             <div className="option">
-              <img src={IconHome} alt="icon en forme de maison" />
-              <p>Acceuil</p>
+              <MdHome />
+              Acceuil
             </div>
           </Link>
           <Link to={currentUser?.profile ? "/trajet" : "/login"}>
             <div className="option">
-              <img src={IconVoiture} alt="icon de voiture" />
-              <p>Trajet</p>
+              <MdDirectionsCar />
+              Trajet
             </div>
           </Link>
         </div>

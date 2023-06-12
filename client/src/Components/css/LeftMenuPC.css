@@ -1,61 +1,81 @@
 .left-menu-pc {
-    background-color: #518071;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    /* attention : la valeur est liée au margin-left du .app de la "media query PC" dans "Home.css" */
-    width: 175px;
-    z-index: 1;
+  background-color: #518071;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  /* attention : la valeur est liée au margin-left du .app de la "media query PC" dans "Home.css" */
+  width: 200px;
+  z-index: 1;
 }
 
 .left-menu-pc img,
 .option p {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .left-menu-pc .logo {
-    width: 150px;
+  width: 150px;
 }
 
 .left-menu-pc .profil-img {
-    border-radius: 50px;
-    height: 100px;
+  border-radius: 50px;
+  height: 100px;
 }
 
 .left-menu-pc p {
-    color: #FFF;
-    font-size: 1rem;
+  color: #fefefe;
+  font-size: 1rem;
+  margin: 0;
 }
 
 .left-menu-pc a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-.left-menu-pc a:hover {
-    text-decoration: underline;
-    text-decoration-color: #FFF;
+.option-liste {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .option {
-    display: flex;
+  width: 90%;
+  height: 40px;
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
 }
 
-.option img {
-    margin: 5px;
-    width: 25px;
+.option:hover {
+  color: rgb(254, 254, 254);
+  background: rgb(254, 254, 254, 0.2);
 }
 
-.option p {
-    margin-left: 5px;
+.option svg {
+  font-size: 25px;
+  margin-left: 20px;
+  margin-right: 12px;
+}
+
+.option a {
+  color: #fefefe;
+}
+.option a:active {
+  color: #3d3434;
 }
 
 @media screen and (max-width: 992px) {
-    .left-menu-pc {
-        display: none;
-    }
+  .left-menu-pc {
+    display: none;
+  }
 }

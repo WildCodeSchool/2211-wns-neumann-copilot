@@ -97,7 +97,7 @@ function Trajet() {
             />
           </div>
           {/* Nombre de passager */}
-          <div className="input">
+          <div className="input_carpool">
             <input
               type="text"
               placeholder="Nombre de passager"
