@@ -107,4 +107,7 @@ input:checked + .slider:before {
   .form_create_carpool {
     gap: 150px;
   }
+  .form_create_carpool .input {
+    flex-basis: 40%;
+  }
 }
