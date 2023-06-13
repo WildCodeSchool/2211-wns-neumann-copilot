@@ -54,6 +54,7 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
+  transition: all 0.4s ease-in-out;
 }
 
 .option:hover {
