@@ -80,6 +80,17 @@ export default class UserResolver {
 
   @Authorized()
   @Mutation(() => User)
+  async updateProfile(
+    @Ctx() { currentUser }: ContextType, 
+    @Arg("data", { validate: false }) { expoNotificationToken }:
+      UserUpdateInput): Promise<User> {
+    return await datasource.getRepository(User).save({ ...currentUser, expoNotificationToken });
+  }
+
+
+
+  @Authorized()
+  @Mutation(() => User)
   async updateUser(
     @Ctx() { currentUser }: ContextType,
     @Arg("data")

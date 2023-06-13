@@ -45,6 +45,10 @@ class User {
   @Field({ nullable: true })
   @Column({ nullable: true, length: 3, type: "varchar" })
   age?: string;
+
+  @Field()
+  @Column({ nullable: true })
+  expoNotificationsToken: string;
 }
 
 @InputType()
@@ -78,6 +82,9 @@ export class UserUpdateInput {
 
   @Field({ nullable: true })
   age?: string;
+
+  @Field()
+  expoNotificationToken: string;
 }
 
 const hashageOptions = {
