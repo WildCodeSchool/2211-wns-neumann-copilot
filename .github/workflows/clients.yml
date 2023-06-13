@@ -1,8 +1,6 @@
-name: tests, build and push
+name: tests
 
-on:
-  push:
-    branches: ["develop"]
+on: pull_request
   
 jobs:
   test-on-develop:
