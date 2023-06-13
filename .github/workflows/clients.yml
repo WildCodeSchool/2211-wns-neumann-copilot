@@ -1,0 +1,16 @@
+name: tests, build and push
+
+on:
+  push:
+    branches: ["develop"]
+  
+jobs:
+  test-on-develop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Install npm and deps
+        uses: cd client && npm i
+      - name: Go to client and run tests
+        uses: cd client && npm run test
