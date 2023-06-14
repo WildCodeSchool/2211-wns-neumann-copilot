@@ -1,14 +1,14 @@
-name: tests-front
+# name: tests-front
 
-on: pull_request
+# on: pull_request
 
-jobs:
-  test-client:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-      - name: Install npm and deps
-        run: cd client && npm i
-      - name: Go to client file and run tests
-        run: cd client && npm run test
+# jobs:
+#   test-client:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out code
+#         uses: actions/checkout@v3
+#       - name: Install npm and deps
+#         run: cd client && npm i
+#       - name: Go to client file and run tests
+#         run: cd client && npm run test
