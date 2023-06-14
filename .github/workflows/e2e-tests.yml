@@ -1,9 +1,9 @@
-name: integration-tests
+name: e2e-tests
 
 on: pull_request
-  
+
 jobs:
-  test-on-pull-request:
+  e2e-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -17,11 +17,7 @@ jobs:
           envkey_SERVER_HOST: "localhost"
           envkey_SERVER_PORT: "4000"
           envkey_DB_HOST: localhost
-          envkey_DB_USER: postgres
-          envkey_DB_PASS: postgres
-          envkey_DB_NAME: postgres
-          envkey_DB_PORT: 5432
           directory: server
           file_name: .env
-      - name: Run integration test
-        run: npm run integration-tests
+      - name: Run e2e tests
+        run: npm run e2e-tests
