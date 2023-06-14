@@ -1,32 +1,33 @@
 .header {
-    background-color: #518071;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 20px;
+  background-color: #518071;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  height: 100px;
 }
 
 .header img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .header .menu {
-    height: 40px;
-    color: #FFF;
+  height: 30px;
+  color: #fff;
 }
 
 .header .logo {
-    width: 100px;
+  width: 100px;
 }
 
 .header .profil-img {
-    border-radius: 50px;
-    height: 60px;
+  border-radius: 50px;
+  height: 60px;
 }
 
 @media screen and (min-width: 992px) {
-    .header {
-        display: none;
-    }
+  .header {
+    display: none;
+  }
 }

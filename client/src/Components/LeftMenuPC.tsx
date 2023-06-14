@@ -1,5 +1,5 @@
 import "./css/LeftMenuPC.css";
-import LogoCopilote from "../img/LogoCopilote.svg";
+import LogoCopilote from "../img/LogoCopilote.png";
 import StandardProfil from "../img/StandardProfil.svg";
 import { Link, NavLink } from "react-router-dom";
 import { useGetProfileQuery } from "../gql/generated/schema";

@@ -11,6 +11,7 @@
   /* attention : la valeur est liée au margin-left du .app de la "media query PC" dans "Home.css" */
   width: 200px;
   z-index: 1;
+  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.7);
 }
 
 .left-menu-pc img,
@@ -20,21 +21,18 @@
 
 .left-menu-pc .logo {
   width: 150px;
+  margin-top: 30px;
 }
 
 .left-menu-pc .profil-img {
   border-radius: 50px;
-  height: 100px;
+  height: 80px;
 }
 
 .left-menu-pc p {
   color: #fefefe;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
-}
-
-.left-menu-pc a {
-  text-decoration: none;
 }
 
 nav {
@@ -42,7 +40,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 80px;
 }
 
 .option {
@@ -50,7 +48,7 @@ nav {
   height: 40px;
   display: flex;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 34px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -68,6 +66,7 @@ nav {
 
 nav a {
   color: #fefefe;
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: 992px) {
