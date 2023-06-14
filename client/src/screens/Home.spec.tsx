@@ -16,15 +16,15 @@ const adminProfileMock = {
   },
 };
 
-describe("App component", () => {
-  it("should", async () => {
+describe("Home component", () => {
+  it("should look for text in the screen", async () => {
     render(
       <MockedProvider mocks={[adminProfileMock]} addTypename={false}>
         <Home />
       </MockedProvider>,
       { wrapper: BrowserRouter }
     );
-    
+
     expect(await screen.findByText('Bienvenue chères Copilote !')).toBeVisible();
   });
 });
