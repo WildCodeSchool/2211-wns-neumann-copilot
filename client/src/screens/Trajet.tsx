@@ -128,15 +128,6 @@ function Trajet() {
           </div>
 
           <div className="toggle">
-            <p>je recherche</p>
-            <label className="switch">
-              <input type="checkbox" />
-              <span className="slider round"></span>
-            </label>
-            <p>je propose</p>
-          </div>
-
-          <div className="toggle">
             <p>je propose</p>
             <label className="switch">
               <input type="checkbox" id="toggle" onChange={handleToggle} />
@@ -144,11 +135,12 @@ function Trajet() {
             </label>
             <p>je recherche</p>
           </div>
-          {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />}
+
           <button type="submit" className="button">
             Valider
           </button>
         </form>
+        {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />}
       </div>
     </div>
   );
