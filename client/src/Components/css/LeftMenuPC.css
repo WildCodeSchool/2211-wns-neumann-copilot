@@ -9,7 +9,7 @@
   top: 0;
   bottom: 0;
   /* attention : la valeur est liée au margin-left du .app de la "media query PC" dans "Home.css" */
-  width: 200px;
+  width: 180px;
   z-index: 1;
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.7);
 }

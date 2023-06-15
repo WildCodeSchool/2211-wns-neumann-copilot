@@ -30,15 +30,6 @@ function Trajet() {
   return (
     <div className="trajet">
       <div className="app">
-        <div className="toggle">
-          <p>je recherche</p>
-          <label className="switch">
-            <input type="checkbox" />
-            <span className="slider round"></span>
-          </label>
-          <p>je propose</p>
-        </div>
-
         <form
           className="form_create_carpool"
           onSubmit={async (e) => {
@@ -90,14 +81,12 @@ function Trajet() {
           <div className="input">
             <input
               type="datetime-local"
-              placeholder=""
-              name=""
               onChange={(e) => setDepartureDateTime(e.target.value)}
               value={departureDateTime}
             />
           </div>
           {/* Nombre de passager */}
-          <div className="input_carpool">
+          <div className="input">
             <input
               type="text"
               placeholder="Nombre de passager"
@@ -106,11 +95,19 @@ function Trajet() {
               value={passengerNumber}
             />
           </div>
-          <input
-            type="submit"
-            className="button button_validate"
-            value="Valider"
-          />
+
+          <div className="toggle">
+            <p>je recherche</p>
+            <label className="switch">
+              <input type="checkbox" />
+              <span className="slider round"></span>
+            </label>
+            <p>je propose</p>
+          </div>
+
+          <button type="submit" className="button">
+            Valider
+          </button>
         </form>
       </div>
     </div>

@@ -32,14 +32,13 @@ a {
 
 .app h1 {
   margin: 0 0 20px 0;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 2rem;
   color: #000000;
 }
 
 .app h2,
 .app p {
-  font-size: 1rem;
   text-align: left;
   width: 90%;
   display: block;
@@ -48,8 +47,13 @@ a {
 
 .app h2 {
   font-weight: bold;
+  font-size: 1.2rem;
 }
 
+.app p {
+  font-weight: normal;
+  font-size: 1rem;
+}
 .app img {
   width: 90%;
   margin-bottom: 50px;
@@ -86,7 +90,7 @@ a {
 @media screen and (min-width: 992px) {
   .app {
     /* attention : la valeur est liée au width du left-menu-pc dans "LeftMenuPC.css" */
-    margin-left: 175px;
+    margin-left: 200px;
   }
 
   .app h2,
