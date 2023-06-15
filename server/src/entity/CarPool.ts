@@ -62,3 +62,14 @@ export class CarPoolerInput {
   @IsInt()
   driverId: number;
 }
+
+@InputType()
+export class getCarPoolByCitiesInput {
+  @Field()
+  @MinLength(1)
+  departureCity: string;
+
+  @Field()
+  @MinLength(1)
+  arrivalCity: string;
+}
