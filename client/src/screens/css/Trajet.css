@@ -5,9 +5,18 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-
+.form_create_carpool .button {
+  margin: 0;
+}
 .form_create_carpool input {
   flex-basis: 30%;
+  border-bottom: 1px solid #686868;
+  border-radius: 5px;
+  background: none;
+}
+
+.form_create_carpool input::placeholder {
+  color: black;
 }
 
 /* The switch - the box around the slider */
@@ -33,7 +42,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #518071;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -51,7 +60,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: #518071;
 }
 
 input:focus + .slider {
@@ -78,11 +87,14 @@ input:checked + .slider:before {
   gap: 20px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 100px;
+  width: 100%;
 }
 
 .toggle p {
   margin: 0;
+  width: auto;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 @media screen and (min-width: 576px) {
@@ -105,7 +117,8 @@ input:checked + .slider:before {
 
 @media screen and (min-width: 992px) {
   .form_create_carpool {
-    gap: 150px;
+    gap: 100px;
+    margin-top: 100px;
   }
   .form_create_carpool .input {
     flex-basis: 40%;

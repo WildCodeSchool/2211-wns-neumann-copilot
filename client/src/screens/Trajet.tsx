@@ -82,15 +82,6 @@ function Trajet() {
   return (
     <div className="trajet">
       <div className="app">
-        <div className="toggle">
-          <p>je propose</p>
-          <label className="switch">
-            <input type="checkbox" id="toggle" onChange={handleToggle} />
-            <span className="slider round"></span>
-          </label>
-          <p>je recherche</p>
-        </div>
-        {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />}
         <form
           className="form_create_carpool"
           onSubmit={(e: FormEvent) => {
@@ -121,14 +112,12 @@ function Trajet() {
           <div className="input">
             <input
               type="datetime-local"
-              placeholder=""
-              name=""
               onChange={(e) => setDepartureDateTime(e.target.value)}
               value={departureDateTime}
             />
           </div>
           {/* Nombre de passager */}
-          <div className="input_carpool">
+          <div className="input">
             <input
               type="text"
               placeholder="Nombre de passager"
@@ -137,11 +126,28 @@ function Trajet() {
               value={passengerNumber}
             />
           </div>
-          <input
-            type="submit"
-            className="button button_validate"
-            value="Valider"
-          />
+
+          <div className="toggle">
+            <p>je recherche</p>
+            <label className="switch">
+              <input type="checkbox" />
+              <span className="slider round"></span>
+            </label>
+            <p>je propose</p>
+          </div>
+
+          <div className="toggle">
+            <p>je propose</p>
+            <label className="switch">
+              <input type="checkbox" id="toggle" onChange={handleToggle} />
+              <span className="slider round"></span>
+            </label>
+            <p>je recherche</p>
+          </div>
+          {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />}
+          <button type="submit" className="button">
+            Valider
+          </button>
         </form>
       </div>
     </div>
