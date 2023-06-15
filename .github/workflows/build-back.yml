@@ -21,6 +21,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
+          build-args: "REACT_APP_GRAPHQL_API_URL=http://localhost:4000"
           context: "{{defaultContext}}:server"
           file: "Dockerfile.production"
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/2211-wns-neumann-copilot-server
