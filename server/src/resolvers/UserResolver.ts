@@ -14,6 +14,7 @@ import User, {
   encodePassword,
   verifyPassword,
   UserRole,
+  UserUpdateNativeInput,
 } from "../entity/User";
 import jwt from "jsonwebtoken";
 import { ApolloError } from "apollo-server-errors";
@@ -55,6 +56,8 @@ export default class UserResolver {
       secure: env.NODE_ENV === "production",
     });
     console.log(token);
+    console.log(email);
+    
 
     return token;
   }
@@ -78,13 +81,21 @@ export default class UserResolver {
     return currentUser;
   }
 
+
+
   @Authorized()
   @Mutation(() => User)
   async updateProfile(
     @Ctx() { currentUser }: ContextType, 
-    @Arg("data", { validate: false }) { expoNotificationToken }:
-      UserUpdateInput): Promise<User> {
-    return await datasource.getRepository(User).save({ ...currentUser, expoNotificationToken });
+    @Arg("data") { expoNotificationsToken }:
+      UserUpdateNativeInput): Promise<User> {
+        console.log(expoNotificationsToken);
+        console.log('toto');
+        console.log(currentUser);
+        
+        
+        
+    return await datasource.getRepository(User).save({ ...currentUser, expoNotificationsToken });
   }
 
 

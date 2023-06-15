@@ -82,9 +82,31 @@ export class UserUpdateInput {
 
   @Field({ nullable: true })
   age?: string;
+}
+
+@InputType()
+export class UserUpdateNativeInput {
+  @Field()
+  @IsEmail()
+  email: string;
+
+  // @Field({ nullable: true })
+  // profilePicture?: string;
+
+  // @Field({ nullable: true })
+  // profileDescription?: string;
+
+  // @Field({ nullable: true })
+  // firstName?: string;
+
+  // @Field({ nullable: true })
+  // lastName?: string;
+
+  // @Field({ nullable: true })
+  // age?: string;
 
   @Field()
-  expoNotificationToken: string;
+  expoNotificationsToken: string;
 }
 
 const hashageOptions = {
