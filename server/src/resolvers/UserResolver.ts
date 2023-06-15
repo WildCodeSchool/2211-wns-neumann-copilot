@@ -57,7 +57,7 @@ export default class UserResolver {
     });
     console.log(token);
     console.log(email);
-    
+
 
     return token;
   }
@@ -86,15 +86,10 @@ export default class UserResolver {
   @Authorized()
   @Mutation(() => User)
   async updateProfile(
-    @Ctx() { currentUser }: ContextType, 
-    @Arg("data") { expoNotificationsToken }:
+    @Ctx() { currentUser }: ContextType,
+    @Arg("data", { validate: false }) { expoNotificationsToken }:
       UserUpdateNativeInput): Promise<User> {
-        console.log(expoNotificationsToken);
-        console.log('toto');
-        console.log(currentUser);
-        
-        
-        
+    console.log(currentUser);
     return await datasource.getRepository(User).save({ ...currentUser, expoNotificationsToken });
   }
 
