@@ -1,0 +1,51 @@
+mutation CreateCarPool($data: CarPoolerInput!) {
+  createCarPool(data: $data) {
+    id
+    departureCity
+    arrivalCity
+    departureDateTime
+    passengerNumber
+    passengerId
+    driverId
+  }
+}
+query Query($getCarPoolId: Int!) {
+  getCarPool(id: $getCarPoolId) {
+    id
+    departureCity
+    arrivalCity
+    departureDateTime
+    passengerNumber
+    passengerId
+    driverId
+  }
+}
+query GetCarPools {
+  getCarPools {
+    id
+    departureCity
+    arrivalCity
+    departureDateTime
+    passengerNumber
+    passengerId
+    driverId
+  }
+}
+mutation UpdateCarpool(
+  $data: CarPoolerInput!
+  $carPoolId: Int!
+  $userId: Int!
+) {
+  updateCarpool(data: $data, carPoolId: $carPoolId, userId: $userId) {
+    id
+    departureCity
+    arrivalCity
+    departureDateTime
+    passengerNumber
+    passengerId
+    driverId
+  }
+}
+mutation DeleteCarPool($deleteCarPoolId: Int!) {
+  deleteCarPool(id: $deleteCarPoolId)
+}

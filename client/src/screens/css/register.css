@@ -10,9 +10,9 @@
     height: auto;
 }
 
-.form{
+.form_register{
     width: 90%;
-    height: 300px;
+    height: 400px;
     margin: 0 auto;
     padding-top: 50px;
     display: flex;
@@ -54,7 +54,9 @@
     color: #518071;
 }
 
-
+.button_inscription{
+    margin-top: 20px;
+}
 @media screen and (min-width: 576px){
     .input_inscription input{
         width: 45%;

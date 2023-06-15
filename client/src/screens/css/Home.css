@@ -9,6 +9,11 @@
     padding: 15px 40px;
 }
 
+a{
+    text-decoration: none;
+    color: #FFF;
+}
+
 .button:hover {
     color: #f9f9f9;
     background-color: #3e5e54;

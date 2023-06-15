@@ -5,10 +5,8 @@ import {
   useLogoutMutation,
 } from "../gql/generated/schema";
 import { Link, useNavigate } from "react-router-dom";
-import "./css/login.css"
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
-import LeftMenuPC from "../Components/LeftMenuPC";
+import "./css/login.css";
+import { log } from "console";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,12 +21,13 @@ export default function Login() {
     errorPolicy: "ignore",
   });
   const isAdmin = currentUser?.profile.role === "admin";
+  console.log("Hey");
   console.log(currentUser);
+  console.log("oh");
 
   return (
     <div>
-      {window.innerWidth < 992 ? <Header></Header> : <LeftMenuPC></LeftMenuPC>}
-      {currentUser?.profile ? (
+      {/* {currentUser?.profile ? (
         <div className="logout">
           {" "}
           <p> connected as {currentUser.profile.email}</p>
@@ -42,55 +41,60 @@ export default function Login() {
             Logout
           </button>
         </div>
-      ) : (
-        <div className="main">
-          <h1>Connexion</h1>
-          <form className="form"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              console.log({ email, password });
-              setError("");
-              try {
-                await login({ variables: { data: { email, password } } });
-              } catch (err) {
-                console.error(err);
-                setError("invalid credentials");
-              } finally {
-                client.resetStore();
-                navigate('/Profil');
-              }
-            }}
-          >
-            <div className="input_connexion">
-              <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre adresse email"
-              />
-            </div>
-            <div className="input_connexion">
-              <input
-                type="text"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Votre mot de passe"
-              />
-            </div>
-            {error && <p>{error}</p>}
-          <div className="redirection_sign_up">
-                <p>Pas encore de compte ?</p>&nbsp;<Link to="/signUp">Inscription</Link>
+      ) : ( */}
+      <div className="main">
+        <h1>Connexion</h1>
+        <form
+          className="form"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setError("");
+            try {
+              await login({ variables: { data: { email, password } } });
+            } catch (err) {
+              console.error(err);
+              setError("invalid credentials");
+            } finally {
+              client.resetStore();
+              navigate("/profil");
+            }
+          }}
+        >
+          <div className="input_connexion">
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Votre adresse email"
+            />
           </div>
-            <div>
-              <button className="button button_connexion" type="submit">Connexion</button>
-            </div>
-          </form>
-        </div>
-      )}
-      {window.innerWidth < 992 ? <Footer></Footer> : ''}
-      <div> {isAdmin && <p>C'est le boss</p>}</div>
+          <div className="input_connexion">
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Votre mot de passe"
+            />
+          </div>
+          {error && <p>{error}</p>}
+          <div className="redirection_sign_up">
+            <p>Pas encore de compte ?</p>&nbsp;
+            <Link to="/Register">Inscription</Link>
+          </div>
+          <div>
+            <button
+              className="button button_connexion"
+              type="submit"
+              name="Login"
+            >
+              Connexion
+            </button>
+          </div>
+        </form>
+      </div>
+      {/* )} */}
     </div>
   );
 }
