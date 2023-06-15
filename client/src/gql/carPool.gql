@@ -9,7 +9,7 @@ mutation CreateCarPool($data: CarPoolerInput!) {
     driverId
   }
 }
-query Query($getCarPoolId: Int!) {
+query getCarPool($getCarPoolId: Int!) {
   getCarPool(id: $getCarPoolId) {
     id
     departureCity
@@ -48,4 +48,15 @@ mutation UpdateCarpool(
 }
 mutation DeleteCarPool($deleteCarPoolId: Int!) {
   deleteCarPool(id: $deleteCarPoolId)
+}
+query GetCarPoolByCities($data: getCarPoolByCitiesInput!) {
+  getCarPoolByCities(data: $data) {
+    id
+    departureCity
+    arrivalCity
+    departureDateTime
+    passengerNumber
+    passengerId
+    driverId
+  }
 }
