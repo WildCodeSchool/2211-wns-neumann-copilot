@@ -1,6 +1,0 @@
-mutation UpdateProfile($data: UserUpdateNativeInput!) {
-  updateProfile(data: $data) {
-    expoNotificationsToken
-    id
-  }
-}
