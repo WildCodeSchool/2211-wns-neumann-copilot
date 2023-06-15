@@ -110,11 +110,12 @@ export type UserInput = {
 
 export type UserUpdateInput = {
   age?: InputMaybe<Scalars['String']>;
-  email: Scalars['String'];
+  email?: Scalars['String'];
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   profileDescription?: InputMaybe<Scalars['String']>;
   profilePicture?: InputMaybe<Scalars['String']>;
+  expoNotificationsToken?: InputMaybe<Scalars['String']>;
 };
 
 export type CreateUserMutationVariables = Exact<{

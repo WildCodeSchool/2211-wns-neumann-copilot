@@ -81,8 +81,6 @@ export default class UserResolver {
     return currentUser;
   }
 
-
-
   @Authorized()
   @Mutation(() => User)
   async updateProfile(
@@ -92,8 +90,6 @@ export default class UserResolver {
     console.log(currentUser);
     return await datasource.getRepository(User).save({ ...currentUser, expoNotificationsToken });
   }
-
-
 
   @Authorized()
   @Mutation(() => User)
