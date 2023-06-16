@@ -1,0 +1,29 @@
+[
+  {
+    "datasetid": "laposte_hexasmal",
+    "recordid": "0cb2fb18312e8504a89fc013a7f5472b1b61129a",
+    "fields": {
+      "code_postal": "08380",
+      "libelle_d_acheminement": "SIGNY LE PETIT",
+      "code_commune_insee": "08420",
+      "ligne_5": "LA GRUERIE",
+      "coordonnees_geographiques": [49.929831737, 4.321946455],
+      "nom_de_la_commune": "SIGNY LE PETIT"
+    },
+    "geometry": { "type": "Point", "coordinates": [4.321946455, 49.929831737] },
+    "record_timestamp": "2023-04-18T23:34:00+02:00"
+  },
+  {
+    "datasetid": "laposte_hexasmal",
+    "recordid": "c2ebddf22df9b7fcf3f552f9fae3952dd619b853",
+    "fields": {
+      "code_postal": "08250",
+      "libelle_d_acheminement": "SOMMERANCE",
+      "code_commune_insee": "08425",
+      "coordonnees_geographiques": [49.326202622, 4.992260818],
+      "nom_de_la_commune": "SOMMERANCE"
+    },
+    "geometry": { "type": "Point", "coordinates": [4.992260818, 49.326202622] },
+    "record_timestamp": "2023-04-18T23:34:00+02:00"
+  }
+]

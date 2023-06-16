@@ -1,19 +1,10 @@
-import {
-  Arg,
-  Authorized,
-  Int,
-  Ctx,
-  Mutation,
-  Query,
-  Resolver,
-} from "type-graphql";
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import datasource from "../db";
 import User, {
   UserInput,
   UserUpdateInput,
   encodePassword,
   verifyPassword,
-  UserRole,
 } from "../entity/User";
 import jwt from "jsonwebtoken";
 import { ApolloError } from "apollo-server-errors";
