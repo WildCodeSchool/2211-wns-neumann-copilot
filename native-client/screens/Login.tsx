@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Text, View, TextInput, StyleSheet, Pressable } from "react-native";
-import { useGetProfileQuery, useLoginMutation, useLogoutMutation, useUpdateUserMutation } from "../gql/generated/schema";
+import { useGetProfileQuery, useLoginMutation, useLogoutMutation, useUpdateProfileMutation } from "../gql/generated/schema";
 import * as SecureStore from 'expo-secure-store';
 import { registerForPushNotificationsAsync } from "../utils/notifications";
 
@@ -17,11 +17,11 @@ export default function Login() {
     const [logout] = useLogoutMutation();
     const [error, setError] = useState("");
 
-    const [updateProfile] = useUpdateUserMutation();
+    const [updateProfile] = useUpdateProfileMutation();
 
     useEffect(() => {
         registerForPushNotificationsAsync().then((expoNotificationsToken) => {
-            if (expoNotificationsToken) 
+            if (expoNotificationsToken)
                 updateProfile({
                     variables: {
                         data:
