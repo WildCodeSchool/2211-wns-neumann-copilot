@@ -7,7 +7,7 @@ import {
 import datasource from "../db";
 import { ApolloError } from "apollo-server-errors";
 @Resolver()
-export class CarPoolResolver {
+export default class CarPoolResolver {
   @Query(() => [CarPool])
   async getCarPools(): Promise<CarPool[]> {
     const carPools = await datasource.getRepository(CarPool).find();
