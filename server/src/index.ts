@@ -7,8 +7,9 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import { env } from "./env";
 import User from "./entity/User";
-import { join } from "path";
 import cookie from "cookie";
+import UserResolver from "./resolvers/UserResolver";
+import CarPoolResolver from "./resolvers/CarPoolResolver";
 
 export interface JWTPayload {
   userId: number;
@@ -25,7 +26,7 @@ async function start(): Promise<void> {
   await db.initialize();
 
   const schema = await buildSchema({
-    resolvers: [join(__dirname, "/resolvers/*.ts")],
+    resolvers: [UserResolver, CarPoolResolver],
     authChecker: async ({ context }: { context: ContextType }, roles = []) => {
       console.log({ roles });
 
