@@ -1,5 +1,6 @@
+name: staging
 services:
-  prodDB:
+  stagingDB:
     image: postgres:15-alpine
     environment:
       - POSTGRES_PASSWORD=${DB_PASS:-postgres}
@@ -17,7 +18,7 @@ services:
 
   server:
     depends_on:
-      prodDB:
+      stagingDB:
         condition: service_healthy
     environment:
       - NODE_ENV=${NODE_ENV:-production}
