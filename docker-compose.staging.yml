@@ -1,5 +1,6 @@
+name: staging
 services:
-  prodDB:
+  stagingDB:
     image: postgres:15-alpine
     environment:
       - POSTGRES_PASSWORD=${DB_PASS:-postgres}
@@ -17,7 +18,7 @@ services:
 
   server:
     depends_on:
-      prodDB:
+      stagingDB:
         condition: service_healthy
     environment:
       - NODE_ENV=${NODE_ENV:-production}
@@ -25,6 +26,7 @@ services:
       - DB_USER=${DB_USER:-postgres}
       - DB_PASS=${DB_PASS:-postgres}
       - DB_NAME=${DB_NAME:-postgres}
+      - DB_PORT=${DB_PORT:-5432}
       - SERVER_HOST=${SERVER_HOST:-localhost}
       - SERVER_PORT=${SERVER_PORT:-4000}
       - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
