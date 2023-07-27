@@ -1,4 +1,6 @@
-commande pour lancer les container : docker-compose up 
+commande pour lancer les container: docker - compose up 
 
  
 Acces a l'intercae graphique playwright :  npx playwright show-report
+
+test
