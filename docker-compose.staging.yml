@@ -1,4 +1,5 @@
 name: staging
+
 services:
   stagingDB:
     image: postgres:15-alpine
