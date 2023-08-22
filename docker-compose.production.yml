@@ -54,14 +54,5 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./logs:/var/log/nginx
 
-  discord-notifier:
-    image: florian59c/discord
-    depends_on:
-      nginx:
-        condition: service_started
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN:-}
-      - CHANNEL_ID=${CHANNEL_ID:-}
-    command: "npm run send-message 'prod env has been updated : https://neumann4.wns.wilders.dev'"
 volumes:
   prodDB:
