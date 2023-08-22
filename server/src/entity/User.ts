@@ -90,6 +90,18 @@ export class UserUpdateNativeInput {
   expoNotificationsToken: string;
 }
 
+@InputType()
+export class NotificationInput {
+  @Field()
+  title: string;
+
+  @Field()
+  body: string;
+
+  @Field()
+  JSONPayload?: string;
+}
+
 const hashageOptions = {
   type: argon2id,
   memoryCost: 2 ** 16,

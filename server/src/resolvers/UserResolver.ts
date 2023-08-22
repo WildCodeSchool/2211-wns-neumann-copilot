@@ -15,11 +15,17 @@ import User, {
   verifyPassword,
   UserRole,
   UserUpdateNativeInput,
+  NotificationInput,
 } from "../entity/User";
 import jwt from "jsonwebtoken";
 import { ApolloError } from "apollo-server-errors";
 import { env } from "../env";
 import { ContextType } from "../index";
+import { Expo } from 'expo-server-sdk';
+
+// Create a new Expo SDK client
+// optionally providing an access token if you have enabled push security
+const expo = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN });
 
 @Resolver(User)
 export default class UserResolver {
@@ -107,5 +113,25 @@ export default class UserResolver {
     return await datasource.getRepository(User).save({
       ...userToUpdate, ...data
     });
+  }
+
+  // seul les Admins peuvent faire partir une notif
+  // @Authorized<UserRole>(UserRole.ADMIN)
+  @Mutation(() => Boolean)
+  async sendNotification(
+    @Arg('data', { validate: false }) data: NotificationInput,
+    @Arg('userId', () => Int) userId: number
+  ): Promise<boolean> {
+    const user = await datasource.getRepository(User).findOne({ where: { id: userId } })
+    if (user === null) throw new Error("user not found");
+    if (user.expoNotificationsToken === null || typeof (user.expoNotificationsToken) === "undefined")
+      throw new Error("expo notification not found for this user");
+    await expo.sendPushNotificationsAsync([{
+      to: user.expoNotificationsToken,
+      title: data.title,
+      body: data.body,
+      data: data.JSONPayload ? JSON.parse(data.JSONPayload) : undefined,
+    }]);
+    return true;
   }
 }
