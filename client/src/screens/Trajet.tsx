@@ -2,10 +2,12 @@ import { useNavigate } from "react-router-dom";
 import {
   useGetProfileQuery,
   useCreateCarPoolMutation,
-  CarPoolerInput,
+  useGetCarPoolByCitiesLazyQuery,
+  CarPool,
 } from "../gql/generated/schema";
 import "./css/Trajet.css";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import CarpoolList from "../Components/CarpoolList";
 
 function Trajet() {
   const { data: currentUser, client } = useGetProfileQuery({
@@ -19,6 +21,9 @@ function Trajet() {
   const [passengerNumber, setPassengerNumber] = useState("");
   const [error, setError] = useState("");
   const [driverId, setDriverId] = useState(0);
+  const [toggle, setToggle] = useState(false);
+  const [GetCarPoolByCities] = useGetCarPoolByCitiesLazyQuery();
+  const [carPoolToDisplay, setCarPoolToDisplay] = useState<CarPool[]>();
   const passengerId = "";
 
   useEffect(() => {
@@ -27,43 +32,60 @@ function Trajet() {
     }
   }, [currentUser]);
 
+  function handleToggle() {
+    setToggle(!toggle);
+  }
+  async function createNewCarpool(e: FormEvent) {
+    e.preventDefault();
+    setError("");
+    try {
+      await createCarPool({
+        variables: {
+          data: {
+            departureCity,
+            arrivalCity,
+            departureDateTime,
+            passengerNumber,
+            driverId,
+            passengerId,
+          },
+        },
+      });
+    } catch (err) {
+      console.error(error);
+      setError("invalid credentials");
+    } finally {
+      client.resetStore();
+      navigate("/trajet");
+    }
+  }
+
+  async function carPoolbycities(e: FormEvent) {
+    e.preventDefault();
+    try {
+      const res = await GetCarPoolByCities({
+        variables: {
+          data: {
+            arrivalCity,
+            departureCity,
+          },
+        },
+      });
+
+      setCarPoolToDisplay(res.data?.getCarPoolByCities);
+    } catch (err) {
+      console.error(err);
+      setError("invalid City");
+    }
+  }
+
   return (
     <div className="trajet">
       <div className="app">
-        <div className="toggle">
-          <p>je recherche</p>
-          <label className="switch">
-            <input type="checkbox" />
-            <span className="slider round"></span>
-          </label>
-          <p>je propose</p>
-        </div>
-
         <form
           className="form_create_carpool"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            setError("");
-            try {
-              await createCarPool({
-                variables: {
-                  data: {
-                    departureCity,
-                    arrivalCity,
-                    departureDateTime,
-                    passengerNumber,
-                    driverId,
-                    passengerId,
-                  },
-                },
-              });
-            } catch (err) {
-              console.error(err);
-              setError("invalid credentials");
-            } finally {
-              client.resetStore();
-              navigate("/trajet");
-            }
+          onSubmit={(e: FormEvent) => {
+            toggle ? carPoolbycities(e) : createNewCarpool(e);
           }}
         >
           {/* Ville de Départ */}
@@ -90,8 +112,6 @@ function Trajet() {
           <div className="input">
             <input
               type="datetime-local"
-              placeholder=""
-              name=""
               onChange={(e) => setDepartureDateTime(e.target.value)}
               value={departureDateTime}
             />
@@ -106,12 +126,21 @@ function Trajet() {
               value={passengerNumber}
             />
           </div>
-          <input
-            type="submit"
-            className="button button_validate"
-            value="Valider"
-          />
+
+          <div className="toggle">
+            <p>je propose</p>
+            <label className="switch">
+              <input type="checkbox" id="toggle" onChange={handleToggle} />
+              <span className="slider round"></span>
+            </label>
+            <p>je recherche</p>
+          </div>
+
+          <button type="submit" className="button">
+            Valider
+          </button>
         </form>
+        {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />}
       </div>
     </div>
   );

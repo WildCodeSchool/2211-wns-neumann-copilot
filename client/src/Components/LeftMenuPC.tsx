@@ -1,10 +1,9 @@
 import "./css/LeftMenuPC.css";
-import LogoCopilote from "../img/LogoCopilote.svg";
+import LogoCopilote from "../img/LogoCopilote.png";
 import StandardProfil from "../img/StandardProfil.svg";
-import IconHome from "../img/IconHome.svg";
-import IconVoiture from "../img/IconVoiture.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useGetProfileQuery } from "../gql/generated/schema";
+import { MdDirectionsCar, MdHome } from "react-icons/md";
 
 function LeftMenuPC() {
   const { data: currentUser } = useGetProfileQuery({
@@ -17,20 +16,20 @@ function LeftMenuPC() {
         <Link to={"/"}>
           <img src={LogoCopilote} alt="logo de Copilote" className="logo" />
         </Link>
-        <div className="option-liste">
-          <Link to={"/"}>
+        <nav>
+          <NavLink to="/">
             <div className="option">
-              <img src={IconHome} alt="icon en forme de maison" />
-              <p>Acceuil</p>
+              <MdHome />
+              Acceuil
             </div>
-          </Link>
-          <Link to={currentUser?.profile ? "/trajet" : "/login"}>
+          </NavLink>
+          <NavLink to={currentUser?.profile ? "/trajet" : "/login"}>
             <div className="option">
-              <img src={IconVoiture} alt="icon de voiture" />
-              <p>Trajet</p>
+              <MdDirectionsCar />
+              Trajet
             </div>
-          </Link>
-        </div>
+          </NavLink>
+        </nav>
       </div>
       <div>
         <Link to={currentUser?.profile ? "/Profil" : "/login"}>

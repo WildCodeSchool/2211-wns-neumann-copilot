@@ -1,71 +1,86 @@
 .main {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    z-index: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+  padding: 50px 5px;
+}
+
+.main h1 {
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 0 0 20px 0;
 }
 
 .container_form {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
-.form{
-    width: 90%;
-    height: 300px;
-    margin: 0 auto;
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.form {
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
-.input_connexion{
-    flex-basis: 25%;
-}
-
-.input_connexion input{
-    width: 90%;
-    height: 40px;
-    border: none;
-    border-bottom: 1px solid #686868;
-    border-radius: 10px;
-    padding: 10px;
-    outline: none;
-    font-size: 1rem;
+.input_connexion {
+  flex-basis: 25%;
 }
 
-.redirection_sign_up{
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.input_connexion input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid #686868;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+  font-size: 1rem;
+  background: none;
+}
+.input_connexion input::placeholder {
+  color: black;
+  font-size: 1rem;
 }
 
-.redirection_sign_up p{
-    margin: 0;
-    font-size: 0.875rem;
-    color: #686868;
+.redirection_sign_up {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.redirection_sign_up a{
-    font-size: 0.875rem;
-    font-weight: bold;
-    color: #518071;
+.redirection_sign_up p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #686868;
+}
+
+.redirection_sign_up a {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #518071;
 }
 
 .logout {
-    text-align: center;
+  text-align: center;
 }
 
-@media screen and (min-width: 576px){
-    .input_connexion input{
-        width: 45%;
-    }
+@media screen and (min-width: 576px) {
+  .input_connexion input {
+    width: 45%;
+  }
 }
 
-@media screen and (min-width: 992px){
-    .input_connexion input{
-        width: 30%;
-    }
+@media screen and (min-width: 992px) {
+  .input_connexion input {
+    width: 30%;
+  }
+  .main {
+    margin-left: 200px;
+  }
 }

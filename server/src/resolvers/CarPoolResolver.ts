@@ -1,9 +1,13 @@
 import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
-import { CarPool, CarPoolerInput } from "../entity/CarPool";
+import {
+  CarPool,
+  CarPoolerInput,
+  getCarPoolByCitiesInput,
+} from "../entity/CarPool";
 import datasource from "../db";
 import { ApolloError } from "apollo-server-errors";
 @Resolver()
-export class CarPoolResolver {
+export default class CarPoolResolver {
   @Query(() => [CarPool])
   async getCarPools(): Promise<CarPool[]> {
     const carPools = await datasource.getRepository(CarPool).find();
@@ -19,6 +23,19 @@ export class CarPoolResolver {
     if (carPool === null)
       throw new ApolloError("Carpool not found", "NOT_FOUND");
     return carPool;
+  }
+
+  @Query(() => [CarPool])
+  async getCarPoolByCities(
+    @Arg("data") data: getCarPoolByCitiesInput
+  ): Promise<CarPool[]> {
+    const { departureCity, arrivalCity } = data;
+    const carPoolByCity = await datasource
+      .getRepository(CarPool)
+      .find({ where: { departureCity, arrivalCity } });
+    if (carPoolByCity === null)
+      throw new ApolloError("Carpool not found", "NOT_FOUND");
+    return carPoolByCity;
   }
 
   @Mutation(() => Boolean)

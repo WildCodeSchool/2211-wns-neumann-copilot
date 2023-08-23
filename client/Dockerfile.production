@@ -1,0 +1,24 @@
+FROM node:16.19-alpine
+
+RUN apk --no-cache add curl
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY package*.json .
+COPY .npmrc .
+
+RUN npm i
+RUN npm i -g serve
+
+COPY src src
+COPY public public
+COPY tsconfig.json .
+COPY codegen.yml .
+
+ARG REACT_APP_GRAPHQL_API_URL
+ENV REACT_APP_GRAPHQL_API_URL ${REACT_APP_GRAPHQL_API_URL}
+
+RUN npm run build
+
+CMD serve -s build

@@ -1,0 +1,12 @@
+#comment
+FROM node:lts-alpine
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY package.json ./
+RUN npm i 
+
+COPY sendMessage.ts .
+
+CMD npm run test-message

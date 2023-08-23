@@ -1,25 +1,28 @@
 {
-    "name": "copilot",
-    "version": "1.0.0",
-    "description": "",
-    "scripts": {
-        "integration-tests": "docker compose -f docker-compose.integration-tests.yml up --build --exit-code-from testrunner",
-        "integration-tests:backend-only": "docker compose -f docker-compose.integration-tests.yml up testDB backend",
-        "e2e-tests": "REACT_APP_GRAPHQL_API_URL=http://host.docker.internal:4000 docker compose -f docker-compose.e2e-tests.yml up --build --exit-code-from testrunner --remove-orphans",
-        "e2e-tests:app-only": "docker compose -f docker-compose.e2e-tests.yml up testDB backend client --build   --remove-orphans",
-        "start": "docker compose -f docker-compose.yml up --build"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/karimmakhloufi/wilders-book-livecoding.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/karimmakhloufi/wilders-book-livecoding/issues"
-    },
-    "homepage": "https://github.com/karimmakhloufi/wilders-book-livecoding#readme",
-    "devDependencies": {
-        "@playwright/test": "^1.32.3"
-    }
+  "name": "copilot",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "integration-tests": "docker compose -f docker-compose.integration-tests.yml up --build --exit-code-from testrunner",
+    "integration-tests:backend-only": "docker compose -f docker-compose.integration-tests.yml up testDB backend",
+    "e2e-tests": "REACT_APP_GRAPHQL_API_URL=http://host.docker.internal:4000 docker compose -f docker-compose.e2e-tests.yml up --build --exit-code-from testrunner --remove-orphans",
+    "e2e-tests:app-only": "docker compose -f docker-compose.e2e-tests.yml up testDB backend client --build   --remove-orphans",
+    "start": "docker compose -f docker-compose.yml up --build",
+    "publish:server": "cd server && docker build -f Dockerfile.production . -t florian59c/2211-wns-neumann-copilot-server && docker push florian59c/2211-wns-neumann-copilot-server && cd ..",
+    "publish:client": "cd client && docker build -f Dockerfile.production . -t florian59c/2211-wns-neumann-copilot-client && docker push florian59c/2211-wns-neumann-copilot-client && cd ..",
+    "start:prod": "docker compose -f docker-compose.production.yml pull && docker compose -f docker-compose.production.yml --env-file .env.production up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WildCodeSchool/2211-wns-neumann-copilot"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WildCodeSchool/2211-wns-neumann-copilot/issues"
+  },
+  "homepage": "https://github.com/WildCodeSchool/2211-wns-neumann-copilot#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.32.3"
+  }
 }
