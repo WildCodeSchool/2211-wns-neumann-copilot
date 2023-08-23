@@ -98,7 +98,7 @@ export class NotificationInput {
   @Field()
   body: string;
 
-  @Field()
+  @Field({ nullable: true })
   JSONPayload?: string;
 }
 

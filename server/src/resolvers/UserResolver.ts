@@ -115,8 +115,7 @@ export default class UserResolver {
     });
   }
 
-  // seul les Admins peuvent faire partir une notif
-  // @Authorized<UserRole>(UserRole.ADMIN)
+  // mutation générique pour envoyer une notification
   @Mutation(() => Boolean)
   async sendNotification(
     @Arg('data', { validate: false }) data: NotificationInput,
@@ -130,7 +129,7 @@ export default class UserResolver {
       to: user.expoNotificationsToken,
       title: data.title,
       body: data.body,
-      data: data.JSONPayload ? JSON.parse(data.JSONPayload) : undefined,
+      data: typeof data.JSONPayload === 'string' ? JSON.parse(data.JSONPayload) : undefined,
     }]);
     return true;
   }
