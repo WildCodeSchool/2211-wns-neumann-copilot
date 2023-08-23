@@ -4,7 +4,7 @@ import apolloClient from './gql/apolloClient';
 import { NavigationContainer } from '@react-navigation/native'; import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from './screens/Login';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import NotificationsSreen from "./screens/NotificationsSreen";
+// import NotificationsSreen from "./screens/NotificationsSreen";
 
 export default function App() {
 
@@ -16,15 +16,7 @@ export default function App() {
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
-              if (route.name === "Trajet") {
-                return (
-                  <Ionicons
-                    name={focused ? "car-sport" : "car-sport-outline"}
-                    size={size}
-                    color={color}
-                  />
-                );
-              } else if (route.name === "Login") {
+              if (route.name === "Connexion") {
                 return (
                   <Ionicons
                     name={focused ? "person-circle" : "person-circle-outline"}
@@ -32,14 +24,22 @@ export default function App() {
                     color={color}
                   />
                 );
-              } else if (route.name === "Notifications") {
+              } else if (route.name === "Trajet") {
                 return (
                   <Ionicons
-                    name={focused ? "notifications-circle" : "notifications-circle-outline"}
+                    name={focused ? "car-sport" : "car-sport-outline"}
                     size={size}
                     color={color}
                   />
                 );
+                // } else if (route.name === "Notifications") {
+                //   return (
+                //     <Ionicons
+                //       name={focused ? "notifications-circle" : "notifications-circle-outline"}
+                //       size={size}
+                //       color={color}
+                //     />
+                //   );
               }
               return (
                 <Ionicons
@@ -56,9 +56,9 @@ export default function App() {
             headerTintColor: "#518071"
           })}
         >
-          <Tab.Screen name="Login" component={Login} />
+          <Tab.Screen name="Connexion" component={Login} />
           <Tab.Screen name="Trajet" component={Trajet} />
-          <Tab.Screen name="Notifications" component={NotificationsSreen} />
+          {/* <Tab.Screen name="Notifications" component={NotificationsSreen} /> */}
         </Tab.Navigator>
       </NavigationContainer>
     </ApolloProvider>
