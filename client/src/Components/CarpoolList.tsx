@@ -20,6 +20,12 @@ export default function CarpoolList({ carPoolsList }: carPoolsListProps) {
             <div className="carPoolCard-time">
               <p> Date & Heure : {carPool.departureDateTime}</p>
             </div>
+            <div className="carPoolCard-passager">
+              <p> Nombre de passager : {carPool.passengerNumber}</p>
+            </div>
+            <div className="carPoolCard-distance">
+              <p> Distance : {carPool.passengerNumber} km</p>
+            </div>
           </div>
         ))}
     </div>
