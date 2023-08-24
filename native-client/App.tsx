@@ -24,7 +24,7 @@ export default function App() {
                     color={color}
                   />
                 );
-              } else if (route.name === "Trajet") {
+              } else if (route.name === "Trajets") {
                 return (
                   <Ionicons
                     name={focused ? "car-sport" : "car-sport-outline"}
@@ -57,7 +57,7 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Connexion" component={Login} />
-          <Tab.Screen name="Trajet" component={Trajet} />
+          <Tab.Screen name="Trajets" component={Trajet} />
           {/* <Tab.Screen name="Notifications" component={NotificationsSreen} /> */}
         </Tab.Navigator>
       </NavigationContainer>
