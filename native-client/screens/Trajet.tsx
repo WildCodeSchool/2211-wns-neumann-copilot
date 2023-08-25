@@ -128,11 +128,11 @@ export default function Trajet() {
                             placeholder="Nombre de passager"
                         />
                         <SafeAreaView>
-                            <Pressable style={{ borderWidth: 2, margin: 10, backgroundColor: 'green' }} onPress={showDatepicker}>
-                                <Text>{date.toLocaleDateString()}</Text>
+                            <Pressable style={styles.calendarButtons} onPress={showDatepicker}>
+                                <Text style={styles.calendarButtonsText}>{date.toLocaleDateString()}</Text>
                             </Pressable>
-                            <Pressable style={{ borderWidth: 2, margin: 10, backgroundColor: 'green' }} onPress={showTimepicker}>
-                                <Text>{date.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })}</Text>
+                            <Pressable style={styles.calendarButtons} onPress={showTimepicker}>
+                                <Text style={styles.calendarButtonsText}>{date.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })}</Text>
                             </Pressable>
                             {show && (
                                 <DateTimePicker
@@ -231,12 +231,24 @@ const styles = StyleSheet.create({
     },
     messageValidate: {
         textAlign: "center",
-        marginTop: 10
+        marginTop: 10,
     },
     messageError: {
         color: 'red',
         textAlign: "center",
-        marginTop: 10
+        marginTop: 10,
+    },
+    calendarButtons: {
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: "#686868",
+        borderRadius: 5,
+        padding: 10,
+        fontSize: 16,
+        marginBottom: 10,
+    },
+    calendarButtonsText: {
+        color: '#888888',
     },
 
 
