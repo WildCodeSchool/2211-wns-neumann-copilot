@@ -168,7 +168,29 @@ export default function Trajet() {
                             <Text style={styles.messageValidate}>{messagePropose}</Text>
                         }
 
+                        {/* {carPoolToDisplay?.length > 0 ? carPoolToDisplay.map((carPool: CarPool) => {
+                            return (
+                                <View key={carPool.id}><Text>ok</Text></View>
+                            )
+                        }) :
+                            <View><Text>aucun résultat</Text></View>
+                        } */}
+
                         {/* {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />} */}
+                        {/* // carPoolsList.map((carPool: CarPool) => (
+                        //     <div key={carPool.id} className="carPoolCard">
+                        //       <div className="carPoolCard-departure">
+                        //         <p>Départ : {carPool.departureCity}</p>
+                        //       </div>
+                        //       <div className="carPoolCard-arrival">
+                        //         <p> Arivée : {carPool.arrivalCity}</p>
+                        //       </div>
+                        //       <div className="carPoolCard-time">
+                        //         <p> Date & Heure : {carPool.departureDateTime}</p>
+                        //       </div>
+                        //     </div>
+                        //   ))} */}
+
                     </View>
                 </TouchableWithoutFeedback>
                 :
@@ -250,15 +272,6 @@ const styles = StyleSheet.create({
     calendarButtonsText: {
         color: '#888888',
     },
-
-
-
-
-
-
-
-
-
     logout: {
         textAlign: "center",
         fontSize: 20,
