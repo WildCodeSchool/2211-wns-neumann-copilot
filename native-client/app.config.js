@@ -9,7 +9,7 @@ module.exports = {
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo-copilote.png",
+      "image": "./assets/LogoCopilote.png",
       "resizeMode": "contain",
       "backgroundColor": "#518071"
     },
