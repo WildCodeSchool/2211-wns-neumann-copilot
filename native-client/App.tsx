@@ -4,6 +4,7 @@ import apolloClient from './gql/apolloClient';
 import { NavigationContainer } from '@react-navigation/native'; import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from './screens/Login';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import CarpoolList from "./screens/CarpoolList";
 // import NotificationsSreen from "./screens/NotificationsSreen";
 
 export default function App() {
@@ -28,6 +29,15 @@ export default function App() {
                 return (
                   <Ionicons
                     name={focused ? "car-sport" : "car-sport-outline"}
+                    size={size}
+                    color={color}
+                  />
+                );
+              }
+              else if (route.name === "Liste de covoiturages") {
+                return (
+                  <Ionicons
+                    name={focused ? "newspaper" : "newspaper-outline"}
                     size={size}
                     color={color}
                   />
@@ -58,6 +68,7 @@ export default function App() {
         >
           <Tab.Screen name="Connexion" component={Login} />
           <Tab.Screen name="Trajets" component={Trajet} />
+          <Tab.Screen name="Liste de covoiturages" component={CarpoolList} />
           {/* <Tab.Screen name="Notifications" component={NotificationsSreen} /> */}
         </Tab.Navigator>
       </NavigationContainer>
