@@ -12,4 +12,5 @@ export const env = load({
   DB_PASS: String,
   DB_USER: String,
   DB_NAME: String,
+  HereApiKey: String,
 });
