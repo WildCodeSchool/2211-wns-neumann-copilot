@@ -12,13 +12,9 @@ export default function CarpoolList() {
 
     return (
         <View style={styles.container}>
-            {currentUser ?
-                <View>
-                    <Text style={styles.title}>Résultat de votre recherche : </Text>
-                </View>
-                :
-                <Text style={styles.logout}>Vous devez être connecté !</Text>
-            }
+            <View>
+                <Text style={styles.title}>Résultat de votre recherche : </Text>
+            </View>
         </View>
     );
 }

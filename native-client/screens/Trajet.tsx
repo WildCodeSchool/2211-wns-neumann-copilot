@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { CarPool, useCreateCarPoolMutation, useGetCarPoolByCitiesLazyQuery, useGetProfileQuery, useGetUsersQuery } from "../gql/generated/schema";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function Trajet() {
+export default function Trajet({ navigation }) {
 
     /** Les paramètre du DateTimePicker avec la convertion de la date */
     const [date, setDate] = useState(new Date());
@@ -105,97 +105,93 @@ export default function Trajet() {
 
     return (
         <View style={styles.container}>
-            {currentUser?.profile ?
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                    <View>
-                        <Text style={styles.title}>{toggle ? "Recherchez un trajet" : "Proposez votre trajet"}</Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(val => setDepartureCity(val))}
-                            value={departureCity}
-                            placeholder="Ville de départ"
-                        />
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(val => setArrivalCity(val))}
-                            value={arrivalCity}
-                            placeholder="Ville d'arrivée"
-                        />
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(val => setPassengerNumber(val))}
-                            value={passengerNumber}
-                            placeholder="Nombre de passager"
-                        />
-                        <SafeAreaView>
-                            <Pressable style={styles.calendarButtons} onPress={showDatepicker}>
-                                <Text style={styles.calendarButtonsText}>{date.toLocaleDateString()}</Text>
-                            </Pressable>
-                            <Pressable style={styles.calendarButtons} onPress={showTimepicker}>
-                                <Text style={styles.calendarButtonsText}>{date.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })}</Text>
-                            </Pressable>
-                            {show && (
-                                <DateTimePicker
-                                    testID="dateTimePicker"
-                                    value={date}
-                                    mode={mode}
-                                    is24Hour={true}
-                                    onChange={onChange}
-                                />
-                            )}
-                        </SafeAreaView>
-                        <View style={styles.toggle}>
-                            <Text style={[styles.textToggle, toggle ? null : styles.textToggleActive]}>Je propose</Text>
-                            <Switch
-                                style={{ transform: [{ scaleX: 1.8 }, { scaleY: 1.8 }] }}
-                                trackColor={{ false: '#518071', true: '#518071' }}
-                                thumbColor={toggle ? '#FFFFFF' : '#FFFFFF'}
-                                onValueChange={handleToggle}
-                                value={toggle}
-                            />
-                            <Text style={[styles.textToggle, toggle ? styles.textToggleActive : null]}>Je recherche</Text>
-                        </View>
-                        <Pressable style={styles.button}
-                            onPress={() => {
-                                toggle ? carPoolbycities() : createNewCarpool();
-                            }}
-                        >
-                            <Text style={styles.textOnButton}>Valider</Text>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View>
+                    <Text style={styles.title}>{toggle ? "Recherchez un trajet" : "Proposez votre trajet"}</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(val => setDepartureCity(val))}
+                        value={departureCity}
+                        placeholder="Ville de départ"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(val => setArrivalCity(val))}
+                        value={arrivalCity}
+                        placeholder="Ville d'arrivée"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(val => setPassengerNumber(val))}
+                        value={passengerNumber}
+                        placeholder="Nombre de passager"
+                    />
+                    <SafeAreaView>
+                        <Pressable style={styles.calendarButtons} onPress={showDatepicker}>
+                            <Text style={styles.calendarButtonsText}>{date.toLocaleDateString()}</Text>
                         </Pressable>
-                        {error ?
-                            <Text style={styles.messageError}>{error}</Text>
-                            :
-                            <Text style={styles.messageValidate}>{messagePropose}</Text>
-                        }
-
-                        {/* {carPoolToDisplay?.length > 0 ? carPoolToDisplay.map((carPool: CarPool) => {
-                            return (
-                                <View key={carPool.id}><Text>ok</Text></View>
-                            )
-                        }) :
-                            <View><Text>aucun résultat</Text></View>
-                        } */}
-
-                        {/* {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />} */}
-                        {/* // carPoolsList.map((carPool: CarPool) => (
-                        //     <div key={carPool.id} className="carPoolCard">
-                        //       <div className="carPoolCard-departure">
-                        //         <p>Départ : {carPool.departureCity}</p>
-                        //       </div>
-                        //       <div className="carPoolCard-arrival">
-                        //         <p> Arivée : {carPool.arrivalCity}</p>
-                        //       </div>
-                        //       <div className="carPoolCard-time">
-                        //         <p> Date & Heure : {carPool.departureDateTime}</p>
-                        //       </div>
-                        //     </div>
-                        //   ))} */}
-
+                        <Pressable style={styles.calendarButtons} onPress={showTimepicker}>
+                            <Text style={styles.calendarButtonsText}>{date.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })}</Text>
+                        </Pressable>
+                        {show && (
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={date}
+                                mode={mode}
+                                is24Hour={true}
+                                onChange={onChange}
+                            />
+                        )}
+                    </SafeAreaView>
+                    <View style={styles.toggle}>
+                        <Text style={[styles.textToggle, toggle ? null : styles.textToggleActive]}>Je propose</Text>
+                        <Switch
+                            style={{ transform: [{ scaleX: 1.8 }, { scaleY: 1.8 }] }}
+                            trackColor={{ false: '#518071', true: '#518071' }}
+                            thumbColor={toggle ? '#FFFFFF' : '#FFFFFF'}
+                            onValueChange={handleToggle}
+                            value={toggle}
+                        />
+                        <Text style={[styles.textToggle, toggle ? styles.textToggleActive : null]}>Je recherche</Text>
                     </View>
-                </TouchableWithoutFeedback>
-                :
-                <Text style={styles.logout}>Vous devez être connecté !</Text>
-            }
+                    <Pressable style={styles.button}
+                        onPress={() => {
+                            toggle ?
+                                carPoolbycities()
+                                :
+                                (currentUser ? createNewCarpool() : navigation.navigate('Connexion'));
+                        }}
+                    >
+                        <Text style={styles.textOnButton}>Valider</Text>
+                    </Pressable>
+                    {error ?
+                        <Text style={styles.messageError}>{error}</Text>
+                        :
+                        <Text style={styles.messageValidate}>{messagePropose}</Text>
+                    }
+
+                    {carPoolToDisplay?.length > 0 ? carPoolToDisplay.map((carPool: CarPool) => {
+                        return (
+                            <View key={carPool.id}>
+                                <Text>ok</Text>
+                                <View>
+                                    <Text>Départ : {carPool.departureCity}</Text>
+                                </View>
+                                <View>
+                                    <Text> Arivée : {carPool.arrivalCity}</Text>
+                                </View>
+                                <View>
+                                    <Text> Date & Heure : {carPool.departureDateTime}</Text>
+                                </View>
+                            </View>
+                        )
+                    }) :
+                        <View><Text>aucun résultat</Text></View>
+                    }
+
+                    {/* {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />} */}
+                </View>
+            </TouchableWithoutFeedback>
         </View>
     );
 }

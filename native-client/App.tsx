@@ -66,9 +66,9 @@ export default function App() {
             headerTintColor: "#518071"
           })}
         >
-          <Tab.Screen name="Connexion" component={Login} />
-          <Tab.Screen name="Trajets" component={Trajet} />
           <Tab.Screen name="Liste de covoiturages" component={CarpoolList} />
+          <Tab.Screen name="Trajets" component={Trajet} />
+          <Tab.Screen name="Connexion" component={Login} />
           {/* <Tab.Screen name="Notifications" component={NotificationsSreen} /> */}
         </Tab.Navigator>
       </NavigationContainer>
