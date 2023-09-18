@@ -4,8 +4,6 @@ type carPoolsListProps = {
   carPoolsList?: CarPool[];
 };
 export default function CarpoolList({ carPoolsList }: carPoolsListProps) {
-  console.log("LALALALAL");
-
   return (
     <div className="app main-carpool-list">
       {carPoolsList &&

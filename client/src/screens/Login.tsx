@@ -21,9 +21,7 @@ export default function Login() {
     errorPolicy: "ignore",
   });
   const isAdmin = currentUser?.profile.role === "admin";
-  console.log("Hey");
   console.log(currentUser);
-  console.log("oh");
 
   return (
     <div>
@@ -51,12 +49,14 @@ export default function Login() {
             setError("");
             try {
               await login({ variables: { data: { email, password } } });
+              login() === null || undefined
+                ? setError("invalid credentials")
+                : navigate("/profil");
             } catch (err) {
               console.error(err);
               setError("invalid credentials");
             } finally {
               client.resetStore();
-              navigate("/profil");
             }
           }}
         >

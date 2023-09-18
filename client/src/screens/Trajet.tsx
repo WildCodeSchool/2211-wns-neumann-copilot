@@ -96,6 +96,7 @@ function Trajet() {
               name=""
               onChange={(e) => setDepartureCity(e.target.value)}
               value={departureCity}
+              required
             />
           </div>
           {/* Ville d'arrivée */}
@@ -106,6 +107,7 @@ function Trajet() {
               name=""
               onChange={(e) => setArrivalCity(e.target.value)}
               value={arrivalCity}
+              required
             />
           </div>
           {/* Jour et heure du départ */}
@@ -114,16 +116,21 @@ function Trajet() {
               type="datetime-local"
               onChange={(e) => setDepartureDateTime(e.target.value)}
               value={departureDateTime}
+              required
             />
           </div>
           {/* Nombre de passager */}
           <div className="input">
             <input
-              type="text"
+              type="number"
               placeholder="Nombre de passager"
-              name=""
-              onChange={(e) => setPassengerNumber(e.target.value)}
+              onChange={(e) => {
+                parseInt(e.target.value) > 0
+                  ? setPassengerNumber(e.target.value)
+                  : setPassengerNumber("");
+              }}
               value={passengerNumber}
+              required
             />
           </div>
 

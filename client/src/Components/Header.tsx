@@ -43,7 +43,7 @@ function Header() {
         </li>
         <span></span>
         <li>
-          <Link to="/trajet" onClick={toggleMenu}>
+          <Link to={currentUser ? "/trajet" : "/login"} onClick={toggleMenu}>
             Trajets
           </Link>
         </li>
