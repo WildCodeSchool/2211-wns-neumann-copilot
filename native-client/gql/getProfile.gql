@@ -4,21 +4,22 @@ query getProfile {
     email
     profilePicture
     profileDescription
-    pseudo
     firstName
     lastName
     role
+    age
   }
 }
-mutation updateUser($data: UserInput!, $updateUserId: Int!) {
-  updateUser(data: $data, id: $updateUserId) {
+mutation UpdateUser($data: UserUpdateInput!) {
+  updateUser(data: $data) {
     id
     email
     profilePicture
     profileDescription
-    pseudo
     firstName
     lastName
     role
+    age
+    expoNotificationsToken
   }
 }
