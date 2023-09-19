@@ -24,5 +24,8 @@
   "homepage": "https://github.com/WildCodeSchool/2211-wns-neumann-copilot#readme",
   "devDependencies": {
     "@playwright/test": "^1.32.3"
+  },
+  "dependencies": {
+    "axios": "^1.5.0"
   }
 }
