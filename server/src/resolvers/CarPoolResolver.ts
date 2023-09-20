@@ -6,12 +6,14 @@ import {
 } from "../entity/CarPool";
 import datasource from "../db";
 import { ApolloError } from "apollo-server-errors";
+import getDepartureCity from "../hereApi/retrieveGeopoint";
 @Resolver()
 export default class CarPoolResolver {
   @Query(() => [CarPool])
   async getCarPools(): Promise<CarPool[]> {
     const carPools = await datasource.getRepository(CarPool).find();
     if (carPools === null) throw new Error("carpool not found");
+    console.log(await getDepartureCity("Lille"));
     return carPools;
   }
 
