@@ -49,7 +49,6 @@ export default function Trajet({ navigation }) {
     const [driverId, setDriverId] = useState(0);
     const [toggle, setToggle] = useState(false);
     const [GetCarPoolByCities] = useGetCarPoolByCitiesLazyQuery();
-    const [carPoolToDisplay, setCarPoolToDisplay] = useState<CarPool[]>();
     const passengerId = "";
 
     useEffect(() => {
@@ -86,9 +85,11 @@ export default function Trajet({ navigation }) {
         }
     }
 
-    async function carPoolbycities() {
+    // fait la recherche, puis l'envoie sur la page CarPoolList au moment de la navigation
+    async function sendResearchInOtherPage() {
+        setError("");
         try {
-            const res = await GetCarPoolByCities({
+            const carPoolToDisplay = await GetCarPoolByCities({
                 variables: {
                     data: {
                         arrivalCity,
@@ -96,10 +97,12 @@ export default function Trajet({ navigation }) {
                     },
                 },
             });
-            setCarPoolToDisplay(res.data?.getCarPoolByCities);
+            navigation.navigate('Liste de covoiturages', {
+                carPoolToDisplay: carPoolToDisplay.data?.getCarPoolByCities
+            });
         } catch (err) {
             console.error(err);
-            setError("invalid City");
+            setError("erreur lors de la recherche");
         }
     }
 
@@ -157,7 +160,7 @@ export default function Trajet({ navigation }) {
                     <Pressable style={styles.button}
                         onPress={() => {
                             toggle ?
-                                carPoolbycities()
+                                sendResearchInOtherPage()
                                 :
                                 (currentUser ? createNewCarpool() : navigation.navigate('Connexion'));
                         }}
@@ -169,27 +172,6 @@ export default function Trajet({ navigation }) {
                         :
                         <Text style={styles.messageValidate}>{messagePropose}</Text>
                     }
-
-                    {carPoolToDisplay?.length > 0 ? carPoolToDisplay.map((carPool: CarPool) => {
-                        return (
-                            <View key={carPool.id}>
-                                <Text>ok</Text>
-                                <View>
-                                    <Text>Départ : {carPool.departureCity}</Text>
-                                </View>
-                                <View>
-                                    <Text> Arivée : {carPool.arrivalCity}</Text>
-                                </View>
-                                <View>
-                                    <Text> Date & Heure : {carPool.departureDateTime}</Text>
-                                </View>
-                            </View>
-                        )
-                    }) :
-                        <View><Text>aucun résultat</Text></View>
-                    }
-
-                    {/* {toggle && <CarpoolList carPoolsList={carPoolToDisplay} />} */}
                 </View>
             </TouchableWithoutFeedback>
         </View>
