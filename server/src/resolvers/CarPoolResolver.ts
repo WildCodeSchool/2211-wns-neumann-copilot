@@ -38,6 +38,14 @@ export default class CarPoolResolver {
     return carPoolByCity;
   }
 
+  @Query(() => [CarPool])
+  async getCarPoolByDepartureCity(@Arg("data") departureCity: string): Promise<CarPool[]> {
+    const carPoolByDepartureCity = await datasource.getRepository(CarPool).find({ where: { departureCity } });
+    if (carPoolByDepartureCity === null)
+      throw new ApolloError("Carpool not found", "NOT_FOUND");
+    return carPoolByDepartureCity;
+  }
+
   @Mutation(() => Boolean)
   async deleteCarPool(@Arg("id", () => Int) id: number): Promise<boolean> {
     const deleted = await datasource.getRepository(CarPool).delete(id);
