@@ -13,7 +13,7 @@ import User, {
   UserUpdateInput,
   encodePassword,
   verifyPassword,
-  UserRole,
+  // UserRole,
   UserUpdateNativeInput,
   NotificationInput,
 } from "../entity/User";

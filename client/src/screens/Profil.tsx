@@ -55,8 +55,8 @@ export default function Profil() {
                   },
                 },
               });
-            } catch (err) {
-              console.error(err);
+            } catch (error) {
+              console.error(error);
               setError("invalid credentials");
             } finally {
               client.resetStore();

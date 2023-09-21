@@ -6,7 +6,6 @@ import {
 } from "../gql/generated/schema";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/login.css";
-import { log } from "console";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,14 +15,11 @@ export default function Login() {
 
   // import de la mutation login.gql
   const [login] = useLoginMutation();
-  const [logout] = useLogoutMutation();
+  // const [logout] = useLogoutMutation();
   const { data: currentUser, client } = useGetProfileQuery({
     errorPolicy: "ignore",
   });
   const isAdmin = currentUser?.profile.role === "admin";
-  console.log("Hey");
-  console.log(currentUser);
-  console.log("oh");
 
   return (
     <div>
