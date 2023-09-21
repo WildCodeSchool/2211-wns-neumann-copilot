@@ -60,3 +60,15 @@ query GetCarPoolByCities($data: getCarPoolByCitiesInput!) {
     driverId
   }
 }
+
+query GetCarPoolByDepartureCity($data: String!) {
+  getCarPoolByDepartureCity(data: $data) {
+    id
+    departureCity
+    arrivalCity
+    departureDateTime
+    passengerNumber
+    passengerId
+    driverId   
+  }
+}

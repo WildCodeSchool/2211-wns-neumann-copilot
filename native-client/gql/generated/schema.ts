@@ -101,6 +101,7 @@ export type Query = {
   __typename?: 'Query';
   getCarPool: CarPool;
   getCarPoolByCities: Array<CarPool>;
+  getCarPoolByDepartureCity: Array<CarPool>;
   getCarPools: Array<CarPool>;
   getUsers: Array<User>;
   profile: User;
@@ -114,6 +115,11 @@ export type QueryGetCarPoolArgs = {
 
 export type QueryGetCarPoolByCitiesArgs = {
   data: GetCarPoolByCitiesInput;
+};
+
+
+export type QueryGetCarPoolByDepartureCityArgs = {
+  data: Scalars['String'];
 };
 
 export type User = {
@@ -205,6 +211,13 @@ export type GetCarPoolByCitiesQueryVariables = Exact<{
 
 
 export type GetCarPoolByCitiesQuery = { __typename?: 'Query', getCarPoolByCities: Array<{ __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDateTime: string, passengerNumber: string, passengerId?: string | null, driverId: number }> };
+
+export type GetCarPoolByDepartureCityQueryVariables = Exact<{
+  data: Scalars['String'];
+}>;
+
+
+export type GetCarPoolByDepartureCityQuery = { __typename?: 'Query', getCarPoolByDepartureCity: Array<{ __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDateTime: string, passengerNumber: string, passengerId?: string | null, driverId: number }> };
 
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -540,6 +553,47 @@ export function useGetCarPoolByCitiesLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type GetCarPoolByCitiesQueryHookResult = ReturnType<typeof useGetCarPoolByCitiesQuery>;
 export type GetCarPoolByCitiesLazyQueryHookResult = ReturnType<typeof useGetCarPoolByCitiesLazyQuery>;
 export type GetCarPoolByCitiesQueryResult = Apollo.QueryResult<GetCarPoolByCitiesQuery, GetCarPoolByCitiesQueryVariables>;
+export const GetCarPoolByDepartureCityDocument = gql`
+    query GetCarPoolByDepartureCity($data: String!) {
+  getCarPoolByDepartureCity(data: $data) {
+    id
+    departureCity
+    arrivalCity
+    departureDateTime
+    passengerNumber
+    passengerId
+    driverId
+  }
+}
+    `;
+
+/**
+ * __useGetCarPoolByDepartureCityQuery__
+ *
+ * To run a query within a React component, call `useGetCarPoolByDepartureCityQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCarPoolByDepartureCityQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCarPoolByDepartureCityQuery({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useGetCarPoolByDepartureCityQuery(baseOptions: Apollo.QueryHookOptions<GetCarPoolByDepartureCityQuery, GetCarPoolByDepartureCityQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCarPoolByDepartureCityQuery, GetCarPoolByDepartureCityQueryVariables>(GetCarPoolByDepartureCityDocument, options);
+      }
+export function useGetCarPoolByDepartureCityLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCarPoolByDepartureCityQuery, GetCarPoolByDepartureCityQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCarPoolByDepartureCityQuery, GetCarPoolByDepartureCityQueryVariables>(GetCarPoolByDepartureCityDocument, options);
+        }
+export type GetCarPoolByDepartureCityQueryHookResult = ReturnType<typeof useGetCarPoolByDepartureCityQuery>;
+export type GetCarPoolByDepartureCityLazyQueryHookResult = ReturnType<typeof useGetCarPoolByDepartureCityLazyQuery>;
+export type GetCarPoolByDepartureCityQueryResult = Apollo.QueryResult<GetCarPoolByDepartureCityQuery, GetCarPoolByDepartureCityQueryVariables>;
 export const GetProfileDocument = gql`
     query getProfile {
   profile {
