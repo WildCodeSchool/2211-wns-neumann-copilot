@@ -11,9 +11,9 @@ export default function Login() {
 
   // import de la mutation login.gql
   const [login] = useLoginMutation();
-  // const { data: client } = useGetProfileQuery({
-  //   errorPolicy: "ignore",
-  // });
+  const { data: currentUser, client } = useGetProfileQuery({
+    errorPolicy: "ignore",
+  });
 
   return (
     <div>
@@ -26,11 +26,14 @@ export default function Login() {
             setError("");
             try {
               await login({ variables: { data: { email, password } } });
+              login() === null || undefined
+                ? setError("invalid credentials")
+                : navigate("/profil");
             } catch (err) {
               console.error(err);
               setError("invalid credentials");
             } finally {
-              // client.resetStore();
+              client.resetStore();
               navigate("/profil");
             }
           }}

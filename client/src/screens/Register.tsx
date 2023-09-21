@@ -3,7 +3,6 @@ import "./css/register.css";
 import {
   useCreateUserMutation,
   useGetProfileQuery,
-  LoginMutation,
   useLoginMutation,
 } from "../gql/generated/schema";
 import { useState } from "react";
@@ -18,7 +17,7 @@ export default function Register() {
   const { data: currentUser, client } = useGetProfileQuery({
     errorPolicy: "ignore",
   });
-  const isAdmin = currentUser?.profile.role === "admin";
+  // const isAdmin = currentUser?.profile.role === "admin";
   const [login] = useLoginMutation();
 
   return (

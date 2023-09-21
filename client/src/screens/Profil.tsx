@@ -60,7 +60,10 @@ export default function Profil() {
               setError("invalid credentials");
             } finally {
               client.resetStore();
-              navigate("/profil");
+              if (error) {
+                return navigate("/login");
+              }
+              return navigate("/profil");
             }
           }}
         >

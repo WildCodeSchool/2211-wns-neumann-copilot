@@ -4,8 +4,6 @@ type carPoolsListProps = {
   carPoolsList?: CarPool[];
 };
 export default function CarpoolList({ carPoolsList }: carPoolsListProps) {
-  console.log("LALALALAL");
-
   return (
     <div className="app main-carpool-list">
       {carPoolsList &&
@@ -19,6 +17,12 @@ export default function CarpoolList({ carPoolsList }: carPoolsListProps) {
             </div>
             <div className="carPoolCard-time">
               <p> Date & Heure : {carPool.departureDateTime}</p>
+            </div>
+            <div className="carPoolCard-passager">
+              <p> Nombre de passager : {carPool.passengerNumber}</p>
+            </div>
+            <div className="carPoolCard-distance">
+              <p> Distance : {carPool.passengerNumber} km</p>
             </div>
           </div>
         ))}
