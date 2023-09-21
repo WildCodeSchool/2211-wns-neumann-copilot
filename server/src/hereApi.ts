@@ -8,7 +8,7 @@ export interface City {
     lng: number;
   };
 }
-let cities: City[] = [];
+const cities: City[] = [];
 export default async (
   getDepartureCity: string,
   getArrivalCity: string
