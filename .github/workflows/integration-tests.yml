@@ -4,6 +4,8 @@ on: pull_request
 
 jobs:
   test-on-pull-request:
+    env:
+      HereApiKey: ${{secrets.HEREAPIKEY}}
     runs-on: ubuntu-latest
     steps:
       - name: Check out code

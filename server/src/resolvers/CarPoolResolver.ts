@@ -14,7 +14,8 @@ export default class CarPoolResolver {
   async getCarPools(): Promise<CarPool[]> {
     const carPools = await datasource.getRepository(CarPool).find();
     if (carPools === null) throw new Error("carpool not found");
-    console.log(await getDepartureCity("Rennes"));
+    console.log(await getDepartureCity("Lille", "Lyon"));
+
     return carPools;
   }
 
