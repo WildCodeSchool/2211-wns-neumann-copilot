@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TextInput, StyleSheet, Pressable, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Text, View, TextInput, StyleSheet, Pressable, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
 import { CarPool, useGetCarPoolByDepartureCityLazyQuery, useGetCarPoolByDepartureCityQuery, useGetProfileQuery } from "../gql/generated/schema";
 import { useRoute } from '@react-navigation/native';
 import * as Location from 'expo-location';
@@ -65,52 +65,64 @@ export default function CarpoolList() {
     // récupère le resultat de la recherche passé dans les params de la route à chaque changement dans la route (dc à chaque recherche)
     useEffect(() => {
         console.log('Résultat de la recherche : ', route.params?.carPoolToDisplay);
-        setCarPoolToDisplay(route.params?.carPoolToDisplay)
+        setCarPoolToDisplay(route.params?.carPoolToDisplay);
     }, [route]);
+
+    function conditionalDisplay() {
+        if (typeof route.params?.carPoolToDisplay !== 'undefined') {
+            if (carPoolToDisplay?.length > 0) {
+                return (carPoolToDisplay.map((carPool: CarPool) => {
+                    return (
+                        <View key={carPool.id} style={styles.carpoolContainer}>
+                            <View>
+                                <Text style={styles.carpoolInfos}>Ville de départ : {carPool.departureCity}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.carpoolInfos}>Ville d'arrivée : {carPool.arrivalCity}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.carpoolInfos}>Date et heure : {carPool.departureDateTime}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.carpoolInfos}>Nombre de passagers : {carPool.passengerNumber} personnes</Text>
+                            </View>
+                        </View>
+                    );
+                }));
+            } else {
+                return <Text style={styles.messageNotFound}>Aucun covoiturage correspondant à votre recherche n'a été trouvé.</Text>
+            }
+        } else if (city) {
+            if (carPoolByLocationCity?.length > 0) {
+                return (carPoolByLocationCity.map((carPool: CarPool) => {
+                    return (
+                        <View key={carPool.id} style={styles.carpoolContainer}>
+                            <View>
+                                <Text style={styles.carpoolInfos}>Ville de départ : {carPool.departureCity}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.carpoolInfos}>Ville d'arrivée : {carPool.arrivalCity}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.carpoolInfos}>Date et heure : {carPool.departureDateTime}</Text>
+                            </View>
+                        </View>
+                    );
+                }));
+            } else {
+                return <Text style={styles.messageNotFound}>Aucun covoiturage n'a été trouvé dans votre ville.</Text>
+            }
+        } else {
+            return <Text style={styles.messageNotFound}>Nous n'avons pas réussi à trouver la ville où vous vous trouvez.</Text>
+        }
+    }
 
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={styles.title}>Résultat de votre recherche : </Text>
-
-
-                {carPoolByLocationCity?.length > 0 ? carPoolByLocationCity.map((carPool: CarPool) => {
-                    return (
-                        <View key={carPool.id}>
-                            <View>
-                                <Text>Départ : {carPool.departureCity}</Text>
-                            </View>
-                            <View>
-                                <Text> Arivée : {carPool.arrivalCity}</Text>
-                            </View>
-                            <View>
-                                <Text> Date & Heure : {carPool.departureDateTime}</Text>
-                            </View>
-                        </View>
-                    )
-                }) :
-                    <View><Text>Aucun coivoiturage en partance de {city}</Text></View>
-                }
-
-
-                {carPoolToDisplay?.length > 0 ? carPoolToDisplay.map((carPool: CarPool) => {
-                    return (
-                        <View key={carPool.id}>
-                            <View>
-                                <Text>Départ : {carPool.departureCity}</Text>
-                            </View>
-                            <View>
-                                <Text> Arivée : {carPool.arrivalCity}</Text>
-                            </View>
-                            <View>
-                                <Text> Date & Heure : {carPool.departureDateTime}</Text>
-                            </View>
-                        </View>
-                    )
-                }) :
-                    <View><Text>Aucun résultat pour votre recherche</Text></View>
-                }
-            </View>
+            <Text style={styles.title}>Résultat de votre recherche : </Text>
+            <ScrollView style={styles.scrollView}>
+                {conditionalDisplay()}
+            </ScrollView>
         </View>
     );
 }
@@ -118,14 +130,52 @@ export default function CarpoolList() {
 const styles = StyleSheet.create({
     container: {
         marginTop: 50,
-        marginHorizontal: 20,
+        marginHorizontal: 5,
     },
     title: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 25,
-        marginBottom: 30,
+        marginBottom: 10,
+        paddingHorizontal: 20,
         color: "#518071",
+    },
+    scrollView: {
+        marginBottom: 80,
+    },
+    carpoolContainer: {
+        // height: 50,
+        backgroundColor: "#ffffff",
+        // borderWidth: 2,
+        // borderColor: "#bbbbbb",
+        marginVertical: 5,
+        marginHorizontal: 10,
+        padding: 5,
+        borderRadius: 5,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.8,
+        shadowRadius: 6.68,
+        elevation: 11,
+    },
+    carpoolInfos: {
+        fontSize: 16
+    },
+    messageNotFound: {
+        margin: 20,
+        textAlign: "center",
+        fontSize: 16,
+        color: "#686868",
+        textShadowColor: "#aaa",
+        textShadowOffset: {
+            width: 1,
+            height: 1,
+        },
+        textShadowRadius: 10,
     },
     logout: {
         textAlign: "center",

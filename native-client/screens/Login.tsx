@@ -139,6 +139,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 20,
         fontSize: 16,
+        color: "#686868",
+        textShadowColor: "#aaa",
+        textShadowOffset: {
+            width: 1,
+            height: 1,
+        },
+        textShadowRadius: 10,
     },
     mail: {
         fontWeight: "bold",
