@@ -4,8 +4,6 @@ on: pull_request
 
 jobs:
   test-on-pull-request:
-    env:
-      HereApiKey: P_cC9-TJ-odVVXPLOOyabwU7n7TqMvCpLWlMIbGWep0
     runs-on: ubuntu-latest
     steps:
       - name: Print Environment variable
