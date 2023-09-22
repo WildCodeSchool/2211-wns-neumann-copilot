@@ -1,6 +1,12 @@
-import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
-import { InputType, ObjectType, Field } from "type-graphql";
+import {
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  ManyToOne,
+} from "typeorm";
+import { InputType, ObjectType, Field, ID } from "type-graphql";
 import { IsInt, MinLength } from "class-validator";
+import City from "./City";
 
 @ObjectType()
 @Entity()
@@ -9,25 +15,25 @@ export class CarPool {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field(() => City)
+  @ManyToOne(() => City, (departureCity) => departureCity.departureCarpools)
+  departureCity: City;
+
+  @Field(() => City)
+  @ManyToOne(() => City, (arrivalCity) => arrivalCity.arrivalCarpools)
+  arrivalCity: City;
+
   @Field()
-  @Column()
-  departureCity: string;
+  @Column({ type: "timestamptz" })
+  departureDateTime: Date;
 
   @Field()
   @Column()
-  arrivalCity: string;
-
-  @Field()
-  @Column()
-  departureDateTime: string;
-
-  @Field()
-  @Column()
-  passengerNumber: string;
+  passengerNumber: number;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
-  passengerId?: string;
+  passengerId?: number;
 
   @Field()
   @Column()
@@ -36,16 +42,13 @@ export class CarPool {
 
 @InputType()
 export class CarPoolerInput {
-  @Column()
-  id: number;
-
-  @Field()
+  @Field(() => ID)
   @MinLength(1)
-  departureCity: string;
+  departureCity: number;
 
-  @Field()
+  @Field(() => ID)
   @MinLength(1)
-  arrivalCity: string;
+  arrivalCity: number;
 
   @Field()
   @MinLength(1)
@@ -53,14 +56,19 @@ export class CarPoolerInput {
 
   @Field()
   @MinLength(1)
-  passengerNumber: string;
+  passengerNumber: number;
 
   @Field()
-  passengerId?: string;
+  passengerId?: number;
 
   @Field()
   @IsInt()
   driverId: number;
+}
+@InputType()
+export class CarPoolerInputUpdate extends CarPoolerInput {
+  @Field()
+  id: number;
 }
 
 @InputType()

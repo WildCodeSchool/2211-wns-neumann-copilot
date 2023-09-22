@@ -23,7 +23,7 @@ function LeftMenuPC() {
               Acceuil
             </div>
           </NavLink>
-          <NavLink to={currentUser?.profile ? "/trajet" : "/login"}>
+          <NavLink to={currentUser ? "/trajet" : "/login"}>
             <div className="option">
               <MdDirectionsCar />
               Trajet

@@ -2,16 +2,21 @@ import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
 import {
   CarPool,
   CarPoolerInput,
+  CarPoolerInputUpdate,
   getCarPoolByCitiesInput,
 } from "../entity/CarPool";
 import datasource from "../db";
 import { ApolloError } from "apollo-server-errors";
+import getDepartureCity from "../hereApi";
+
 @Resolver()
 export default class CarPoolResolver {
   @Query(() => [CarPool])
   async getCarPools(): Promise<CarPool[]> {
     const carPools = await datasource.getRepository(CarPool).find();
     if (carPools === null) throw new Error("carpool not found");
+    console.log(await getDepartureCity("Lille", "Lyon"));
+
     return carPools;
   }
 
@@ -30,9 +35,12 @@ export default class CarPoolResolver {
     @Arg("data") data: getCarPoolByCitiesInput
   ): Promise<CarPool[]> {
     const { departureCity, arrivalCity } = data;
-    const carPoolByCity = await datasource
-      .getRepository(CarPool)
-      .find({ where: { departureCity, arrivalCity } });
+    const carPoolByCity = await datasource.getRepository(CarPool).find({
+      where: {
+        departureCity: { cityName: departureCity },
+        arrivalCity: { cityName: arrivalCity },
+      },
+    });
     if (carPoolByCity === null)
       throw new ApolloError("Carpool not found", "NOT_FOUND");
     return carPoolByCity;
@@ -48,18 +56,22 @@ export default class CarPoolResolver {
 
   @Mutation(() => CarPool)
   async createCarPool(@Arg("data") data: CarPoolerInput): Promise<CarPool> {
-    return await datasource.getRepository(CarPool).save(data);
+    const carPool = datasource.getRepository(CarPool).create();
+    return await datasource.getRepository(CarPool).save(carPool);
   }
 
   @Mutation(() => CarPool)
   async updateCarpool(
     @Arg("userId", () => Int) userId: number,
-    @Arg("carPoolId", () => Int) carPoolId: number,
-    @Arg("data") data: CarPoolerInput
+    @Arg("data") data: CarPoolerInputUpdate
   ): Promise<CarPool> {
-    const id = carPoolId;
-    const { departureCity, arrivalCity, departureDateTime, passengerNumber } =
-      data;
+    const {
+      departureCity,
+      arrivalCity,
+      departureDateTime,
+      passengerNumber,
+      id,
+    } = data;
     const carpoolToUpdate = await datasource
       .getRepository(CarPool)
       .findOne({ where: { id } });
@@ -71,9 +83,9 @@ export default class CarPoolResolver {
         "Unauthorised"
       );
     return await datasource.getRepository(CarPool).save({
-      id,
-      departureCity,
-      arrivalCity,
+      ...carpoolToUpdate,
+      departureCity: { id: departureCity },
+      arrivalCity: { id: arrivalCity },
       departureDateTime,
       passengerNumber,
     });

@@ -13,7 +13,7 @@ import User, {
   UserUpdateInput,
   encodePassword,
   verifyPassword,
-  UserRole,
+  // UserRole,
   UserUpdateNativeInput,
   NotificationInput,
 } from "../entity/User";
@@ -56,7 +56,8 @@ export default class UserResolver {
 
     const token = jwt.sign({ userId: user.id }, env.JWT_PRIVATE_KEY);
 
-    // reponse via cookie (nom, valeur, options) / secure empeche le navigateur d'interpreter un cookie si on est pas en https
+    // reponse via cookie (nom, valeur, options) /
+    //secure empeche le navigateur d'interpreter un cookie si on est pas en https
     res.cookie("token", token, {
       httpOnly: true,
       secure: env.NODE_ENV === "production",

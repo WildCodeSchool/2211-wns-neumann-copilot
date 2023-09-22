@@ -10,6 +10,7 @@ import User from "./entity/User";
 import cookie from "cookie";
 import UserResolver from "./resolvers/UserResolver";
 import CarPoolResolver from "./resolvers/CarPoolResolver";
+import { CityResolver } from "./resolvers/CityResolver";
 
 export interface JWTPayload {
   userId: number;
@@ -26,7 +27,7 @@ async function start(): Promise<void> {
   await db.initialize();
 
   const schema = await buildSchema({
-    resolvers: [UserResolver, CarPoolResolver],
+    resolvers: [UserResolver, CarPoolResolver, CityResolver],
     authChecker: async ({ context }: { context: ContextType }, roles = []) => {
       console.log({ roles });
 
