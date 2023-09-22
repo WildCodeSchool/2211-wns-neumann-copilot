@@ -20,7 +20,7 @@ services:
     volumes:
       - ./server/src:/app/src
     environment:
-      - HereApiKey=${{HEREAPIKEY}}
+      - HereApiKey=${{secrets.HEREAPIKEY}}
       - DB_HOST: testDB
     healthcheck:
       test: "curl --fail --request GET -H 'content-type:application/json' --url 'http://localhost:4000/graphql?query=%7B__typename%7D'"
