@@ -6,8 +6,11 @@ jobs:
   test-on-pull-request:
     env:
       HereApiKey: ${{secrets.HEREAPIKEY}}
+
     runs-on: ubuntu-latest
     steps:
+      - name: Print Environment variable
+        run: printenv
       - name: Check out code
         uses: actions/checkout@v3
       - name: Make envfile
