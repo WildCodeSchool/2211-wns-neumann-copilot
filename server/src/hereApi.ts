@@ -1,5 +1,6 @@
 import axios from "axios";
-import { env } from "./env";
+
+const hereApi = process.env.HereApiKey;
 
 export interface City {
   title: string;
@@ -17,7 +18,7 @@ export default async (
     const res = await axios.get(
       `https://geocode.search.hereapi.com/v1/geocode?q=${getDepartureCity}%2C+France
 &lang=fr
-&apiKey=${env.HereApiKey}`
+&apiKey=${hereApi}`
     );
     const [returnedArray] = res.data.items;
     const departureCity: City = {
@@ -36,7 +37,7 @@ export default async (
     const res = await axios.get(
       `https://geocode.search.hereapi.com/v1/geocode?q=${getArrivalCity}%2C+France
 &lang=fr
-&apiKey=${env.HereApiKey}`
+&apiKey=${hereApi}`
     );
     const [returnedArray] = res.data.items;
     const arrivalCity = {

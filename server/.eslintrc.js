@@ -18,5 +18,6 @@ module.exports = {
         checksVoidReturn: false,
       },
     ],
+    "@typescript-eslint/restrict-template-expressions": "off",
   },
 };
