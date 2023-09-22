@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, Pressable, TouchableWithoutFeedback, Keyboard, Switch, SafeAreaView } from "react-native";
 import { useEffect, useState } from "react";
-import { CarPool, useCreateCarPoolMutation, useGetCarPoolByCitiesLazyQuery, useGetProfileQuery, useGetUsersQuery } from "../gql/generated/schema";
+import { useCreateCarPoolMutation, useGetCarPoolByCitiesLazyQuery, useGetProfileQuery } from "../gql/generated/schema";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function Trajet({ navigation }) {
@@ -63,6 +63,7 @@ export default function Trajet({ navigation }) {
 
     async function createNewCarpool() {
         setError("");
+        setMessagePropose("");
         try {
             await createCarPool({
                 variables: {
@@ -180,7 +181,7 @@ export default function Trajet({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
+        marginTop: 20,
         marginHorizontal: 20,
     },
     title: {

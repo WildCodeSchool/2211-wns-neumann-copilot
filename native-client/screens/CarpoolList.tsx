@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TextInput, StyleSheet, Pressable, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
-import { CarPool, useGetCarPoolByDepartureCityLazyQuery, useGetCarPoolByDepartureCityQuery, useGetProfileQuery } from "../gql/generated/schema";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { CarPool, useGetCarPoolByDepartureCityLazyQuery, useGetProfileQuery } from "../gql/generated/schema";
 import { useRoute } from '@react-navigation/native';
 import * as Location from 'expo-location';
 
@@ -8,16 +8,14 @@ export default function CarpoolList() {
 
     const route = useRoute();
     const [carPoolToDisplay, setCarPoolToDisplay] = useState([]);
+    const [GetCarPoolByDepartureCity] = useGetCarPoolByDepartureCityLazyQuery();
     const { data: currentUser, client } = useGetProfileQuery({
         errorPolicy: "ignore",
     });
-
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [city, setCity] = useState(null);
     const [carPoolByLocationCity, setCarPoolByLocationCity] = useState([]);
-
-    const [GetCarPoolByDepartureCity] = useGetCarPoolByDepartureCityLazyQuery();
 
     useEffect(() => {
         (async () => {
@@ -47,21 +45,6 @@ export default function CarpoolList() {
     }, []);
     console.log("ville géolocalisé : " + city);
 
-    // useEffect(() => {
-    //     async () => {
-    //         const carPoolByLocationCity = await GetCarPoolByDepartureCity({
-    //             variables: {
-    //                 data: city
-    //             },
-    //         });
-    //         console.log("test" + carPoolByLocationCity);
-
-    //         setCarPoolByLocationCity(carPoolByLocationCity)
-    //     }
-    // }, [city]);
-    // console.log(carPoolByLocationCity);
-
-
     // récupère le resultat de la recherche passé dans les params de la route à chaque changement dans la route (dc à chaque recherche)
     useEffect(() => {
         console.log('Résultat de la recherche : ', route.params?.carPoolToDisplay);
@@ -75,16 +58,24 @@ export default function CarpoolList() {
                     return (
                         <View key={carPool.id} style={styles.carpoolContainer}>
                             <View>
-                                <Text style={styles.carpoolInfos}>Ville de départ : {carPool.departureCity}</Text>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Ville de départ</Text> : {carPool.departureCity}
+                                </Text>
                             </View>
                             <View>
-                                <Text style={styles.carpoolInfos}>Ville d'arrivée : {carPool.arrivalCity}</Text>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Ville d'arrivée</Text> : {carPool.arrivalCity}
+                                </Text>
                             </View>
                             <View>
-                                <Text style={styles.carpoolInfos}>Date et heure : {carPool.departureDateTime}</Text>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Date et heure</Text> : {carPool.departureDateTime}
+                                </Text>
                             </View>
                             <View>
-                                <Text style={styles.carpoolInfos}>Nombre de passagers : {carPool.passengerNumber} personnes</Text>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Nombre de passagers</Text> : {carPool.passengerNumber} personnes
+                                </Text>
                             </View>
                         </View>
                     );
@@ -98,13 +89,24 @@ export default function CarpoolList() {
                     return (
                         <View key={carPool.id} style={styles.carpoolContainer}>
                             <View>
-                                <Text style={styles.carpoolInfos}>Ville de départ : {carPool.departureCity}</Text>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Ville de départ</Text> : {carPool.departureCity}
+                                </Text>
                             </View>
                             <View>
-                                <Text style={styles.carpoolInfos}>Ville d'arrivée : {carPool.arrivalCity}</Text>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Ville d'arrivée</Text> : {carPool.arrivalCity}
+                                </Text>
                             </View>
                             <View>
-                                <Text style={styles.carpoolInfos}>Date et heure : {carPool.departureDateTime}</Text>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Date et heure</Text> : {carPool.departureDateTime}
+                                </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.carpoolInfos}>
+                                    <Text style={styles.carpoolInfosName}>Nombre de passagers</Text> : {carPool.passengerNumber} personnes
+                                </Text>
                             </View>
                         </View>
                     );
@@ -120,7 +122,11 @@ export default function CarpoolList() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Résultat de votre recherche : </Text>
-            <ScrollView style={styles.scrollView}>
+            {/* 
+                pour rendre la bar lateral invisible, ajouter sur la scrollview : showsVerticalScrollIndicator={false}
+                pour supprimer les effets d'arrivé en début/fin de scroll : overScrollMode="never"
+            */}
+            <ScrollView style={styles.scrollView} overScrollMode="never">
                 {conditionalDisplay()}
             </ScrollView>
         </View>
@@ -129,7 +135,7 @@ export default function CarpoolList() {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
+        marginTop: 20,
         marginHorizontal: 5,
     },
     title: {
@@ -144,15 +150,11 @@ const styles = StyleSheet.create({
         marginBottom: 80,
     },
     carpoolContainer: {
-        // height: 50,
         backgroundColor: "#ffffff",
-        // borderWidth: 2,
-        // borderColor: "#bbbbbb",
         marginVertical: 5,
         marginHorizontal: 10,
         padding: 5,
         borderRadius: 5,
-
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -163,7 +165,10 @@ const styles = StyleSheet.create({
         elevation: 11,
     },
     carpoolInfos: {
-        fontSize: 16
+        fontSize: 16,
+    },
+    carpoolInfosName: {
+        textDecorationLine: "underline",
     },
     messageNotFound: {
         margin: 20,

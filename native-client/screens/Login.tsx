@@ -96,7 +96,7 @@ export default function Login() {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
+        marginTop: 20,
         marginHorizontal: 20,
     },
     title: {
