@@ -1,6 +1,7 @@
 import axios from "axios";
+import { env } from "./env";
 
-const hereApi = process.env.HereApiKey;
+const hereApi = env.HERE_API_KEY;
 
 export interface City {
   title: string;
