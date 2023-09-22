@@ -25,7 +25,7 @@ jobs:
           envkey_DB_PASS: postgres
           envkey_DB_NAME: postgres
           envkey_DB_PORT: 5432
-          envkey_HereApiKey: P_cC9-TJ-odVVXPLOOyabwU7n7TqMvCpLWlMIbGWep0
+          envkey_HERE_API_KEY: P_cC9-TJ-odVVXPLOOyabwU7n7TqMvCpLWlMIbGWep0
           directory: server
           file_name: .env
       - name: Run integration test
