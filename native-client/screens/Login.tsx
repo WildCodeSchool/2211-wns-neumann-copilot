@@ -65,6 +65,7 @@ export default function Login() {
                         />
                         <TextInput
                             style={styles.input}
+                            secureTextEntry={true} // permet de rendre le contenu invisible, avec des "....."
                             onChangeText={(val => setCredentials({ ...credentials, password: val }))}
                             value={credentials.password}
                             placeholder="Votre mot de passe"
