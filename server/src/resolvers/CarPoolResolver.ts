@@ -1,22 +1,32 @@
-import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
+import datasource from "../db";
+import { ApolloError } from "apollo-server-errors";
+import {
+  Arg,
+  Authorized,
+  Ctx,
+  Int,
+  Mutation,
+  Query,
+  Resolver,
+} from "type-graphql";
 import {
   CarPool,
   CarPoolerInput,
-  CarPoolerInputUpdate,
+  // CarPoolerInputUpdate,
   getCarPoolByCitiesInput,
 } from "../entity/CarPool";
-import datasource from "../db";
-import { ApolloError } from "apollo-server-errors";
-import getDepartureCity from "../hereApi";
+import { ContextType } from "..";
+import City from "../entity/City";
+import { getCity } from "../hereApi";
 
 @Resolver()
 export default class CarPoolResolver {
   @Query(() => [CarPool])
   async getCarPools(): Promise<CarPool[]> {
-    const carPools = await datasource.getRepository(CarPool).find();
+    const carPools = await datasource
+      .getRepository(CarPool)
+      .find({ relations: ["departureCity", "arrivalCity"] });
     if (carPools === null) throw new Error("carpool not found");
-    console.log(await getDepartureCity("Lille", "Lyon"));
-
     return carPools;
   }
 
@@ -24,7 +34,7 @@ export default class CarPoolResolver {
   async getCarPool(@Arg("id", () => Int) id: number): Promise<CarPool> {
     const carPool = await datasource
       .getRepository(CarPool)
-      .findOne({ where: { id } });
+      .findOne({ relations: ["departureCity", "arrivalCity"], where: { id } });
     if (carPool === null)
       throw new ApolloError("Carpool not found", "NOT_FOUND");
     return carPool;
@@ -36,6 +46,7 @@ export default class CarPoolResolver {
   ): Promise<CarPool[]> {
     const { departureCity, arrivalCity } = data;
     const carPoolByCity = await datasource.getRepository(CarPool).find({
+      relations: ["departureCity", "arrivalCity"],
       where: {
         departureCity: { cityName: departureCity },
         arrivalCity: { cityName: arrivalCity },
@@ -54,40 +65,76 @@ export default class CarPoolResolver {
     return true;
   }
 
+  @Authorized()
   @Mutation(() => CarPool)
-  async createCarPool(@Arg("data") data: CarPoolerInput): Promise<CarPool> {
-    const carPool = datasource.getRepository(CarPool).create();
-    return await datasource.getRepository(CarPool).save(carPool);
-  }
-
-  @Mutation(() => CarPool)
-  async updateCarpool(
-    @Arg("userId", () => Int) userId: number,
-    @Arg("data") data: CarPoolerInputUpdate
+  async createCarPool(
+    @Arg("data") data: CarPoolerInput,
+    @Ctx() { currentUser }: ContextType
   ): Promise<CarPool> {
-    const {
+    if (typeof currentUser !== "object") {
+      throw new ApolloError("Vous devez être connecté !!!");
+    }
+    // 1ere etapes est ce que ma ville existe en base
+    let departureCity = await datasource
+      .getRepository(City)
+      .findOne({ where: { cityName: data.departureCityname } });
+    // Non elle n existe pas Infos depuis l api+ ajout en base
+    if (departureCity === null) {
+      const departureCityApi = await getCity(data.departureCityname);
+      departureCity = await datasource
+        .getRepository(City)
+        .save(departureCityApi);
+    }
+
+    // 1ere etapes est ce que ma ville existe en base
+    let arrivalCity = await datasource
+      .getRepository(City)
+      .findOne({ where: { cityName: data.arrivalCityname } });
+    // Non elle n existe pas Infos depuis l api+ ajout en base
+    if (arrivalCity === null) {
+      const arrivalApi = await getCity(data.arrivalCityname);
+      arrivalCity = await datasource.getRepository(City).save(arrivalApi);
+    }
+    // Oui elle existe : je recupere son id
+
+    // Je creer mon car pool
+    return await datasource.getRepository(CarPool).save({
+      driverId: currentUser.id,
       departureCity,
       arrivalCity,
-      departureDateTime,
-      passengerNumber,
-      id,
-    } = data;
-    const carpoolToUpdate = await datasource
-      .getRepository(CarPool)
-      .findOne({ where: { id } });
-    if (carpoolToUpdate === null)
-      throw new ApolloError("carpool not found", "NOT_FOUND");
-    if (carpoolToUpdate.driverId !== userId)
-      throw new ApolloError(
-        "Only the driver can update the carpool",
-        "Unauthorised"
-      );
-    return await datasource.getRepository(CarPool).save({
-      ...carpoolToUpdate,
-      departureCity: { id: departureCity },
-      arrivalCity: { id: arrivalCity },
-      departureDateTime,
-      passengerNumber,
+      passengerNumber: data.passengerNumber,
+      departureDateTime: new Date(data.departureDateTime),
     });
   }
+
+  // @Mutation(() => CarPool)
+  // async updateCarpool(
+  //   @Arg("userId", () => Int) userId: number,
+  //   @Arg("data") data: CarPoolerInputUpdate
+  // ): Promise<CarPool> {
+  //   const {
+  //     departureCity,
+  //     arrivalCity,
+  //     departureDateTime,
+  //     passengerNumber,
+  //     id,
+  //   } = data;
+  //   const carpoolToUpdate = await datasource
+  //     .getRepository(CarPool)
+  //     .findOne({ where: { id } });
+  //   if (carpoolToUpdate === null)
+  //     throw new ApolloError("carpool not found", "NOT_FOUND");
+  //   if (carpoolToUpdate.driverId !== userId)
+  //     throw new ApolloError(
+  //       "Only the driver can update the carpool",
+  //       "Unauthorised"
+  //     );
+  //   return await datasource.getRepository(CarPool).save({
+  //     ...carpoolToUpdate,
+  //     departureCity: { id: departureCity },
+  //     arrivalCity: { id: arrivalCity },
+  //     departureDateTime,
+  //     passengerNumber,
+  //   });
+  // }
 }

@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CarPool } from "./CarPool";
 
@@ -15,15 +15,15 @@ class City {
 
   @Column()
   @Field()
-  zipCode: string;
+  zipCode: number;
 
-  @Column()
+  @Column("real")
   @Field()
-  latitude: string;
+  latitude: number;
 
-  @Column()
+  @Column("real")
   @Field()
-  longitude: string;
+  longitude: number;
 
   @OneToMany(() => CarPool, (carPool) => carPool.departureCity)
   departureCarpools?: CarPool[];
@@ -31,17 +31,20 @@ class City {
   @OneToMany(() => CarPool, (carPool) => carPool.arrivalCity)
   arrivalCarpools?: CarPool[];
 }
+
+@InputType()
 export class CityInput {
   @Field()
   cityName: string;
 
   @Field()
-  zipCode: string;
+  zipCode: number;
 
   @Field()
-  latitude: string;
+  latitude: number;
 
   @Field()
-  longitude: string;
+  longitude: number;
 }
+
 export default City;

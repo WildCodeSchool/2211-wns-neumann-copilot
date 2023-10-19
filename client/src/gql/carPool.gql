@@ -1,62 +1,76 @@
 mutation CreateCarPool($data: CarPoolerInput!) {
   createCarPool(data: $data) {
     id
-    departureCity
-    arrivalCity
     departureDateTime
     passengerNumber
     passengerId
     driverId
+    departureCity {
+      cityName
+    }
+    arrivalCity {
+      cityName
+    }
   }
 }
-query getCarPool($getCarPoolId: Int!) {
+query GetCarPool($getCarPoolId: Int!) {
   getCarPool(id: $getCarPoolId) {
-    id
-    departureCity
-    arrivalCity
+    departureCity {
+      cityName
+    }
+    arrivalCity {
+      cityName
+    }
     departureDateTime
     passengerNumber
     passengerId
     driverId
   }
 }
-query GetCarPools {
+query Query {
   getCarPools {
     id
-    departureCity
-    arrivalCity
+    departureCity {
+      cityName
+    }
+    arrivalCity {
+      cityName
+    }
     departureDateTime
     passengerNumber
-    passengerId
     driverId
   }
 }
-mutation UpdateCarpool(
-  $data: CarPoolerInput!
-  $carPoolId: Int!
-  $userId: Int!
-) {
-  updateCarpool(data: $data, carPoolId: $carPoolId, userId: $userId) {
-    id
-    departureCity
-    arrivalCity
-    departureDateTime
-    passengerNumber
-    passengerId
-    driverId
-  }
-}
+# mutation UpdateCarpool(
+#   $data: CarPoolerInput!
+#   $carPoolId: Int!
+#   $userId: Int!
+# ) {
+#   updateCarpool(data: $data, carPoolId: $carPoolId, userId: $userId) {
+#     id
+#     departureCity
+#     arrivalCity
+#     departureDateTime
+#     passengerNumber
+#     passengerId
+#     driverId
+#   }
+# }
 mutation DeleteCarPool($deleteCarPoolId: Int!) {
   deleteCarPool(id: $deleteCarPoolId)
 }
 query GetCarPoolByCities($data: getCarPoolByCitiesInput!) {
   getCarPoolByCities(data: $data) {
-    id
-    departureCity
-    arrivalCity
+    departureCity {
+      cityName
+    }
+    arrivalCity {
+      cityName
+    }
     departureDateTime
     passengerNumber
     passengerId
     driverId
+    id
   }
 }

@@ -8,7 +8,8 @@
     "start": "ts-node-dev src/index.ts",
     "build": "tsc",
     "start:prod": "node build/index.js",
-    "resetDB": "ts-node-dev src/resetDb.ts"
+    "resetDB": "ts-node-dev src/resetDb.ts",
+    "hereApi": "ts-node-dev src/hereApi.ts"
   },
   "repository": {
     "type": "git",

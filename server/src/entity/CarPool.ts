@@ -1,10 +1,5 @@
-import {
-  Column,
-  PrimaryGeneratedColumn,
-  Entity,
-  ManyToOne,
-} from "typeorm";
-import { InputType, ObjectType, Field, ID } from "type-graphql";
+import { Column, PrimaryGeneratedColumn, Entity, ManyToOne } from "typeorm";
+import { InputType, ObjectType, Field } from "type-graphql";
 import { IsInt, MinLength } from "class-validator";
 import City from "./City";
 
@@ -42,23 +37,21 @@ export class CarPool {
 
 @InputType()
 export class CarPoolerInput {
-  @Field(() => ID)
+  @Field()
   @MinLength(1)
-  departureCity: number;
-
-  @Field(() => ID)
-  @MinLength(1)
-  arrivalCity: number;
+  departureCityname: string;
 
   @Field()
   @MinLength(1)
-  departureDateTime: string;
+  arrivalCityname: string;
 
   @Field()
-  @MinLength(1)
+  departureDateTime: Date;
+
+  @Field()
   passengerNumber: number;
 
-  @Field()
+  @Field({ nullable: true })
   passengerId?: number;
 
   @Field()

@@ -1,19 +1,20 @@
-import { CarPool } from "../gql/generated/schema";
+import { CarPool, GetCarPoolByCitiesQuery } from "../gql/generated/schema";
 import "./css/CarpoolList.css";
 type carPoolsListProps = {
-  carPoolsList?: CarPool[];
+  carPoolsList?: GetCarPoolByCitiesQuery["getCarPoolByCities"];
 };
 export default function CarpoolList({ carPoolsList }: carPoolsListProps) {
+  console.log(carPoolsList);
   return (
     <div className="app main-carpool-list">
       {carPoolsList &&
-        carPoolsList.map((carPool: CarPool) => (
+        carPoolsList.map((carPool) => (
           <div key={carPool.id} className="carPoolCard">
             <div className="carPoolCard-departure">
-              <p>Départ : {carPool.departureCity}</p>
+              <p>Départ : {carPool.departureCity.cityName}</p>
             </div>
             <div className="carPoolCard-arrival">
-              <p> Arivée : {carPool.arrivalCity}</p>
+              <p> Arivée : {carPool.arrivalCity.cityName}</p>
             </div>
             <div className="carPoolCard-time">
               <p> Date & Heure : {carPool.departureDateTime}</p>
