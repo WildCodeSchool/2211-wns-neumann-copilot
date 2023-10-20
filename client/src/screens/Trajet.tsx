@@ -4,10 +4,13 @@ import {
   useCreateCarPoolMutation,
   useGetCarPoolByCitiesLazyQuery,
   CarPool,
+  GetCarPoolByCitiesQueryResult,
+  GetCarPoolByCitiesQuery,
 } from "../gql/generated/schema";
 import "./css/Trajet.css";
 import { FormEvent, useEffect, useState } from "react";
 import CarpoolList from "../Components/CarpoolList";
+import { log } from "console";
 
 function Trajet() {
   const { data: currentUser, client } = useGetProfileQuery({
@@ -18,13 +21,14 @@ function Trajet() {
   const [departureCity, setDepartureCity] = useState("");
   const [arrivalCity, setArrivalCity] = useState("");
   const [departureDateTime, setDepartureDateTime] = useState("");
-  const [passengerNumber, setPassengerNumber] = useState("");
+  const [passengerNumber, setPassengerNumber] = useState(0);
   const [error, setError] = useState("");
   const [driverId, setDriverId] = useState(0);
   const [toggle, setToggle] = useState(false);
   const [GetCarPoolByCities] = useGetCarPoolByCitiesLazyQuery();
-  const [carPoolToDisplay, setCarPoolToDisplay] = useState<CarPool[]>();
-  const passengerId = "";
+  const [carPoolToDisplay, setCarPoolToDisplay] =
+    useState<GetCarPoolByCitiesQuery["getCarPoolByCities"]>();
+  const passengerId = 0;
 
   useEffect(() => {
     if (currentUser) {
@@ -42,8 +46,8 @@ function Trajet() {
       await createCarPool({
         variables: {
           data: {
-            departureCity,
-            arrivalCity,
+            departureCityname: departureCity,
+            arrivalCityname: arrivalCity,
             departureDateTime,
             passengerNumber,
             driverId,
@@ -71,6 +75,7 @@ function Trajet() {
           },
         },
       });
+      console.log(res.data?.getCarPoolByCities);
 
       setCarPoolToDisplay(res.data?.getCarPoolByCities);
     } catch (err) {
@@ -78,7 +83,6 @@ function Trajet() {
       setError("invalid City");
     }
   }
-
   return (
     <div className="trajet">
       <div className="app">
@@ -126,8 +130,8 @@ function Trajet() {
               placeholder="Nombre de passager"
               onChange={(e) => {
                 parseInt(e.target.value) > 0
-                  ? setPassengerNumber(e.target.value)
-                  : setPassengerNumber("");
+                  ? setPassengerNumber(parseInt(e.target.value))
+                  : setPassengerNumber(0);
               }}
               value={passengerNumber}
               required
