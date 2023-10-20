@@ -7,7 +7,7 @@ function Home() {
   const { data: currentUser } = useGetProfileQuery({
     errorPolicy: "ignore",
   });
-
+  console.log(currentUser);
   return (
     <div>
       <div className="app">

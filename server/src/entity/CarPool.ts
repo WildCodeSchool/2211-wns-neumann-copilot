@@ -73,4 +73,7 @@ export class getCarPoolByCitiesInput {
   @Field()
   @MinLength(1)
   arrivalCity: string;
+
+  // @Field()
+  // departureDateTime: Date;
 }

@@ -18,6 +18,7 @@ import {
 import { ContextType } from "..";
 import City from "../entity/City";
 import { getCity } from "../hereApi";
+import { ILike } from "typeorm";
 
 @Resolver()
 export default class CarPoolResolver {
@@ -44,12 +45,17 @@ export default class CarPoolResolver {
   async getCarPoolByCities(
     @Arg("data") data: getCarPoolByCitiesInput
   ): Promise<CarPool[]> {
-    const { departureCity, arrivalCity } = data;
+    const {
+      departureCity,
+      arrivalCity,
+      // departureDateTime
+    } = data;
     const carPoolByCity = await datasource.getRepository(CarPool).find({
       relations: ["departureCity", "arrivalCity"],
       where: {
-        departureCity: { cityName: departureCity },
-        arrivalCity: { cityName: arrivalCity },
+        departureCity: { cityName: ILike(`${departureCity}`) },
+        arrivalCity: { cityName: ILike(`${arrivalCity}`) },
+        // departureDateTime: {departureDateTime : }
       },
     });
     if (carPoolByCity === null)
@@ -74,13 +80,15 @@ export default class CarPoolResolver {
     if (typeof currentUser !== "object") {
       throw new ApolloError("Vous devez être connecté !!!");
     }
+
     // 1ere etapes est ce que ma ville existe en base
     let departureCity = await datasource
       .getRepository(City)
-      .findOne({ where: { cityName: data.departureCityname } });
+      .findOne({ where: { cityName: ILike(`${data.departureCityname}`) } });
     // Non elle n existe pas Infos depuis l api+ ajout en base
     if (departureCity === null) {
       const departureCityApi = await getCity(data.departureCityname);
+      departureCityApi.cityName = departureCityApi.cityName.split(",")[0];
       departureCity = await datasource
         .getRepository(City)
         .save(departureCityApi);
@@ -89,10 +97,11 @@ export default class CarPoolResolver {
     // 1ere etapes est ce que ma ville existe en base
     let arrivalCity = await datasource
       .getRepository(City)
-      .findOne({ where: { cityName: data.arrivalCityname } });
+      .findOne({ where: { cityName: ILike(`${data.arrivalCityname}`) } });
     // Non elle n existe pas Infos depuis l api+ ajout en base
     if (arrivalCity === null) {
       const arrivalApi = await getCity(data.arrivalCityname);
+      arrivalApi.cityName = arrivalApi.cityName.split(",")[0];
       arrivalCity = await datasource.getRepository(City).save(arrivalApi);
     }
     // Oui elle existe : je recupere son id

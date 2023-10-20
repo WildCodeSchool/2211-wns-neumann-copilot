@@ -10,6 +10,7 @@ import {
 import "./css/Trajet.css";
 import { FormEvent, useEffect, useState } from "react";
 import CarpoolList from "../Components/CarpoolList";
+import { log } from "console";
 
 function Trajet() {
   const { data: currentUser, client } = useGetProfileQuery({
@@ -82,7 +83,6 @@ function Trajet() {
       setError("invalid City");
     }
   }
-
   return (
     <div className="trajet">
       <div className="app">

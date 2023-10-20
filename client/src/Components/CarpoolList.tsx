@@ -1,4 +1,4 @@
-import { CarPool, GetCarPoolByCitiesQuery } from "../gql/generated/schema";
+import { GetCarPoolByCitiesQuery } from "../gql/generated/schema";
 import "./css/CarpoolList.css";
 type carPoolsListProps = {
   carPoolsList?: GetCarPoolByCitiesQuery["getCarPoolByCities"];
@@ -22,9 +22,9 @@ export default function CarpoolList({ carPoolsList }: carPoolsListProps) {
             <div className="carPoolCard-passager">
               <p> Nombre de passager : {carPool.passengerNumber}</p>
             </div>
-            <div className="carPoolCard-distance">
+            {/* <div className="carPoolCard-distance">
               <p> Distance : {carPool.passengerNumber} km</p>
-            </div>
+            </div> */}
           </div>
         ))}
     </div>
