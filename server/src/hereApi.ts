@@ -50,7 +50,6 @@ export default async function getCities(
   } catch (error) {
     console.error("Error", error);
   }
-  console.log(cities);
 
   return cities;
 }
@@ -67,6 +66,10 @@ export async function getCity(city: string | number): Promise<City> {
     zipCode: firstItem.address.postalCode,
     latitude: firstItem.position.lat,
     longitude: firstItem.position.lng,
+    coordinate: {
+      type: "Point",
+      coordinates: [firstItem.position.lat, firstItem.position.lng],
+    },
   };
 
   return foundCity;

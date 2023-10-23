@@ -14,6 +14,7 @@ import {
   CarPoolerInput,
   // CarPoolerInputUpdate,
   getCarPoolByCitiesInput,
+  getNearbyCarpool,
 } from "../entity/CarPool";
 import { ContextType } from "..";
 import City from "../entity/City";
@@ -76,14 +77,73 @@ export default class CarPoolResolver {
       .addSelect(["arrivalCity.latitude", "arrivalCity.longitude"])
       .where("arrivalCity.cityName=:arrivalCity", { arrivalCity })
       .getMany();
-    const radiusInMeter=10000;
-    consr departureCityPoint=`POINT(${carPoolByCities.})`
-    const carPoolNearBy = await datasource;
-
-    // const carPoolNearBy = await datasource.getRepository(CarPool).find({});
     if (carPoolByCities === null)
       throw new ApolloError("Carpool not found", "NOT_FOUND");
     return carPoolByCities;
+  }
+
+  @Query(() => [CarPool])
+  async getNearbyCarpool(
+    @Arg("data", { validate: false }) data: getNearbyCarpool
+  ): Promise<CarPool[]> {
+    const { departureCityName, arrivalCityName } = data;
+    let existingDepartureCity = await datasource
+      .getRepository(City)
+      .findOne({ where: { cityName: departureCityName } });
+    if (existingDepartureCity === null) {
+      try {
+        const departureCityApi = await getCity(departureCityName);
+        departureCityApi.cityName = departureCityApi.cityName
+          .split(",")[0]
+          .toLowerCase();
+        existingDepartureCity = await datasource
+          .getRepository(City)
+          .save(departureCityApi);
+        console.log(existingDepartureCity);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    let existingArrivalCity = await datasource
+      .getRepository(City)
+      .findOne({ where: { cityName: arrivalCityName } });
+
+    if (existingArrivalCity === null) {
+      try {
+        const arrivalCityApi = await getCity(arrivalCityName);
+        arrivalCityApi.cityName = arrivalCityApi.cityName
+          .split(",")[0]
+          .toLowerCase();
+        existingArrivalCity = await datasource
+          .getRepository(City)
+          .save(arrivalCityApi);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    console.log(existingArrivalCity);
+
+    const departureCoordinate = `${existingDepartureCity?.coordinate} `;
+    const arrivalCoordinate = `${existingArrivalCity?.coordinate} `;
+    const nearbyCarpool = await datasource
+      .getRepository(CarPool)
+      .createQueryBuilder("carpool")
+      .innerJoin(
+        "city",
+        "departureCity",
+        `ST_DWithin(departureCoordinate,:point,10000)`,
+        { point: departureCoordinate }
+      )
+      .innerJoin(
+        "city",
+        "arrivalCity",
+        `ST_DWithin(arrivalCoordinate,:point,10000)`,
+        { point: arrivalCoordinate }
+      )
+      // .where("carpool.id !== :carpoolId", { carpoolId })
+      .getMany();
+
+    return nearbyCarpool;
   }
 
   @Mutation(() => Boolean)

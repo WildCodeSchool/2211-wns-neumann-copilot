@@ -73,7 +73,13 @@ export class getCarPoolByCitiesInput {
   @Field()
   @MinLength(1)
   arrivalCity: string;
+}
 
-  // @Field()
-  // departureDateTime: Date;
+@InputType()
+export class getNearbyCarpool {
+  @Field()
+  departureCityName: string;
+
+  @Field()
+  arrivalCityName: string;
 }

@@ -2,11 +2,16 @@ import { Field, InputType, ObjectType } from "type-graphql";
 import {
   Column,
   Entity,
+  Index,
   OneToMany,
-  Point,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { CarPool } from "./CarPool";
+
+export interface Geometry {
+  type: "Point";
+  coordinates: [Number, Number];
+}
 
 @Entity()
 @ObjectType()
@@ -31,9 +36,14 @@ class City {
   @Field()
   longitude: number;
 
-  @Column("geometry")
-  @Field()
-  point: Point;
+  @Column("geometry", {
+    spatialFeatureType: "Point",
+    srid: 4326,
+    nullable: true,
+  })
+  @Column({ nullable: true })
+  @Index({ spatial: true })
+  coordinate?: Geometry;
 
   @OneToMany(() => CarPool, (carPool) => carPool.departureCity)
   departureCarpools?: CarPool[];
