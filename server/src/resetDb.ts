@@ -29,13 +29,13 @@ async function reset(): Promise<void> {
 
   const BasicCities = await datasource.getRepository(City).save([
     {
-      cityName: "Lille",
+      cityName: "lille",
       latitude: 50.62925,
       longitude: 3.057256,
       zipCode: 59000,
     },
     {
-      cityName: "Lyon",
+      cityName: "lyon",
       latitude: 45.75917,
       longitude: 4.82965,
       zipCode: 69000,
