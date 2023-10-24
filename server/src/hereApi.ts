@@ -66,7 +66,7 @@ export async function getCity(city: string | number): Promise<City> {
     zipCode: firstItem.address.postalCode,
     latitude: firstItem.position.lat,
     longitude: firstItem.position.lng,
-    coordinate: {
+    coordinates: {
       type: "Point",
       coordinates: [firstItem.position.lat, firstItem.position.lng],
     },

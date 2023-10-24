@@ -41,9 +41,8 @@ class City {
     srid: 4326,
     nullable: true,
   })
-  @Column({ nullable: true })
   @Index({ spatial: true })
-  coordinate?: Geometry;
+  coordinates?: Geometry;
 
   @OneToMany(() => CarPool, (carPool) => carPool.departureCity)
   departureCarpools?: CarPool[];

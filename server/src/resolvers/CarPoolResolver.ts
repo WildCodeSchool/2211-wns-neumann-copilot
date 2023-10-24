@@ -87,9 +87,11 @@ export default class CarPoolResolver {
     @Arg("data", { validate: false }) data: getNearbyCarpool
   ): Promise<CarPool[]> {
     const { departureCityName, arrivalCityName } = data;
+    // Verification de l'existance de la ville en base
     let existingDepartureCity = await datasource
       .getRepository(City)
       .findOne({ where: { cityName: departureCityName } });
+    // Si la ville n'existe pas on fait une requete a here API et on l'ajoute
     if (existingDepartureCity === null) {
       try {
         const departureCityApi = await getCity(departureCityName);
@@ -104,10 +106,12 @@ export default class CarPoolResolver {
         console.error(err);
       }
     }
+    console.log(existingDepartureCity);
+    // Verification de l'existance de la ville en base
     let existingArrivalCity = await datasource
       .getRepository(City)
       .findOne({ where: { cityName: arrivalCityName } });
-
+    // Si la ville n'existe pas on fait une requete a here API et on l'ajoute
     if (existingArrivalCity === null) {
       try {
         const arrivalCityApi = await getCity(arrivalCityName);
@@ -122,27 +126,32 @@ export default class CarPoolResolver {
       }
     }
     console.log(existingArrivalCity);
-
-    const departureCoordinate = `${existingDepartureCity?.coordinate} `;
-    const arrivalCoordinate = `${existingArrivalCity?.coordinate} `;
+    // Recuperation des coordonées
+    const departureCityCoordinates = `${existingDepartureCity?.coordinates?.coordinates.join(
+      " "
+    )}`;
+    const arrivalCityCoordinates = `${existingArrivalCity?.coordinates?.coordinates.join(
+      " "
+    )}`;
+    // Query utilisant PostGis
     const nearbyCarpool = await datasource
       .getRepository(CarPool)
       .createQueryBuilder("carpool")
-      .innerJoin(
-        "city",
-        "departureCity",
-        `ST_DWithin(departureCoordinate,:point,10000)`,
-        { point: departureCoordinate }
+      .select()
+      .leftJoinAndSelect("carpool.departureCity", "departureCity")
+      .addSelect(["departureCity.latitude", "departureCity.longitude"])
+      .leftJoinAndSelect("carpool.arrivalCity", "arrivalCity")
+      .addSelect(["arrivalCity.latitude", "arrivalCity.longitude"])
+      .where(
+        "ST_DWithin(departureCity.coordinates,ST_GeomFromText(:departureCoordinates,4326)::geography, :distance) " +
+          "AND ST_DWithin(arrivalCity.coordinates,ST_GeomFromText(:arrivalCoordinates,4326)::geography, :distance)",
+        {
+          departureCoordinates: `POINT(${departureCityCoordinates})`,
+          arrivalCoordinates: `POINT(${arrivalCityCoordinates})`,
+          distance: 10000,
+        }
       )
-      .innerJoin(
-        "city",
-        "arrivalCity",
-        `ST_DWithin(arrivalCoordinate,:point,10000)`,
-        { point: arrivalCoordinate }
-      )
-      // .where("carpool.id !== :carpoolId", { carpoolId })
       .getMany();
-
     return nearbyCarpool;
   }
 
