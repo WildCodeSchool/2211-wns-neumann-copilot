@@ -26,19 +26,26 @@ async function reset(): Promise<void> {
       role: "passenger",
     },
   ]);
-
   const BasicCities = await datasource.getRepository(City).save([
     {
-      cityName: "Lille",
+      cityName: "lille",
       latitude: 50.62925,
       longitude: 3.057256,
       zipCode: 59000,
+      coordinate: {
+        type: "Point",
+        coordinates: [50.62925, 3.057256],
+      },
     },
     {
-      cityName: "Lyon",
+      cityName: "lyon",
       latitude: 45.75917,
       longitude: 4.82965,
       zipCode: 69000,
+      coordinate: {
+        type: "Point",
+        coordinates: [45.75917, 4.82965],
+      },
     },
   ]);
   await datasource.getRepository(CarPool).save([
