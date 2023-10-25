@@ -13,6 +13,23 @@
   border-bottom: 1px solid #686868;
   border-radius: 5px;
   background: none;
+  width: 75%;
+}
+
+.form_create_carpool input::-webkit-input-placeholder {
+  color: black;
+}
+
+.form_create_carpool input::-moz-placeholder {
+  color: black;
+}
+
+.form_create_carpool input:-ms-input-placeholder {
+  color: black;
+}
+
+.form_create_carpool input::-ms-input-placeholder {
+  color: black;
 }
 
 .form_create_carpool input::placeholder {
@@ -43,7 +60,6 @@
   right: 0;
   bottom: 0;
   background-color: #518071;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -55,7 +71,6 @@
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -68,8 +83,6 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 

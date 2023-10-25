@@ -106,6 +106,7 @@ export default function Profil() {
               <input
                 type="email"
                 name="email"
+                id="email"
                 placeholder={
                   currentUser?.profile.email === null
                     ? "Email"
