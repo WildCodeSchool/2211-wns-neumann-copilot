@@ -2,14 +2,12 @@ import "./css/Home.css";
 import ImageDeCovoiturage from "../img/ImageDeCovoiturage.svg";
 import { Link } from "react-router-dom";
 import { useGetProfileQuery } from "../gql/generated/schema";
-import { log } from "console";
 
 function Home() {
   const { data: currentUser } = useGetProfileQuery({
     errorPolicy: "ignore",
   });
-  console.log("toto");
-
+  console.log(currentUser);
   return (
     <div>
       <div className="app">

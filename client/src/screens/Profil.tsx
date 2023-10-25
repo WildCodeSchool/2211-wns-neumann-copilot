@@ -33,7 +33,7 @@ export default function Profil() {
       setage(currentUser.profile.age || "");
     }
   }, [currentUser]);
-
+  console.log(currentUser);
   return (
     <>
       <div className="main">

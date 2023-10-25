@@ -1,6 +1,6 @@
 services:
   testDB:
-    image: postgres:15-alpine
+    image: postgis/postgis:15-3.3-alpine
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres

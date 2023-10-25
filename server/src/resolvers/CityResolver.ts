@@ -1,5 +1,5 @@
-import { Arg, Int, Query, Resolver } from "type-graphql";
-import City from "../entity/City";
+import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
+import City, { CityInput } from "../entity/City";
 import datasource from "../db";
 
 @Resolver(City)
@@ -19,5 +19,11 @@ export class CityResolver {
     if (city === null) throw new Error("City not Found");
     console.log("no city found");
     return city;
+  }
+
+  @Mutation(() => City)
+  async createCity(@Arg("data") data: CityInput): Promise<City> {
+    const city = datasource.getRepository(City).create();
+    return await datasource.getRepository(City).save(city);
   }
 }

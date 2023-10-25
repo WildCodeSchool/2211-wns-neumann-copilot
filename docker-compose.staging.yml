@@ -2,7 +2,7 @@ name: staging
 
 services:
   stagingDB:
-    image: postgres:15-alpine
+    image: postgis/postgis:15-3.3-alpine
     environment:
       - POSTGRES_PASSWORD=${DB_PASS:-postgres}
       - POSTGRES_USER=${DB_USER:-postgres}
