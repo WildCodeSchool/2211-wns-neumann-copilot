@@ -2,27 +2,16 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Profil from "./Profil";
 import { MockedProvider } from "@apollo/client/testing";
 import { BrowserRouter } from "react-router-dom";
-import { GetProfileDocument, GetUsersDocument } from "../gql/generated/schema";
+import { GetProfileDocument } from "../gql/generated/schema";
 
 // on mock, car on recupere des infos sur l'utilisateur depuis la BDD
-const adminProfileMock = {
+const newUserProfileMock = {
     request: {
         query: GetProfileDocument,
     },
     result: {
         data: {
             profile: { id: "1", email: "test@test.com" },
-        },
-    },
-};
-
-const undefinedProfileMock = {
-    request: {
-        query: GetProfileDocument,
-    },
-    result: {
-        data: {
-            profile: undefined,
         },
     },
 };
@@ -49,7 +38,7 @@ const afterModifyProfileMock = {
 describe("Profil component", () => {
     it("should look for text in the screen", async () => {
         render(
-            <MockedProvider mocks={[adminProfileMock]} addTypename={false}>
+            <MockedProvider>
                 <Profil />
             </MockedProvider>,
             { wrapper: BrowserRouter }
@@ -58,76 +47,36 @@ describe("Profil component", () => {
         expect(await screen.findByText('Modifier')).toBeVisible();
     });
 
-    it("should test", () => {
+    it("should verify that a new user sees their email in the input", () => {
         render(
-            <MockedProvider mocks={[adminProfileMock]} addTypename={false}>
+            <MockedProvider mocks={[newUserProfileMock]}>
                 <Profil />
             </MockedProvider>,
             { wrapper: BrowserRouter }
         );
         const input = screen.getByTitle('email')
-        fireEvent.change(input, { target: { value: adminProfileMock.result.data.profile.email } })
+        fireEvent.change(input, { target: { value: newUserProfileMock.result.data.profile.email } })
         expect(input).toHaveValue('test@test.com');
     });
 
-    it("should test2", () => {
+    it("should verify that a user sees their information after modifying it", () => {
         render(
-            <MockedProvider mocks={[adminProfileMock]} addTypename={false}>
+            <MockedProvider mocks={[afterModifyProfileMock]}>
                 <Profil />
             </MockedProvider>,
             { wrapper: BrowserRouter }
         );
-        const input = screen.getByTitle('email')
-        // fireEvent.change(input, { target: { value: adminProfileMock.result.data.profile.email } })
-        expect(input).toHaveValue('');
+
+        fireEvent.change(screen.getByTitle('email'), { target: { value: afterModifyProfileMock.result.data.profile.email } });
+        fireEvent.change(screen.getByTitle('profileDescription'), { target: { value: afterModifyProfileMock.result.data.profile.profileDescription } });
+        fireEvent.change(screen.getByTitle('firstName'), { target: { value: afterModifyProfileMock.result.data.profile.firstName } });
+        fireEvent.change(screen.getByTitle('lastName'), { target: { value: afterModifyProfileMock.result.data.profile.lastName } });
+        fireEvent.change(screen.getByTitle('age'), { target: { value: afterModifyProfileMock.result.data.profile.age } });
+
+        expect(screen.getByTitle('email')).toHaveValue('test@test.com');
+        expect(screen.getByTitle('profileDescription')).toHaveValue('salut tout le monde');
+        expect(screen.getByTitle('firstName')).toHaveValue('Michel');
+        expect(screen.getByTitle('lastName')).toHaveValue('Dupond');
+        expect(screen.getByTitle('age')).toHaveValue('30');
     });
-
-    // it("should test 3", () => {
-    //     render(
-    //         <MockedProvider mocks={[afterModifyProfileMock]} addTypename={false}>
-    //             <Profil />
-    //         </MockedProvider>,
-    //         { wrapper: BrowserRouter }
-    //     );
-    //     const input = screen.getByTitle('email')
-    //     fireEvent.change(input, { target: { value: afterModifyProfileMock.result.data.profile.email } })
-    //     expect(input).toHaveValue('');
-    // });
-
-    // it("should look for text in the input", () => {
-    //     render(
-    //         <MockedProvider mocks={[adminProfileMock]} addTypename={false}>
-    //             <Profil />
-    //         </MockedProvider>,
-    //         { wrapper: BrowserRouter }
-    //     );
-
-    //     expect(screen.getByTestId('email')).toHaveAttribute('id', 'email');
-    // });
-
-    // it("should look for text in the input with undefined current user", () => {
-    //     render(
-    //         <MockedProvider mocks={[undefinedProfileMock]} addTypename={false}>
-    //             <Profil />
-    //         </MockedProvider>,
-    //         { wrapper: BrowserRouter }
-    //     );
-
-    //     expect(screen.getByDisplayValue('')).toHaveAttribute('id', 'email');
-    // });
-
-    // it("should look for text in the input after user has modify his informations", () => {
-    //     render(
-    //         <MockedProvider mocks={[afterModifyProfileMock]} addTypename={false}>
-    //             <Profil />
-    //         </MockedProvider>,
-    //         { wrapper: BrowserRouter }
-    //     );
-
-    //     expect(screen.getByDisplayValue('test@test.com')).toHaveAttribute('id', 'email');
-    //     expect(screen.getByDisplayValue('salut tout le monde')).toHaveAttribute('id', 'description');
-    //     expect(screen.getByDisplayValue('Michel')).toHaveAttribute('id', 'firstName');
-    //     expect(screen.getByDisplayValue('Dupond')).toHaveAttribute('id', 'lastName');
-    //     expect(screen.getByDisplayValue('30')).toHaveAttribute('id', 'age');
-    // });
 });

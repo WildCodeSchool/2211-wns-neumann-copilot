@@ -76,6 +76,7 @@ export default function Profil() {
               <input
                 id="firstName"
                 name="firstname"
+                title="firstName"
                 type="text"
                 placeholder={
                   currentUser?.profile.firstName === null
@@ -92,6 +93,7 @@ export default function Profil() {
               <input
                 id="lastName"
                 name="lastname"
+                title="lastName"
                 type="text"
                 placeholder={
                   currentUser?.profile.lastName === null
@@ -125,6 +127,7 @@ export default function Profil() {
               <input
                 id="age"
                 name="age"
+                title="age"
                 type="text"
                 placeholder={
                   currentUser?.profile.age === null
@@ -141,6 +144,7 @@ export default function Profil() {
               <textarea
                 id="description"
                 name="description"
+                title="profileDescription"
                 placeholder={
                   currentUser?.profile.profileDescription === null
                     ? "Votre description"
