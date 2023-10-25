@@ -107,6 +107,7 @@ export default function Profil() {
             <div className="input">
               <input
                 id="email"
+                title="email"
                 type="email"
                 name="email"
                 placeholder={
