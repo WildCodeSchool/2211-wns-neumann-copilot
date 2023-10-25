@@ -18,7 +18,6 @@ Lancer l'application mobile native en local :
  - Lancer le back (cd server -> npm start ou docker-compose up)
  - Lancer le native sur une autre console avec la commande : npx expo start
  - Installer Expo GO depuis le play store et lancer l'application
- - Certaines fonctionnalitées peuvent ne pas être disponible sans être connecté
- - 
- - 
- - 
+ - Certaines fonctionnalitées peuvent ne pas être disponible sans être connecté (la geolocalisation par exemple)
+ - Depuis Expo Go, choisir de scanner un QRcode et scanner celui de la console qui es apparu avec la commande npx expo start
+ - L'application se lance !!!
