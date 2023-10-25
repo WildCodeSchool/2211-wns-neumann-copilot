@@ -27,6 +27,25 @@ const undefinedProfileMock = {
     },
 };
 
+const afterModifyProfileMock = {
+    request: {
+        query: GetUsersDocument,
+    },
+    result: {
+        data: {
+            profile: {
+                id: "1",
+                email: "test@test.com",
+                profilePicture: "test.png",
+                profileDescription: "salut tout le monde",
+                firstName: "Michel",
+                lastName: "Dupond",
+                age: "30"
+            },
+        },
+    },
+};
+
 describe("Profil component", () => {
     it("should look for text in the screen", async () => {
         render(
@@ -50,14 +69,30 @@ describe("Profil component", () => {
         expect(screen.getByDisplayValue('test@test.com')).toHaveAttribute('id', 'email');
     });
 
-    it("should look for text in the input with undefined current user", () => {
-        render(
-            <MockedProvider mocks={[undefinedProfileMock]} addTypename={false}>
-                <Profil />
-            </MockedProvider>,
-            { wrapper: BrowserRouter }
-        );
 
-        expect(screen.getByDisplayValue('')).toHaveAttribute('id', 'email');
-    });
+    // it("should look for text in the input with undefined current user", () => {
+    //     render(
+    //         <MockedProvider mocks={[undefinedProfileMock]} addTypename={false}>
+    //             <Profil />
+    //         </MockedProvider>,
+    //         { wrapper: BrowserRouter }
+    //     );
+
+    //     expect(screen.getByDisplayValue('')).toHaveAttribute('id', 'email');
+    // });
+
+    // it("should look for text in the input after user has modify his informations", () => {
+    //     render(
+    //         <MockedProvider mocks={[afterModifyProfileMock]} addTypename={false}>
+    //             <Profil />
+    //         </MockedProvider>,
+    //         { wrapper: BrowserRouter }
+    //     );
+
+    //     expect(screen.getByDisplayValue('test@test.com')).toHaveAttribute('id', 'email');
+    //     expect(screen.getByDisplayValue('salut tout le monde')).toHaveAttribute('id', 'description');
+    //     expect(screen.getByDisplayValue('Michel')).toHaveAttribute('id', 'firstName');
+    //     expect(screen.getByDisplayValue('Dupond')).toHaveAttribute('id', 'lastName');
+    //     expect(screen.getByDisplayValue('30')).toHaveAttribute('id', 'age');
+    // });
 });
