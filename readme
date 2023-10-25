@@ -4,3 +4,21 @@ commande pour lancer les container: docker - compose up
 Acces a l'intercae graphique playwright :  npx playwright show-report
 
 test 23
+
+/*********************************************************************/
+
+Lancer l'application mobile native en local :
+
+ - Lancer le projet sous VSCode
+ - Créer un fichier .env dans le dossier nativeClient
+ - Y ajouter la ligne : REACT_APP_GRAPHQL_API_URL=http://*ip*:4000
+ - Remplacer *ip* par l'adresse ip de votre réseau WIFI
+ - Attention : le PC et le téléphone doivent être sur le même réseau WIFI
+ - Faire un "npm i" sur le server et le nativeClient
+ - Lancer le back (cd server -> npm start ou docker-compose up)
+ - Lancer le native sur une autre console avec la commande : npx expo start
+ - Installer Expo GO depuis le play store et lancer l'application
+ - Certaines fonctionnalitées peuvent ne pas être disponible sans être connecté
+ - 
+ - 
+ - 
