@@ -112,6 +112,7 @@ export default function Profil() {
                 title="email"
                 type="email"
                 name="email"
+                id="email"
                 placeholder={
                   currentUser?.profile.email === null
                     ? "Email"

@@ -11,16 +11,126 @@
   width: 90%;
   height: 230px;
   background: #ffffff;
-  border: 2px solid #bbbbbb;
+  border: 2px solid #518071;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   margin-top: 25px;
-  padding: 10px;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+.carPoolCard:hover {
+  background-color: #518071;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.carPoolCard:hover p::before {
+  background-color: #fff !important;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.carPoolCard div {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.carPoolCard .city-wrapper {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.carPoolCard .city-wrapper .carPoolCard-departure p::before {
+  content: "";
+  -webkit-mask: url(../../assets/start.svg);
+  mask: url(../../assets/start.svg);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  background-color: #518071;
+  display: flex;
+  position: relative;
+  top: 50%;
+}
+.carPoolCard .city-wrapper .carPoolCard-arrival p::before {
+  content: "";
+  -webkit-mask: url(../../assets/end.svg);
+  mask: url(../../assets/end.svg);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  background-color: #518071;
+  display: flex;
+  position: relative;
+  top: 9px;
+}
+.carPoolCard .carPoolCard-time p {
+  margin: 0 auto;
+}
+.carPoolCard .carPoolCard-time {
+  display: flex;
+  gap: 16px;
+}
+
+.carPoolCard .carPoolCard-time p:not(.hour)::before {
+  content: "";
+  -webkit-mask: url(../../assets/calendar.svg);
+  mask: url(../../assets/calendar.svg);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  height: 40px;
+  width: 60px;
+  background-color: #518071;
+  display: flex;
+}
+.carPoolCard .city-wrapper p,
+.carPoolCard-time p {
+  white-space: nowrap;
+  display: flex;
+  gap: 16px;
+}
+.carPoolCard .carPoolCard-passager {
+  flex-basis: 100%;
+}
+.carPoolCard .carPoolCard-passager p {
+  margin-left: auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.carPoolCard .carPoolCard-passager p::before {
+  content: "";
+  -webkit-mask: url(../../assets/nb_passengers.svg);
+  mask: url(../../assets/nb_passengers.svg);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  background-color: #518071;
+  display: flex;
 }
 
 .carPoolCard p {
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 
 @media screen and (min-width: 576px) {
@@ -34,6 +144,7 @@
   .app .main-carpool-list {
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
   }
 
   .carPoolCard {
