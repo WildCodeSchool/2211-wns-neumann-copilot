@@ -33,7 +33,7 @@ export default function Profil() {
       setage(currentUser.profile.age || "");
     }
   }, [currentUser]);
-
+  console.log(currentUser);
   return (
     <>
       <div className="main">
@@ -55,12 +55,15 @@ export default function Profil() {
                   },
                 },
               });
-            } catch (err) {
-              console.error(err);
+            } catch (error) {
+              console.error(error);
               setError("invalid credentials");
             } finally {
               client.resetStore();
-              navigate("/profil");
+              if (error) {
+                return navigate("/login");
+              }
+              return navigate("/profil");
             }
           }}
         >
@@ -72,6 +75,7 @@ export default function Profil() {
             <div className="input">
               <input
                 name="firstname"
+                title="firstName"
                 type="text"
                 placeholder={
                   currentUser?.profile.firstName === null
@@ -87,6 +91,7 @@ export default function Profil() {
             <div className="input">
               <input
                 name="lastname"
+                title="lastName"
                 type="text"
                 placeholder={
                   currentUser?.profile.lastName === null
@@ -101,6 +106,7 @@ export default function Profil() {
             {/* Email */}
             <div className="input">
               <input
+                title="email"
                 type="email"
                 name="email"
                 placeholder={
@@ -117,6 +123,7 @@ export default function Profil() {
             <div className="input">
               <input
                 name="age"
+                title="age"
                 type="text"
                 placeholder={
                   currentUser?.profile.age === null
@@ -132,6 +139,7 @@ export default function Profil() {
             <div className="input_description">
               <textarea
                 name="description"
+                title="profileDescription"
                 placeholder={
                   currentUser?.profile.profileDescription === null
                     ? "Votre description"

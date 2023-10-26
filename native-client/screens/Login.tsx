@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Text, View, TextInput, StyleSheet, Pressable } from "react-native";
-import { useGetProfileQuery, useLoginMutation, useLogoutMutation } from "../gql/generated/schema";
+import { useGetProfileQuery, useLoginMutation, useLogoutMutation, useUpdateProfileMutation } from "../gql/generated/schema";
 import * as SecureStore from 'expo-secure-store';
+import { registerForPushNotificationsAsync } from "../utils/notifications";
 
 export default function Login() {
 
     const [credentials, setCredentials] = useState({
-        email: '',
-        password: ''
+        email: 'testdstgf@test.fr',
+        password: 'azertyuiop'
     });
     const { data: currentUser, client } = useGetProfileQuery({
         errorPolicy: "ignore",
@@ -15,6 +16,20 @@ export default function Login() {
     const [login] = useLoginMutation();
     const [logout] = useLogoutMutation();
     const [error, setError] = useState("");
+
+    const [updateProfile] = useUpdateProfileMutation();
+
+    useEffect(() => {
+        registerForPushNotificationsAsync().then((expoNotificationsToken) => {
+            if (expoNotificationsToken)
+                updateProfile({
+                    variables: {
+                        data:
+                            { expoNotificationsToken }
+                    }
+                });
+        });
+    }, [currentUser?.profile.id]);
 
     return (
         <View style={styles.container}>

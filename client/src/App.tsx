@@ -3,7 +3,6 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Profil from "./screens/Profil";
 import "./App.css";
-import { useGetUsersQuery } from "./gql/generated/schema";
 import Home from "./screens/Home";
 // import Edit from "./screens/Edit";
 import Trajet from "./screens/Trajet";
@@ -12,8 +11,6 @@ import Footer from "./Components/Footer";
 import LeftMenuPC from "./Components/LeftMenuPC";
 
 function App() {
-  const { data } = useGetUsersQuery();
-  const users = data?.getUsers || [];
   return (
     <div className="App">
       <Header />
@@ -26,11 +23,6 @@ function App() {
         <Route path="/profil" element={<Profil />} />
         {/* <Route path="/update_profil" element={<Edit />} /> */}
       </Routes>
-      {/* <p>
-          {users.map((user) => {
-            return user.id;
-          })}
-        </p> */}
       <Footer />
     </div>
   );

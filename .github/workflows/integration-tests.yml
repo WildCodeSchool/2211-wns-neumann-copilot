@@ -1,11 +1,13 @@
 name: integration-tests
 
 on: pull_request
-  
+
 jobs:
   test-on-pull-request:
     runs-on: ubuntu-latest
     steps:
+      - name: Print Environment variable
+        run: printenv
       - name: Check out code
         uses: actions/checkout@v3
       - name: Make envfile
@@ -21,6 +23,7 @@ jobs:
           envkey_DB_PASS: postgres
           envkey_DB_NAME: postgres
           envkey_DB_PORT: 5432
+          envkey_HERE_API_KEY: P_cC9-TJ-odVVXPLOOyabwU7n7TqMvCpLWlMIbGWep0
           directory: server
           file_name: .env
       - name: Run integration test

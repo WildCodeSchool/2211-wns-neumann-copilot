@@ -26,7 +26,7 @@ a {
 /* HomePage */
 
 .app {
-  padding: 50px 5px;
+  padding: 50px 16px;
   text-align: center;
 }
 
@@ -96,7 +96,7 @@ a {
   .app h2,
   .app p {
     text-align: left;
-    width: 60%;
+    /* width: 60%; */
     margin: 0 auto;
   }
 

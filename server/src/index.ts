@@ -8,8 +8,10 @@ import jwt from "jsonwebtoken";
 import { env } from "./env";
 import User from "./entity/User";
 import cookie from "cookie";
-import UserResolver from "./resolvers/UserResolver";
+
+import { CityResolver } from "./resolvers/CityResolver";
 import CarPoolResolver from "./resolvers/CarPoolResolver";
+import UserResolver from "./resolvers/UserResolver";
 
 export interface JWTPayload {
   userId: number;
@@ -26,10 +28,8 @@ async function start(): Promise<void> {
   await db.initialize();
 
   const schema = await buildSchema({
-    resolvers: [UserResolver, CarPoolResolver],
+    resolvers: [CityResolver, CarPoolResolver, UserResolver],
     authChecker: async ({ context }: { context: ContextType }, roles = []) => {
-      console.log({ roles });
-
       const {
         req: { headers },
       } = context;
@@ -51,9 +51,9 @@ async function start(): Promise<void> {
         const currentUser = await db
           .getRepository(User)
           .findOneBy({ id: decoded.userId });
-        if (currentUser === null) return false;
+        console.log(currentUser);
 
-        console.log({ roles, currentUser });
+        if (currentUser === null) return false;
 
         // on met les infos de l'utilisateur dans le contexte
         context.currentUser = currentUser;

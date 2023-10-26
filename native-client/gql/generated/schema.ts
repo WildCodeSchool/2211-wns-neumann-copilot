@@ -19,20 +19,20 @@ export type CarPool = {
   __typename?: 'CarPool';
   arrivalCity: Scalars['String'];
   departureCity: Scalars['String'];
-  departureDate?: Maybe<Scalars['String']>;
-  departureTime?: Maybe<Scalars['String']>;
-  driverId?: Maybe<Scalars['Float']>;
+  departureDateTime: Scalars['String'];
+  driverId: Scalars['Float'];
   id: Scalars['Float'];
   passengerId?: Maybe<Scalars['String']>;
+  passengerNumber: Scalars['String'];
 };
 
 export type CarPoolerInput = {
   arrivalCity: Scalars['String'];
   departureCity: Scalars['String'];
-  departureDate: Scalars['String'];
-  departureTime: Scalars['String'];
+  departureDateTime: Scalars['String'];
   driverId: Scalars['Float'];
   passengerId: Scalars['String'];
+  passengerNumber: Scalars['String'];
 };
 
 export type Mutation = {
@@ -43,6 +43,7 @@ export type Mutation = {
   login: Scalars['String'];
   logout: Scalars['Boolean'];
   updateCarpool: CarPool;
+  updateProfile: User;
   updateUser: User;
 };
 
@@ -74,6 +75,11 @@ export type MutationUpdateCarpoolArgs = {
 };
 
 
+export type MutationUpdateProfileArgs = {
+  data: UserUpdateNativeInput;
+};
+
+
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
 };
@@ -95,6 +101,7 @@ export type User = {
   __typename?: 'User';
   age?: Maybe<Scalars['String']>;
   email: Scalars['String'];
+  expoNotificationsToken: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   id: Scalars['Float'];
   lastName?: Maybe<Scalars['String']>;
@@ -117,6 +124,10 @@ export type UserUpdateInput = {
   profilePicture?: InputMaybe<Scalars['String']>;
 };
 
+export type UserUpdateNativeInput = {
+  expoNotificationsToken: Scalars['String'];
+};
+
 export type CreateUserMutationVariables = Exact<{
   data: UserInput;
 }>;
@@ -129,41 +140,6 @@ export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUsersQuery = { __typename?: 'Query', getUsers: Array<{ __typename?: 'User', id: number, email: string }> };
 
-export type MutationMutationVariables = Exact<{
-  data: CarPoolerInput;
-}>;
-
-
-export type MutationMutation = { __typename?: 'Mutation', createCarPool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null } };
-
-export type QueryQueryVariables = Exact<{
-  getCarPoolId: Scalars['Int'];
-}>;
-
-
-export type QueryQuery = { __typename?: 'Query', getCarPool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null } };
-
-export type GetCarPoolsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCarPoolsQuery = { __typename?: 'Query', getCarPools: Array<{ __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null }> };
-
-export type UpdateCarpoolMutationVariables = Exact<{
-  data: CarPoolerInput;
-  carPoolId: Scalars['Int'];
-  userId: Scalars['Int'];
-}>;
-
-
-export type UpdateCarpoolMutation = { __typename?: 'Mutation', updateCarpool: { __typename?: 'CarPool', id: number, departureCity: string, arrivalCity: string, departureDate?: string | null, departureTime?: string | null, passengerId?: string | null, driverId?: number | null } };
-
-export type DeleteCarPoolMutationVariables = Exact<{
-  deleteCarPoolId: Scalars['Int'];
-}>;
-
-
-export type DeleteCarPoolMutation = { __typename?: 'Mutation', deleteCarPool: boolean };
-
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -174,7 +150,7 @@ export type UpdateUserMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', age?: string | null, email: string, firstName?: string | null, profileDescription?: string | null, lastName?: string | null, profilePicture?: string | null } };
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: number, email: string, profilePicture?: string | null, profileDescription?: string | null, firstName?: string | null, lastName?: string | null, role: string, age?: string | null, expoNotificationsToken: string } };
 
 export type LoginMutationVariables = Exact<{
   data: UserInput;
@@ -187,6 +163,13 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
+export type UpdateProfileMutationVariables = Exact<{
+  data: UserUpdateNativeInput;
+}>;
+
+
+export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile: { __typename?: 'User', expoNotificationsToken: string, id: number } };
 
 
 export const CreateUserDocument = gql`
@@ -258,198 +241,6 @@ export function useGetUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
 export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
 export type GetUsersQueryResult = Apollo.QueryResult<GetUsersQuery, GetUsersQueryVariables>;
-export const MutationDocument = gql`
-    mutation Mutation($data: CarPoolerInput!) {
-  createCarPool(data: $data) {
-    id
-    departureCity
-    arrivalCity
-    departureDate
-    departureTime
-    passengerId
-    driverId
-  }
-}
-    `;
-export type MutationMutationFn = Apollo.MutationFunction<MutationMutation, MutationMutationVariables>;
-
-/**
- * __useMutationMutation__
- *
- * To run a mutation, you first call `useMutationMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useMutationMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [mutationMutation, { data, loading, error }] = useMutationMutation({
- *   variables: {
- *      data: // value for 'data'
- *   },
- * });
- */
-export function useMutationMutation(baseOptions?: Apollo.MutationHookOptions<MutationMutation, MutationMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<MutationMutation, MutationMutationVariables>(MutationDocument, options);
-      }
-export type MutationMutationHookResult = ReturnType<typeof useMutationMutation>;
-export type MutationMutationResult = Apollo.MutationResult<MutationMutation>;
-export type MutationMutationOptions = Apollo.BaseMutationOptions<MutationMutation, MutationMutationVariables>;
-export const QueryDocument = gql`
-    query Query($getCarPoolId: Int!) {
-  getCarPool(id: $getCarPoolId) {
-    id
-    departureCity
-    arrivalCity
-    departureDate
-    departureTime
-    passengerId
-    driverId
-  }
-}
-    `;
-
-/**
- * __useQueryQuery__
- *
- * To run a query within a React component, call `useQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useQueryQuery({
- *   variables: {
- *      getCarPoolId: // value for 'getCarPoolId'
- *   },
- * });
- */
-export function useQueryQuery(baseOptions: Apollo.QueryHookOptions<QueryQuery, QueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<QueryQuery, QueryQueryVariables>(QueryDocument, options);
-      }
-export function useQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QueryQuery, QueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<QueryQuery, QueryQueryVariables>(QueryDocument, options);
-        }
-export type QueryQueryHookResult = ReturnType<typeof useQueryQuery>;
-export type QueryLazyQueryHookResult = ReturnType<typeof useQueryLazyQuery>;
-export type QueryQueryResult = Apollo.QueryResult<QueryQuery, QueryQueryVariables>;
-export const GetCarPoolsDocument = gql`
-    query GetCarPools {
-  getCarPools {
-    id
-    departureCity
-    arrivalCity
-    departureDate
-    departureTime
-    passengerId
-    driverId
-  }
-}
-    `;
-
-/**
- * __useGetCarPoolsQuery__
- *
- * To run a query within a React component, call `useGetCarPoolsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCarPoolsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetCarPoolsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetCarPoolsQuery(baseOptions?: Apollo.QueryHookOptions<GetCarPoolsQuery, GetCarPoolsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetCarPoolsQuery, GetCarPoolsQueryVariables>(GetCarPoolsDocument, options);
-      }
-export function useGetCarPoolsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCarPoolsQuery, GetCarPoolsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetCarPoolsQuery, GetCarPoolsQueryVariables>(GetCarPoolsDocument, options);
-        }
-export type GetCarPoolsQueryHookResult = ReturnType<typeof useGetCarPoolsQuery>;
-export type GetCarPoolsLazyQueryHookResult = ReturnType<typeof useGetCarPoolsLazyQuery>;
-export type GetCarPoolsQueryResult = Apollo.QueryResult<GetCarPoolsQuery, GetCarPoolsQueryVariables>;
-export const UpdateCarpoolDocument = gql`
-    mutation UpdateCarpool($data: CarPoolerInput!, $carPoolId: Int!, $userId: Int!) {
-  updateCarpool(data: $data, carPoolId: $carPoolId, userId: $userId) {
-    id
-    departureCity
-    arrivalCity
-    departureDate
-    departureTime
-    passengerId
-    driverId
-  }
-}
-    `;
-export type UpdateCarpoolMutationFn = Apollo.MutationFunction<UpdateCarpoolMutation, UpdateCarpoolMutationVariables>;
-
-/**
- * __useUpdateCarpoolMutation__
- *
- * To run a mutation, you first call `useUpdateCarpoolMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateCarpoolMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateCarpoolMutation, { data, loading, error }] = useUpdateCarpoolMutation({
- *   variables: {
- *      data: // value for 'data'
- *      carPoolId: // value for 'carPoolId'
- *      userId: // value for 'userId'
- *   },
- * });
- */
-export function useUpdateCarpoolMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCarpoolMutation, UpdateCarpoolMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateCarpoolMutation, UpdateCarpoolMutationVariables>(UpdateCarpoolDocument, options);
-      }
-export type UpdateCarpoolMutationHookResult = ReturnType<typeof useUpdateCarpoolMutation>;
-export type UpdateCarpoolMutationResult = Apollo.MutationResult<UpdateCarpoolMutation>;
-export type UpdateCarpoolMutationOptions = Apollo.BaseMutationOptions<UpdateCarpoolMutation, UpdateCarpoolMutationVariables>;
-export const DeleteCarPoolDocument = gql`
-    mutation DeleteCarPool($deleteCarPoolId: Int!) {
-  deleteCarPool(id: $deleteCarPoolId)
-}
-    `;
-export type DeleteCarPoolMutationFn = Apollo.MutationFunction<DeleteCarPoolMutation, DeleteCarPoolMutationVariables>;
-
-/**
- * __useDeleteCarPoolMutation__
- *
- * To run a mutation, you first call `useDeleteCarPoolMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteCarPoolMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteCarPoolMutation, { data, loading, error }] = useDeleteCarPoolMutation({
- *   variables: {
- *      deleteCarPoolId: // value for 'deleteCarPoolId'
- *   },
- * });
- */
-export function useDeleteCarPoolMutation(baseOptions?: Apollo.MutationHookOptions<DeleteCarPoolMutation, DeleteCarPoolMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteCarPoolMutation, DeleteCarPoolMutationVariables>(DeleteCarPoolDocument, options);
-      }
-export type DeleteCarPoolMutationHookResult = ReturnType<typeof useDeleteCarPoolMutation>;
-export type DeleteCarPoolMutationResult = Apollo.MutationResult<DeleteCarPoolMutation>;
-export type DeleteCarPoolMutationOptions = Apollo.BaseMutationOptions<DeleteCarPoolMutation, DeleteCarPoolMutationVariables>;
 export const GetProfileDocument = gql`
     query getProfile {
   profile {
@@ -494,12 +285,15 @@ export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfi
 export const UpdateUserDocument = gql`
     mutation UpdateUser($data: UserUpdateInput!) {
   updateUser(data: $data) {
-    age
+    id
     email
-    firstName
-    profileDescription
-    lastName
     profilePicture
+    profileDescription
+    firstName
+    lastName
+    role
+    age
+    expoNotificationsToken
   }
 }
     `;
@@ -590,3 +384,37 @@ export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<Logou
 export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
+export const UpdateProfileDocument = gql`
+    mutation UpdateProfile($data: UserUpdateNativeInput!) {
+  updateProfile(data: $data) {
+    expoNotificationsToken
+    id
+  }
+}
+    `;
+export type UpdateProfileMutationFn = Apollo.MutationFunction<UpdateProfileMutation, UpdateProfileMutationVariables>;
+
+/**
+ * __useUpdateProfileMutation__
+ *
+ * To run a mutation, you first call `useUpdateProfileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProfileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProfileMutation, { data, loading, error }] = useUpdateProfileMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProfileMutation, UpdateProfileMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProfileMutation, UpdateProfileMutationVariables>(UpdateProfileDocument, options);
+      }
+export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
+export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
+export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;

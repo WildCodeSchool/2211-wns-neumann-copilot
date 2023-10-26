@@ -14,9 +14,25 @@ body {
   background-image: linear-gradient(
     to bottom,
     rgb(81, 128, 113, 0.8) 9%,
-    rgb(254, 254, 254, 0.95) 25%
+    rgb(254, 254, 254, 0.95) 15%
   );
   background-attachment: fixed;
+}
+
+textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
+  font-family: "Roboto", sans-serif;
+}
+
+textarea::-moz-placeholder, input::-moz-placeholder {
+  font-family: "Roboto", sans-serif;
+}
+
+textarea:-ms-input-placeholder, input:-ms-input-placeholder {
+  font-family: "Roboto", sans-serif;
+}
+
+textarea::-ms-input-placeholder, input::-ms-input-placeholder {
+  font-family: "Roboto", sans-serif;
 }
 
 p,
