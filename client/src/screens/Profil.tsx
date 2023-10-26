@@ -74,7 +74,9 @@ export default function Profil() {
             {/* First Name */}
             <div className="input">
               <input
+                id="firstName"
                 name="firstname"
+                title="firstName"
                 type="text"
                 placeholder={
                   currentUser?.profile.firstName === null
@@ -89,7 +91,9 @@ export default function Profil() {
             {/* Last Name */}
             <div className="input">
               <input
+                id="lastName"
                 name="lastname"
+                title="lastName"
                 type="text"
                 placeholder={
                   currentUser?.profile.lastName === null
@@ -104,6 +108,8 @@ export default function Profil() {
             {/* Email */}
             <div className="input">
               <input
+                id="email"
+                title="email"
                 type="email"
                 name="email"
                 id="email"
@@ -120,7 +126,9 @@ export default function Profil() {
             {/* Age */}
             <div className="input">
               <input
+                id="age"
                 name="age"
+                title="age"
                 type="text"
                 placeholder={
                   currentUser?.profile.age === null
@@ -135,7 +143,9 @@ export default function Profil() {
             {/* Description */}
             <div className="input_description">
               <textarea
+                id="description"
                 name="description"
+                title="profileDescription"
                 placeholder={
                   currentUser?.profile.profileDescription === null
                     ? "Votre description"
